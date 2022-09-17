@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="" />
+    <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/filter/LogincheckFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/controller/pojo/R.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/RuiJiWaiMai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/RuiJiWaiMai.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/js/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/backend/js/request.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +26,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -27,6 +38,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2EsOdnkHYUWLbSAAfet5dXHHeZv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
@@ -38,12 +52,13 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/dao/pojo" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -51,10 +66,14 @@
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\controller\pojo" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.RuiJiWaiMai">
+    <configuration name="generated-requests#3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="3" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="RuiJiWaiMai" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="ruiJiWaiMai" />
       <extension name="coverage">
@@ -71,6 +90,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.RuiJiWaiMai" />
+        <item itemvalue="HTTP Request.generated-requests#3" />
       </list>
     </recent_temporary>
   </component>
@@ -82,7 +102,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1663380919615</updated>
-      <workItem from="1663380921885" duration="4805000" />
+      <workItem from="1663380921885" duration="17165000" />
     </task>
     <servers />
   </component>
