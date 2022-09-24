@@ -1,4 +1,4 @@
-package com.wuqisan.ruijiwaimai.controller.pojo;
+package com.wuqisan.ruijiwaimai.common.pojo;
 
 import lombok.Data;
 import java.util.HashMap;

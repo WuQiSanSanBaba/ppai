@@ -1,7 +1,7 @@
 package com.wuqisan.ruijiwaimai.config.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.wuqisan.ruijiwaimai.controller.pojo.R;
+import com.wuqisan.ruijiwaimai.common.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 
@@ -36,6 +36,8 @@ public class LogincheckFilter implements Filter {
             return;
         }
         //4...判断登录状态...如果已登录...则直接放行
+        long id = Thread.currentThread().getId();
+        log.info("线程id:{}",id);
         if (null != httpServletRequest.getSession().getAttribute("employee")
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
