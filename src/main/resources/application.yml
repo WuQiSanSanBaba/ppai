@@ -17,3 +17,7 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
+##配置文件上传路径
+reggie:
+    file: D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\imgFromUpload\

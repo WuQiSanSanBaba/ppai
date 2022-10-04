@@ -6,7 +6,7 @@ package com.wuqisan.ruijiwaimai.common.Utils;
 public class BaseContext {
     private static ThreadLocal<Long> threadLocal=new ThreadLocal<>();
 
-    public void setCurrentId(Long id){
+    public static void setCurrentId(Long id){
         threadLocal.set(id);
     }
 

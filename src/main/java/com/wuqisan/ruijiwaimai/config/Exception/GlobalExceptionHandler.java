@@ -1,8 +1,10 @@
 package com.wuqisan.ruijiwaimai.config.Exception;
 
+import com.wuqisan.ruijiwaimai.common.Exception.CustomException;
 import com.wuqisan.ruijiwaimai.common.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,7 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 
 //拦截加了RestController   Controller 的注解的异常类
-@ControllerAdvice(annotations = {RestController.class, Controller.class})
+@ControllerAdvice(annotations = {RestController.class, Controller.class, Service.class})
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
@@ -29,5 +31,13 @@ public class GlobalExceptionHandler {
           return R.error(message);
         }
         return R.error("未知错误");
+    }
+    /**
+     * 异常处理方法--业务异常
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(CustomException ex){
+        log.error(ex.getMessage());
+        return R.error(ex.getMessage());
     }
 }

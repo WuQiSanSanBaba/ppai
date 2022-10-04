@@ -1,10 +1,10 @@
-package com.wuqisan.ruijiwaimai.backend.controller;
+package com.wuqisan.ruijiwaimai.backend.EmployeeMgr.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wuqisan.ruijiwaimai.common.pojo.R;
-import com.wuqisan.ruijiwaimai.backend.pojo.Employee;
-import com.wuqisan.ruijiwaimai.backend.service.EmployeeService;
+import com.wuqisan.ruijiwaimai.backend.EmployeeMgr.pojo.Employee;
+import com.wuqisan.ruijiwaimai.backend.EmployeeMgr.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
