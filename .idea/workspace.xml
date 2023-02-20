@@ -4,23 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Utils/BaseContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Utils/JacksonObjectMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/Exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MyMetaObjectHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MybatisPlusConfig.java" afterDir="false" />
+    <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="鸡你太美">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/front/images/123.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/WebMcvConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/WebMvc/WebMcvConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/filter/LogincheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/filter/LogincheckFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/controller/pojo/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/pojo/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/mapper/EmployeeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/mapper/pojo/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/pojo/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/service/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/member/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/backend/page/member/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/backend/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/cartData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/favico.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/front/images/favico.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/front/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/front/images" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -79,11 +70,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\front\images" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\common\Utils" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\dao\pojo" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\backend" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\controller\pojo" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
@@ -142,6 +135,8 @@
       <workItem from="1663769907613" duration="4152000" />
       <workItem from="1663859378987" duration="313000" />
       <workItem from="1663943524768" duration="5144000" />
+      <workItem from="1676893251570" duration="647000" />
+      <workItem from="1676899123003" duration="1827000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -155,6 +150,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tijiaobei" />
@@ -175,5 +173,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ruiJiWaiMai$RuiJiWaiMai.ic" NAME="RuiJiWaiMai Coverage Results" MODIFIED="1666794952221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.wuqisan.ruijiwaimai.*</FILTER>
+    </SUITE>
   </component>
 </project>
