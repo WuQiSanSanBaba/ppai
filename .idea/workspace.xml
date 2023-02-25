@@ -5,13 +5,212 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="鸡你太美">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/front/images/123.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/context/BaseContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CheckUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthAop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/swag/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/MenuInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/UserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-pro.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/建表脚本/1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/RuiJiWaiMai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/PpAi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/controller/CategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/controller/DishController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/controller/SetmealController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/mapper/CategoryMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/mapper/DishFlavorMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/mapper/DishMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/mapper/SetmealDishMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/mapper/SetmealMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/pojo/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/pojo/Dish.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/pojo/DishFlavor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/pojo/Setmeal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/pojo/SetmealDish.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/CategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/DishFlavorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/DishService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/SetmealDishService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/SetmealService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/impl/CategoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/impl/DishFlavorServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/impl/DishServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/impl/SetmealDishImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/CategoryAndSetmealMgr/service/impl/SetmealServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/EmployeeMgr/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/EmployeeMgr/mapper/EmployeeMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/EmployeeMgr/pojo/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/BaseBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/EmployeeMgr/service/EmployeeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/backend/EmployeeMgr/service/impl/EmployeeServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/controller/CommonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Exception/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Exception/CustomException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Utils/BaseContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/Utils/JacksonObjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/JacksonObjectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/common/pojo/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/R.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/Exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/Exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MyMetaObjectHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MybatisPlusConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/WebMvc/WebMcvConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/WebMvc/WebMcvConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/filter/LogincheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/filter/LogincheckFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/dto/DishDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/dto/SetmealDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/controller/AddressBookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/controller/OrdersController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/controller/ShoppingCartController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/mapper/AddressBookMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/mapper/OrderDetailMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/mapper/OrdersMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/mapper/ShoppingCartMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/pojo/AddressBook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/pojo/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/pojo/Orders.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/pojo/ShoppingCart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/AddressBookService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/OrderDetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/OrdersService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/ShoppingCartService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/impl/AddressBookServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/impl/OrderDetailServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/impl/OrdersServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/base/service/impl/ShoppingCartServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/dao/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/pojo/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/utils/SMSUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/front/login/utils/ValidateCodeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/outapi/controller/OutApiController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/backend/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/front/cartData.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/favico.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/front/images/favico.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/front/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/combo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/combo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/food.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/food.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/api/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/404-images/404-cloud.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/404-images/404-cloud.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/404-images/404.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/404-images/404.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/btn_back@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_back@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/btn_clean@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_clean@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/btn_close@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_close@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/icon_index.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/icon_index.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/icon_upload@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/icon_upload@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/jine_m-2@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/jine_m-2@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/renshu@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/renshu@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/icons/xiangmujine@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/xiangmujine@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/img_brand01@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/img_brand01@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/img_denglu_bj.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/img_denglu_bj.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/login/login-l.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/login/login-l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/login/login-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/login/login-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/login/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/login/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/images/noImg.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/noImg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/js/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/js/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/category/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/category/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/combo/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/combo/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/combo/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/combo/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/food/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/food/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/food/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/food/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/member/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/user/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/member/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/user/userManage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/page/order/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/order/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/axios/axios.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/axios/axios.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/element-ui/fonts/element-icons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/fonts/element-icons.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/element-ui/fonts/element-icons.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/fonts/element-icons.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/element-ui/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/element-ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/plugins/vue/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/vue/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/fonts/element-icons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/fonts/element-icons.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/fonts/element-icons.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/fonts/element-icons.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/demo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/demo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/demo_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/demo_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/icon/iconfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/backend/styles/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/api/address.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/api/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/api/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/api/order.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/fonts/DIN-Bold.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/fonts/DIN-Medium.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/fonts/PingFangSC-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/fonts/PingFangSC-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/fonts/PingFangSC-Semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/123.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/cart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/cart_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/checked_false.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/checked_true.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/demo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/demo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/demo3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/demo4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/edit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/favico.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/headPage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/location.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/locations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/mainBg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/money.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/noImg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/no_order.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/no_wifi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/orders.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/subtract.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/time.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/images/women.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/js/base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/js/common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/js/request.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/js/vant.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/add-order.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/address-edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/address.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/no-wify.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/order.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/pay-success.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/page/user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/add-order.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/address-edit.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/address.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/no-wify.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/order.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/pay-success.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/front/styles/vant.min.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +220,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -62,7 +263,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/front/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -70,18 +271,23 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai\common" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai\common\bean" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\front\images" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\common\Utils" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\dao\pojo" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\mybatis\mapper\operator" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\backend" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\controller\pojo" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.wuqisan.ppai.system.controller" />
+    </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.RuiJiWaiMai">
+  <component name="RunManager" selected="Spring Boot.PpAi">
     <configuration name="GlobalExceptionHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wuqisan.ruijiwaimai.config.Exception.GlobalExceptionHandler" />
       <module name="ruiJiWaiMai" />
@@ -98,6 +304,17 @@
     <configuration name="generated-requests#3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="3" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="PpAi" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ruiJiWaiMai" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wuqisan.ppai.PpAi" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RuiJiWaiMai" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="ruiJiWaiMai" />
       <extension name="coverage">
@@ -111,9 +328,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.GlobalExceptionHandler" />
+      <item itemvalue="HTTP Request.generated-requests#3" />
+      <item itemvalue="Spring Boot.PpAi" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.RuiJiWaiMai" />
+        <item itemvalue="Spring Boot.PpAi" />
         <item itemvalue="Application.GlobalExceptionHandler" />
         <item itemvalue="HTTP Request.generated-requests#3" />
       </list>
@@ -137,6 +359,9 @@
       <workItem from="1663943524768" duration="5144000" />
       <workItem from="1676893251570" duration="647000" />
       <workItem from="1676899123003" duration="1827000" />
+      <workItem from="1676984767106" duration="1697000" />
+      <workItem from="1677074736892" duration="3764000" />
+      <workItem from="1677306874842" duration="17696000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -157,22 +382,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tijiaobei" />
     <option name="LAST_COMMIT_MESSAGE" value="tijiaobei" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MyMetaObjectHandler.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ruijiwaimai/config/MybatisPlus/MyMetaObjectHandler.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ruiJiWaiMai$RuiJiWaiMai.ic" NAME="RuiJiWaiMai Coverage Results" MODIFIED="1666794952221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

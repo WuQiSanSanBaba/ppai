@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppai.operator.user.mapper.UserMapper">
+    <!--查询-->
+    <select id="getUserById" resultType="com.wuqisan.ppai.operator.user.bean.UserInfo">
+        select id,
+               name,
+               class_id,
+               username,
+               password,
+               phone,
+               sex,
+               id_number,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from user_info
+        where id = #{id}
+    </select>
+    <select id="getUserByUsername" resultType="com.wuqisan.ppai.operator.user.bean.UserInfo">
+        select id,
+               name,
+               class_id,
+               username,
+               password,
+               phone,
+               sex,
+               id_number,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from user_info
+        where username = #{username}
+    </select>
+    <select id="getUserByUsernameAndPassword" resultType="com.wuqisan.ppai.operator.user.bean.UserInfo"
+            parameterType="com.wuqisan.ppai.operator.user.bean.UserInfo">
+        select id,
+               name,
+               class_id,
+               username,
+               password,
+               phone,
+               sex,
+               id_number,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from user_info
+        where username = #{username}
+          and password = #{password}
+    </select>
+    <select id="getMenuList" resultType="com.wuqisan.ppai.operator.user.bean.MenuInfo">
+        SELECT menu_id,
+               name,
+               description,
+               url,
+               icon,
+               status,
+               create_time,
+               create_user,
+               update_time,
+               update_user,
+               auth_id,
+               @rownum:=@rownum+1  id
+        from menu_info,(SELECT @rownum:=0) a
+        WHERE auth_id in (SELECT auth_id from auth WHERE user_id = #{id})
+        order by sort asc
+    </select>
+    <select id="checkAuth" resultType="java.lang.Integer">
+        select 1 from auth where user_id=#{id} and auth_id=#{authId}
+    </select>
+</mapper>
