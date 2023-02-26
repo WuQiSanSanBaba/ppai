@@ -17,4 +17,5 @@ public class BaseBean {
     private Long createUser;
 
     private Long updateUser;
+    private Integer  status;
 }

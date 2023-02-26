@@ -1,5 +1,8 @@
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: PT2H
 spring:
   application:
     name: ppai
@@ -20,3 +23,4 @@ mybatis:
 ##配置文件上传路径
 reggie:
   file: /shanyu/ruijiPhoto
+

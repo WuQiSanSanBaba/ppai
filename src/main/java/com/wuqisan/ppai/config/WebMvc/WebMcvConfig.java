@@ -21,7 +21,6 @@ public class WebMcvConfig extends WebMvcConfigurationSupport {
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("开始映射静态资源路径");
         registry.addResourceHandler("/ppai/**").addResourceLocations("classpath:/ppai/");
-        registry.addResourceHandler("/front/**").addResourceLocations("classpath:/front/");
     }
 
     @Override

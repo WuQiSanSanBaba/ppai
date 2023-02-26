@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * 检查用户是否已经完成登录
@@ -28,8 +29,7 @@ public class LogincheckFilter implements Filter {
        //1、获取本次请求的URI
         String requestURI = httpServletRequest.getRequestURI();//backend/index.html
         //1.1定义不需要处理的路径
-        String[] urls ={"/operator/user/login","/operator/user/logout", "/ppai/**",
-        "/user/sendMsg"};
+        String[] urls ={"/operator/login/login","/operator/login/logout", "/ppai/**"};
         //2..判断本次请求是否需要处理
         boolean flag = check(requestURI, urls);
         //3..如果不需要处理..则直接放行
@@ -50,7 +50,7 @@ public class LogincheckFilter implements Filter {
         }
 
         //5..如果未登录则返回未登录结果,通过输出流想客户端响应数据
-        httpServletResponse.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
+        httpServletResponse.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN").add("url",httpServletRequest.getServerName()+":"+httpServletRequest.getServerPort())));
         return;
     }
 

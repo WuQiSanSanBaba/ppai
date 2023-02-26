@@ -6,11 +6,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MenuInfo extends BaseBean {
-    private String menuId;
-    private String parentId;
+public class ClassInfo extends BaseBean {
+    private String classId;
     private String name;
-    private String description;
-    private String url;
-    private String icon;
+    private String banZhuRen;
 }

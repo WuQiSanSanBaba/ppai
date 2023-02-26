@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppai.operator.user.mapper.UserMapper">
+
+    <select id="checkAuth" resultType="java.lang.Integer">
+        select 1 from auth where user_id=#{id} and auth_id=#{authId}
+    </select>
+    <select id="getUserList"  resultType="com.wuqisan.ppai.operator.user.bean.UserInfo">
+        select id,
+        name,
+        class_id,
+        username,
+        password,
+        phone,
+        sex,
+        id_number,
+        status,
+        create_time,
+        update_time,
+        create_user,
+        update_user
+        from user_info
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <choose>
+                <when test="name != null">
+                    and name = #{name};
+                </when>
+                <when test="area != null">
+                    and class_id = #{class_id};
+                </when>
+            </choose>
+        </trim>
+    </select>
+    <select id="getClassList" resultType="com.wuqisan.ppai.operator.user.bean.ClassInfo">
+        select class_id,
+        name,
+        banZhuRen,
+        status,
+        create_time,
+        update_time,
+        create_user,
+        update_user
+        from class_info
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <choose>
+                <when test="name != null">
+                    and name = #{name};
+                </when>
+                <when test="area != null">
+                    and class_id = #{class_id};
+                </when>
+                <otherwise>
+                    or 1 = 1;
+                </otherwise>
+            </choose>
+        </trim>
+    </select>
+</mapper>

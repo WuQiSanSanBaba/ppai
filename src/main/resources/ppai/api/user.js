@@ -1,11 +1,17 @@
-function getMemberList (params) {
+function getUserList (params) {
   return $axios({
-    url: '/employee/page',
-    method: 'get',
+    url: '/operator/user/getUserList',
+    method: 'post',
     params
   })
 }
-
+function getClassList (params) {
+  return $axios({
+    url: '/operator/user/getClassList',
+    method: 'post',
+    params
+  })
+}
 // 修改---启用禁用接口
 function enableOrDisableEmployee (params) {
   return $axios({

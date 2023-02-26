@@ -1,6 +1,6 @@
 function loginApi(data) {
   return $axios({
-    'url': '/operator/user/login',
+    'url': '/operator/login/login',
     'method': 'post',
     data
   })
@@ -8,14 +8,9 @@ function loginApi(data) {
 
 function logoutApi(){
   return $axios({
-    'url': '/operator/user/logout',
+    'url': '/operator/login/logout',
     'method': 'post',
   })
 }
 
-function getMenu(id){
-  return $axios({
-    'url': '/operator/user/getMenuList/'+id,
-    'method': 'post',
-  })
-}
+
