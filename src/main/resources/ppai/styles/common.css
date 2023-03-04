@@ -1382,12 +1382,6 @@ input[type="number"] {
   font-size: 18px;
   color: #20232a;
 }
-.el-dialog__body {
-  padding: 30px 20px;
-  color: #818693;
-  font-size: 14px;
-  word-break: break-all;
-}
 .el-dialog__footer {
   padding: 10px 20px 20px;
   text-align: right;
@@ -1397,10 +1391,7 @@ input[type="number"] {
 .el-dialog--center {
   text-align: center;
 }
-.el-dialog--center .el-dialog__body {
-  text-align: initial;
-  padding: 25px 25px 30px;
-}
+
 .el-dialog--center .el-dialog__footer {
   text-align: inherit;
 }
@@ -13380,9 +13371,7 @@ input[type="number"] {
   color: #333333;
 }
 
-.el-dialog__body {
-  padding: 43px 90px 21px;
-}
+
 
 .el-dialog__footer {
   padding: 0px 30px 30px;

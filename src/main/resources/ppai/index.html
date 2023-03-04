@@ -45,17 +45,17 @@
                         text-color="#bfcbd9"
                         active-text-color="#f4f4f5"
                 >
-                    <div v-for="item in menuList" :key="item.dictId">
+                    <div v-for="item in menuList" :key="item.menuId">
                         <div @click="getChildrenMenu(item)">
-                            <el-submenu :index="item.dictId">
+                            <el-submenu :index="item.menuId">
                                 <template slot="title">
                                     <span>{{item.name}}</span>
                                 </template>
-                                <el-menu-item
-                                        v-for="sub in item.children"
-                                        :index="sub.menuId"
-                                        :key="sub.menuId"
-                                        @click="menuHandle(sub,false)"
+                                <el-menu-item style="padding: 0 !important;margin: 0!important;"
+                                              v-for="sub in item.children"
+                                              :index="sub.menuId"
+                                              :key="sub.menuId"
+                                              @click="menuHandle(sub,false)"
                                 >
                                     <i class="iconfont" :class="sub.icon"></i>
                                     <span slot="title">{{sub.name}}</span>
@@ -122,6 +122,7 @@
                 goBackFlag: false,
                 loading: true,
                 timer: null,
+                historyStack:[]
             }
         },
         computed: {},
@@ -160,12 +161,14 @@
             },
             goBack() {
                 // window.location.href = 'javascript:history.go(-1)'
-                const menu = this.menuList.find(item => item.menuId === this.menuActived)
+                this.historyStack.pop()
+                const  menu=this.historyStack.pop()
                 // this.goBackFlag = false
                 // this.headTitle = menu.name
                 this.menuHandle(menu, false)
             },
             menuHandle(item, goBackFlag) {
+                this.historyStack.push(item)
                 this.loading = true
                 this.menuActived = item.id
                 this.iframeUrl = item.url
@@ -182,11 +185,11 @@
             /*获取子集菜单*/
             async getChildrenMenu(item) {
                 const menuList = JSON.parse(window.localStorage.getItem("menuList"));
-                const result = menuList.findIndex(find => find.dictId = item.dictId);
-                if (menuList[result].children != null) {
+                const result = menuList.findIndex(find => find.menuId = item.menuId);
+                if (menuList[result].children != null && menuList[result].children.size>0) {
                     item.children = menuList[result].children;
                 } else {
-                    await getChildrenMenuApi(item.dictId).then((res) => {
+                    await getChildrenMenuApi(item.menuId).then((res) => {
                         item.children = res.data;
                         menuList[result].children = res.data;
                         window.localStorage.setItem("menuList", JSON.stringify(menuList))
@@ -197,7 +200,7 @@
 
         }
     })
-    window.onbeforeunload = function(event) {
+    window.onbeforeunload = function (event) {
         console.log("清理")
         window.localStorage.removeItem("menuList")
 

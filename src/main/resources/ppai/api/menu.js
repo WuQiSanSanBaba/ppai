@@ -1,12 +1,12 @@
 function getMenuApi(){
     return $axios({
-        'url': '/operator/menu/getMenuList',
+        'url': '/manage/menu/getMenuList',
         method: 'get',
     })
 }
 function getChildrenMenuApi(id) {
     return $axios({
-        url: '/operator/menu/getChildrenMenu/'+id,
+        url: '/manage/menu/getChildrenMenu/'+id,
         method: 'get'
     })
 }

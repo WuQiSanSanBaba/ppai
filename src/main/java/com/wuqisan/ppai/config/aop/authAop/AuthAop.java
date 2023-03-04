@@ -3,7 +3,7 @@ package com.wuqisan.ppai.config.aop.authAop;
 import com.wuqisan.ppai.base.bean.R;
 import com.wuqisan.ppai.base.context.BaseContext;
 import com.wuqisan.ppai.common.Utils.CheckUtils;
-import com.wuqisan.ppai.operator.user.bean.UserInfo;
+import com.wuqisan.ppai.manage.bean.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -40,7 +40,7 @@ public class AuthAop {
         AuthCheck authCheck = method.getAnnotation(AuthCheck.class);
         String authId = authCheck.value();
         UserInfo currentUserInfo = BaseContext.getCurrentUserInfo();
-        boolean b = CheckUtils.checkAuth(currentUserInfo.getId(), authId);
+        boolean b = CheckUtils.checkAuth(currentUserInfo.getUserId(), authId);
         if (b){
           result=  joinPoint.proceed();
 

@@ -1,6 +1,6 @@
 package com.wuqisan.ppai.common.Utils;
 
-import com.wuqisan.ppai.operator.user.mapper.UserMapper;
+import com.wuqisan.ppai.manage.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

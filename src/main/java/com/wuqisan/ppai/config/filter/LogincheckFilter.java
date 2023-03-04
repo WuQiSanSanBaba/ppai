@@ -3,7 +3,7 @@ package com.wuqisan.ppai.config.filter;
 import com.alibaba.fastjson.JSON;
 import com.wuqisan.ppai.base.context.BaseContext;
 import com.wuqisan.ppai.base.bean.R;
-import com.wuqisan.ppai.operator.user.bean.UserInfo;
+import com.wuqisan.ppai.manage.bean.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 
@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * 检查用户是否已经完成登录
@@ -29,7 +28,7 @@ public class LogincheckFilter implements Filter {
        //1、获取本次请求的URI
         String requestURI = httpServletRequest.getRequestURI();//backend/index.html
         //1.1定义不需要处理的路径
-        String[] urls ={"/operator/login/login","/operator/login/logout", "/ppai/**"};
+        String[] urls ={"/manage/login/login","/manage/login/logout", "/ppai/**"};
         //2..判断本次请求是否需要处理
         boolean flag = check(requestURI, urls);
         //3..如果不需要处理..则直接放行

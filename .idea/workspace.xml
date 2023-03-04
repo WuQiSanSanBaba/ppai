@@ -5,46 +5,113 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/DictItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/SqlExecuteTimeCountInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/ClassInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/LoginMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/MenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/LoginService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/MenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/MenuServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/login/logo1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/images/login/office365.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/user/classManage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CacheUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CommonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/ConfigUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/DictUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/ParamUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/SpringUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/controller/TreeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/mapper/TreeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/service/TreeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/service/impl/TreeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/MybatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/AotuFillField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/CreateTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/CreateUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/UpdateTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/UpdateUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/ClassInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/MenuInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/UserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/ClassInfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/MenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/ClassMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/LoginMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/MenuMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/ClassService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/LoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/ClassServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/LoginServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/PreLoad.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/bean/ParamInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/mapper/DictMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/mapper/ParamMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/ConfigService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/DictService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/ParamService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/ConfigServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/DictServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/ParamServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/bean/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/controller/ConfigController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/mapper/ConfigMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/service/ConfigService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/service/impl/ConfigerviceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cache/ehcache.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/class.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/user.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/dict.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/param.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/system/config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/component/tree/js/tree.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/component/tree/sigleTree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/addClass.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/js/class.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/configList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/js/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/updateConfig.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/PpAi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/PpAi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/BaseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/BaseBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/DictItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/bean/DictItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/context/BaseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/context/BaseContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/controller/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/WebMvc/WebMcvConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/WebMvc/WebMcvConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CheckUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CheckUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthAop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthAop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/filter/LogincheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/filter/LogincheckFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/MenuInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/MenuInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/UserInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/SqlExecuteTimeCountInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/sqlTimeCul/SqlExecuteTimeCountInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/ClassInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/MenuInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/bean/UserInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/MenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/LoginMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/MenuMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/mapper/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/LoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/MenuService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/LoginServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/MenuServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/operator/user/service/impl/UserServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/operator/user.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/api/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/js/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/user/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/user/addUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/user/userManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/user/userManage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/js/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/category/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/combo/add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/combo/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/food/add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/food/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/order/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/user/addUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/addUser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/user/classManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/classList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/user/userManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/userList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppai/styles/common.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +123,10 @@
       <list>
         <option value="Kotlin Class" />
         <option value="AnnotationType" />
+        <option value="Enum" />
         <option value="HTML File" />
         <option value="Interface" />
+        <option value="JavaScript File" />
         <option value="Class" />
       </list>
     </option>
@@ -99,7 +168,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/ppai/images/login" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mybatis/mapper/system" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -107,22 +176,33 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\images\login" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\user" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai\common" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai\common\bean" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\mybatis\mapper\system" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai\system" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ppai" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\system" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\component\tree" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\operator\user\js" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\operator\class" />
+      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\ppai\page\operator" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\mybatis\mapper\operator" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\backend" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\java\com\wuqisan\ruijiwaimai\controller\pojo" />
-      <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.wuqisan.ppai.operator.user.service" />
-      <recent name="com.wuqisan.ppai.system.controller" />
+      <recent name="com.wuqisan.ppai.common.Utils" />
+      <recent name="com.wuqisan.ppai.preLoad.mapper" />
+      <recent name="com.wuqisan.ppai.preLoad.service.impl" />
+      <recent name="com.wuqisan.ppai.preLoad.service" />
+      <recent name="com.wuqisan.ppai.config.mybatis.autoFill_Field.anno" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.PpAi">
     <configuration name="GlobalExceptionHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -200,7 +280,15 @@
       <workItem from="1676984767106" duration="1697000" />
       <workItem from="1677074736892" duration="3764000" />
       <workItem from="1677306874842" duration="26430000" />
-      <workItem from="1677373987371" duration="23416000" />
+      <workItem from="1677373987371" duration="24188000" />
+      <workItem from="1677501318419" duration="11020000" />
+      <workItem from="1677586513647" duration="12103000" />
+      <workItem from="1677677878569" duration="7863000" />
+      <workItem from="1677761594199" duration="363000" />
+      <workItem from="1677761982622" duration="19000" />
+      <workItem from="1677762263215" duration="9645000" />
+      <workItem from="1677847368686" duration="9885000" />
+      <workItem from="1677894544095" duration="23840000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -216,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677328849961</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="简简单单提交一下而已">
+      <created>1677401813578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677401813578</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +323,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tijiaobei" />
     <MESSAGE value="重大更新：&#10;重新设计了权限系统&#10;从mybaitsplus换成mybatis&#10;引入aop，方法级鉴权" />
-    <option name="LAST_COMMIT_MESSAGE" value="重大更新：&#10;重新设计了权限系统&#10;从mybaitsplus换成mybatis&#10;引入aop，方法级鉴权" />
+    <MESSAGE value="简简单单提交一下而已" />
+    <option name="LAST_COMMIT_MESSAGE" value="简简单单提交一下而已" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ruiJiWaiMai$RuiJiWaiMai.ic" NAME="RuiJiWaiMai Coverage Results" MODIFIED="1666794952221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

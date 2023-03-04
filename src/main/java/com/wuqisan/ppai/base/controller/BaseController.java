@@ -1,7 +1,6 @@
 package com.wuqisan.ppai.base.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.wuqisan.ppai.operator.user.bean.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
