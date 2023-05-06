@@ -1,3 +1,30 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: PT2H
 spring:
-  profiles:
-    active: dev
+  application:
+    name: ppat
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/ppat?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Hongkong
+      username: root
+      password: root
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:cache/ehcache.xml
+mybatis:
+  #config-location: classpath:mybatis/mybatis-config.xml # 指定mybatis-config.xml全局配置文件的位置，可以不写
+  mapper-locations: mybatis/mapper/**/*.xml
+  # 指定mapper.xml配置文件的位置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  # 开启下划线转驼峰命名
+
+##配置文件上传路径
+ppat:
+  file: /shanyu/ruijiPhoto
+  wangEditorFile: D:/Linux/fileWang/

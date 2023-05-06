@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+    <link rel="stylesheet" href="./css/question.css"/>
+</head>
+<style>
+
+    body {
+        overflow: hidden
+    }
+
+    .container {
+        align-items: flex-start;
+        display: flex;
+        justify-content: center;
+    }
+
+    .highlight_ {
+        background-color: rgb(255, 236, 61);
+    }
+
+    .highlight-add {
+        background-color: rgb(61, 181, 255);
+    }
+
+    .blue-underline {
+        text-decoration: underline;
+        text-decoration-color: blue;
+    }
+</style>
+<body>
+<div class="addBrand-container" id="question-app">
+    <div class="question" style="width: 80%">
+        <div class="question-title">问题标题</div>
+        <div style="width: 80%">
+            <!--问题输入框-->
+            <div class="question-menu">
+                <input type="text" id="question-input" class="question-input" readonly v-model="question.title">
+                <div id="editorMenu" class="button-container">
+                    <button style="background-color: grey" @click="editQuestion">编辑</button>
+                    <button style="background-color: #00AEEC"
+                            @click="dialogVisible_HighLight=true;">新增高亮显示
+                    </button>
+                    <button @click="dialogVisible_HighLight=true;" style="background-color: red">添加注释
+                    </button>
+                </div>
+            </div>
+            <div v-html="question_html" id="question-content" style="width: 100%" class="content-container">
+            </div>
+            <div style="font-size: 18px" class="group-container">
+                <span style="font-weight: bold">所属成员:</span>
+                <span
+                        v-for="(item, index) in groupers"
+                        :key="index">{{ item }}、</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hightLight-container">
+        <el-dialog
+                title="新增高亮显示"
+                :visible.sync="dialogVisible_HighLight"
+                width="30%"
+        >
+            <div>
+                <div style="margin: 25px">
+                    <div class="keywords-title" style="font-size: 26px">本次新增高亮显示的关键词:</div>
+                    <div style="border: solid 1px">
+                        <span style="font-size:20px;" v-if="addHighLightJsonArray.length===0">
+                            你还未新增高亮词
+                        </span>
+                        <span v-else style=""
+                              v-for="(item, index) in addHighLightJsonArray"
+                              :key="index"
+                              class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
+                                                                 class="el-icon-delete-solid"></i></span>
+                    </div>
+                </div>
+                <div style="display: flex;margin:20px">
+                    <el-input v-model="input_" placeholder="请输入关键词,点击右侧按钮添加"></el-input>
+                    <el-button type="primary" @click="keyWordAdd">添加+</el-button>
+                </div>
+            </div>
+            <div style="display: flex;justify-content: center;">
+                <el-button @click="dialogVisible_HighLight = false">取 消</el-button>
+                <el-button type="primary" @click="addHighLight">保 存</el-button>
+            </div>
+            </span>
+        </el-dialog>
+    </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../plugins/axios/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="../../../js/validate.js"></script>
+<script src="../../../js/index.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="./js/question.js"></script>
+
+<script>
+    new Vue({
+        el: '#question-app',
+        data() {
+            return {
+                question_html: '<p>11</p>',
+                question: {title: '你还没有添加问题'},
+                dialogVisible_HighLight: false,
+                addHighLightJsonArray: [],
+                input_: '',
+                groupers: []
+            }
+        },
+        computed: {
+            //查询自己名下的问题
+        },
+        created() {
+
+        },
+        mounted() {
+            const questionId = requestUrlParam('questionId');
+            if (questionId) {
+                getQuestionByIdAxios(questionId).then((res) => {
+                    if (res.code === 1) {
+                        this.question = res.data
+                        this.question_html = res.data.content
+                        const groupMembersList = res.map.GroupMembersList
+                        groupMembersList.map((member) => {
+                            this.groupers.push(member.userName)
+                        })
+                        console.log(this.groupers)
+                    }
+                })
+                this.question_html = this.question.content
+            } else {
+                //获取自己新建的问题
+                getQuestionBySelf().then(
+                    res => {
+                        if (res.code === 1) {
+                            this.question = res.data
+                            this.question_html = res.data.content
+                            const groupMembersList = res.map.GroupMembersList
+                            groupMembersList.map((member) => {
+                                this.groupers.push(member.userName)
+                            })
+                            //开始处理question
+                            if (this.question_html) {
+                                dealHightLight.excute(this.question);
+                            }
+                        } else {
+                            window.location.href = '/ppat/page/classroom/question/addQuestion.html'
+                        }
+                    }
+                );
+            }
+
+        },
+        methods: {
+            deleteKeyWord(index) {
+                this.addHighLightJsonArray.splice(index, 1)
+            },
+            keyWordAdd() {
+                if (this.input_) {
+                    this.addHighLightJsonArray.push(this.input_)
+                    this.input_ = ''
+                }
+            },
+            addHighLight() {
+                this.dialogVisible_HighLight = false
+                //把新增的内容重复的去掉
+                this.addHighLightJsonArray = this.addHighLightJsonArray.filter((obj, index, self) =>
+                    index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
+                );
+                let addHighLightJsonArray_RemoveAlreadyHighLight
+                //把已经高亮的去掉
+                if (this.question.highLightJsonArray) {
+                    const highLightJsonArray = JSON.parse(this.question.highLightJsonArray)
+                    addHighLightJsonArray_RemoveAlreadyHighLight = this.addHighLightJsonArray.filter(obj =>
+                        !highLightJsonArray.some(other => obj === other) // 不在b数组中出现过的对象
+                    )
+                }else {
+                    addHighLightJsonArray_RemoveAlreadyHighLight= this.addHighLightJsonArray
+                }
+                if (addHighLightJsonArray_RemoveAlreadyHighLight.length === 0){
+                    this.$message.error("你没有添加新增高亮次或者它已经高亮")
+                    return
+                }else {
+                    addHighLightJsonArray_RemoveAlreadyHighLight=JSON.stringify(addHighLightJsonArray_RemoveAlreadyHighLight)
+                }
+                //发送后台处理
+                addHighLight_(this.question.questionId, addHighLightJsonArray_RemoveAlreadyHighLight).then(res => {
+                    if (res.data.code === 1) {
+                        this.$message.success("添加成功")
+                        //处理蓝色
+                        if (this.data.data.addHighLightFlag === 1) {
+                            arrayAdd = JSON.parse(res.data.addHighlightJsonArray);
+                            dealHightLight.preElement(arrayAdd, "addHighLight")
+                        }
+                        //处理黄色
+                        let addHighLightJsonArray = JSON.parse(res.data.addHighLightJsonArray);
+                        if (addHighLightJsonArray && addHighLightJsonArray.size > 0) {
+                            for (let addHighLightJsonArrayElement of addHighLightJsonArray) {
+                                if (!this.data.data.addHighLightJsonArray.includes(addHighLightJsonArrayElement)) {
+                                    for (let value of addHighLightJsonArrayElement) {
+                                        dealHightLight.elementChange(value, 'highlight')
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            editQuestion(){
+                window.location.href = '/ppat/page/classroom/question/addQuestion.html?questionId='+this.question.questionId
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
+

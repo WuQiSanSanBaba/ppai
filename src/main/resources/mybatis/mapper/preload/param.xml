@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wuqisan.ppai.preLoad.mapper.ParamMapper">
-    <select id="getParamList" resultType="com.wuqisan.ppai.preLoad.bean.ParamInfo">
+<mapper namespace="com.wuqisan.ppat.preLoad.mapper.ParamMapper">
+    <select id="getParamList" resultType="com.wuqisan.ppat.preLoad.bean.Param">
         select
         param_id,
         param_value
         from
-        param_info
+        param
         where
         status=1
     </select>

@@ -2,16 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wuqisan.ppai.manage.mapper.MenuMapper">
-    <select id="getMenuList" resultType="com.wuqisan.ppai.manage.bean.MenuInfo">
-        SELECT menu_id,
-               name
-        from menu_info
-        WHERE auth_id in (SELECT auth_id from auth WHERE user_id = #{userId})
-          and parent_id='root'
-        order by sort asc
-    </select>
-    <select id="getChildrenMenu" resultType="com.wuqisan.ppai.manage.bean.MenuInfo">
+<mapper namespace="com.wuqisan.ppat.manage.mapper.MenuMapper">
+    <select id="getMenuList" resultType="com.wuqisan.ppat.manage.bean.Menu">
         SELECT menu_id,
                name,
                description,
@@ -25,9 +17,8 @@
                auth_id,
                parent_id,
                @rownum:=@rownum+1  id
-        from menu_info,(SELECT @rownum:=0) a
-        WHERE auth_id in (SELECT auth_id from auth WHERE user_id = #{userId})
-          and parent_id=#{parentId}
+        from menu,(SELECT @rownum:=0) a
+        WHERE auth_id in (SELECT auth_id from auth_view WHERE user_id = #{userId})
         order by sort asc
     </select>
 </mapper>

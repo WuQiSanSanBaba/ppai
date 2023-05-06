@@ -2,17 +2,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wuqisan.ppai.system.mapper.ConfigMapper">
+<mapper namespace="com.wuqisan.ppat.system.mapper.ConfigMapper">
 
     <update id="updateConfigById">
-        update  config_info set value=#{value} where config_id=#{configId}
+        update  config set value=#{value} where config_id=#{configId}
     </update>
-    <select id="getConfigList" resultType="com.wuqisan.ppai.system.bean.Config">
+    <select id="getConfigList" resultType="com.wuqisan.ppat.system.bean.Config">
         select a.config_id,
         a.name,
         a.value,
         a.description
-        from config_info a
+        from config a
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="name != null">
                 and a.name like concat(#{name},'%')
@@ -22,12 +22,12 @@
             </if>
         </trim>
     </select>
-    <select id="queryConfigById" resultType="com.wuqisan.ppai.system.bean.Config">
+    <select id="queryConfigById" resultType="com.wuqisan.ppat.system.bean.Config">
         select a.config_id,
                a.name,
                a.value,
                a.description
-        from config_info a
+        from config a
         where config_id=#{id}
     </select>
 
