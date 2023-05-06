@@ -1,78 +1,64 @@
 const dealHightLight = {
-    excute(question) {
+    excute(question,v_html) {
         if (question.highLightFlag === 1) {
-            this.preElement(question.highLightJsonArray,'highlight')
+            v_html= this.preElement(question.highLightJsonArray, 'highLight',v_html)
         }
-        if (question.highLightFlagAdd ===1){
-            this.preElement(question.highLightJsonArrayAdd,'blue-underline')
+        if (question.addHighLightFlag === 1) {
+            v_html= this.preElement(question.addHighlightJsonArray, 'highLight-add',v_html)
         }
         if (question.underlineFlag === 1) {
-            this.preElement(question.underlineJsonArray,'highlight-add')
+            v_html= this.preElement(question.underlineJsonArray, 'note',v_html)
         }
+        return v_html;
     },
-    preElement(jsonArray,type) {
+    preElement(jsonArray, type,v_html) {
         let array = JSON.parse(jsonArray);
         //去重
         array = array.filter((obj, index, self) =>
             index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
         );
-        for (let string in array) {
-            for (let element in string) {
-                this.elementChange(element,type)
+        for (let string of array) {
+            for (let element of string) {
+                v_html= this.elementChange(element, type,v_html)
             }
         }
+        return v_html;
     },
-    elementChange(keyword, type) {
-        // 创建正则表达式
-        var regexStr = '(\\b\\S*' + keyword.split('').join('\\S*') + '\\S*\\b)';
-        var regex = new RegExp(regexStr, 'g');
-        element = document.getElementById('question-content')
-        // 遍历所有文本节点，查找并高亮匹配到的文本
-        var textNodes = this.getTextNodesIn(element);
-        for (var i = 0; i < textNodes.length; i++) {
-            var textNode = textNodes[i];
-            var text = textNode.nodeValue;
-            // 匹配文本内容
-            var match = text.match(regex);
-            if (match) {
-                // 创建一个包含匹配到的文本的文本节点
-                var newNode = document.createElement('span');
-                if (type === 'hightLight') {
-                    newNode.innerHTML = match[0].replace(new RegExp(keyword, 'g'), '<span class="highlight">$&</span>');
-                } else if (type === 'note') {
-                    newNode.innerHTML = match[0].replace(new RegExp(keyword, 'g'), '<u class="blue-underline">$&</u>');
-                } else if (type === 'addHighLight') {
-                    newNode.innerHTML = match[0].replace(new RegExp(keyword, 'g'), '<span class="highlight-add">$&</span>');
-                }
-                // 插入新节点，替换原文本节点
-                textNode.parentNode.insertBefore(newNode, textNode);
-                textNode.parentNode.removeChild(textNode);
+    elementChange(keyword, type,v_html) {
+        // 创建一个包含匹配到的文本的文本节点
+        if (type === 'highLight') {
+            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<span class="highlight_y">'+ keyword + '</span>')
+        } else if (type === 'note') {
+            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<u class="blue-underline">'+ keyword + '</u>')
+        } else if (type === 'highLight-add') {
+            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<span class="highlight-add">'+ keyword + '</span>')
+        }
+        return v_html;
+    },
+    getTextNodesIn(element) {
+        var nodes = element.childNodes;
+        var textNodes = [];
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            if (node.nodeType === Node.TEXT_NODE) {
+                textNodes.push(node);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                textNodes = textNodes.concat(this.getTextNodesIn(node));
             }
         }
-    },
-     getTextNodesIn(element) {
-    var nodes = element.childNodes;
-    var textNodes = [];
-    for (var i = 0; i < nodes.length; i++) {
-        var node = nodes[i];
-        if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            textNodes = textNodes.concat(this.getTextNodesIn(node));
-        }
+        return textNodes;
     }
-    return textNodes;
-}
 }
 
 
-function addHighLight_(questionId,newArrayString){
+function addHighLight_(questionId, newArrayString) {
     return $axios({
         url: '/classroom/question/addHighlight',
         method: 'post',
-        data: {questionId:questionId,newArrayString:newArrayString}
+        data: {questionId: questionId, newArrayString: newArrayString}
     });
 }
+
 function getQuestionBySelf() {
     return $axios({
         url: '/classroom/question/getQuestionBySelf',

@@ -8,6 +8,7 @@
         (question_id,
          title,
          content,
+         html,
          high_light_json_array,
          high_light_flag,
          underline_json_array,
@@ -29,6 +30,7 @@
         VALUES (#{questionId},
                 #{title},
                 #{content},
+                #{html},
                 #{highLightJsonArray},
                 #{highLightFlag},
                 #{underlineJsonArray},
@@ -57,6 +59,9 @@
             </if>
             <if test="content != null">
                 content = #{content},
+            </if>
+            <if test="html != null">
+                html = #{html},
             </if>
             <if test="highLightFlag != null">
                 high_light_flag = #{highLightFlag},
@@ -114,10 +119,11 @@
         select question_id,
                title,
                content,
+               html,
                high_light_flag,
                high_light_json_array,
                add_high_light_flag,
-               add_high_light_json_array
+               add_high_light_json_array,
                underline_flag,
                underline_json_array,
                note_json_array,
@@ -141,6 +147,7 @@
             t.question_id,
             t.title,
             t.content,
+            t.html,
             t.high_light_json_array,
             t.high_light_flag,
             t.add_high_light_flag,
@@ -171,6 +178,7 @@
             t.question_id,
             t.title,
             t.content,
+            t.html,
             t.add_high_light_flag,
             t.add_high_light_json_array,
             t.high_light_json_array,

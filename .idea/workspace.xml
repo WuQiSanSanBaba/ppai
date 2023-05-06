@@ -5,169 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/config/mybatis/sqlLog/SqlInfoInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/ClassroomPartMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/classroom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/public.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/subject.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/common/common.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/component/tree.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/images/login/bg_bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/images/login/bg_head.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/images/login/bg_log.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/images/login/stacked-waves-haikei.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/PpAi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/BaseBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/bean/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/context/BaseContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/base/controller/BaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Exception/CustomException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CacheUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CheckUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/CommonUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/ConfigUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/DictUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/JacksonObjectMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/ParamUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/Utils/SpringUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/common/controller/CommonController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/controller/TreeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/mapper/TreeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/service/TreeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/component/service/impl/TreeServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/Exception/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/WebMvc/WebMcvConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthAop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/aop/authAop/AuthCheck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/filter/LogincheckFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/MybatisConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/AotuFillField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/CreateTime.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/CreateUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/UpdateTime.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/autoFillField/anno/UpdateUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/mybatis/sqlTimeCul/SqlExecuteTimeCountInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/config/swag/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/ClassInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/MenuInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/bean/UserInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/ClassInfoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/MenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/ClassMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/LoginMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/MenuMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/ClassService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/LoginService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/ClassServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/LoginServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/manage/service/impl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/PreLoad.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/bean/DictItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/bean/ParamInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/mapper/DictMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/mapper/ParamMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/ConfigService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/DictService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/ParamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/ConfigServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/DictServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/preLoad/service/impl/ParamServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/bean/Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/controller/ConfigController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/mapper/ConfigMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/service/ConfigService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppai/system/service/impl/ConfigerviceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-pro.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/ehcache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/ehcache.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/class.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/class.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/dict.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/dict.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/param.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/preload/param.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/system/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/system/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/category.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/combo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/food.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/menu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/api/order.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/404-images/404-cloud.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/404-images/404.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_back@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_clean@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/btn_close@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/icon_index.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/icon_upload@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/jine_m-2@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/renshu@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/icons/xiangmujine@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/img_brand01@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/img_denglu_bj.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/login/login-l.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/login/login-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/login/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/login/logo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/login/office365.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/images/noImg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/request.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/js/validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/component/tree/js/tree.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/component/tree/sigleTree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/login/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/addClass.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/classList.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/class/js/class.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/addUser.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/js/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/manage/user/userList.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/configList.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/js/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/page/system/config/updateConfig.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/axios/axios.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/fonts/element-icons.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/fonts/element-icons.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/element-ui/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/plugins/vue/vue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/fonts/element-icons.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/fonts/element-icons.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/demo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/demo_index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/icon/iconfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppai/styles/page.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/建表脚本/1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/建表脚本/db_reggie.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/新建 PPT 演示文稿.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/config/mybatis/sqlLog/SqlInfoInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/config/mybatis/sqlLog/SqlInfoInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/question.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/question.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,6 +69,7 @@
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/开发/ppat/src/main/resources/ppat/images/login",
     "node.js.detected.package.eslint": "true",
@@ -385,7 +228,7 @@
       <workItem from="1683271505627" duration="5012000" />
       <workItem from="1683297952553" duration="411000" />
       <workItem from="1683298401162" duration="1036000" />
-      <workItem from="1683337926629" duration="17555000" />
+      <workItem from="1683337926629" duration="28315000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -415,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677941910776</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="简简单单提交一下而已">
+      <created>1683372031437</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683372031437</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

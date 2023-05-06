@@ -23,7 +23,7 @@
         justify-content: center;
     }
 
-    .highlight_ {
+    .highlight_y {
         background-color: rgb(255, 236, 61);
     }
 
@@ -71,17 +71,25 @@
                 width="30%"
         >
             <div>
-                <div style="margin: 25px">
-                    <div class="keywords-title" style="font-size: 26px">本次新增高亮显示的关键词:</div>
-                    <div style="border: solid 1px">
-                        <span style="font-size:20px;" v-if="addHighLightJsonArray.length===0">
+                <div style="margin: 25px;font-size: 18px">
+                    <div class="keywords-title">已有的高亮显示:</div>
+                    <div>
+                        <div style="font-size:20px;" v-if="question.addHighLightJsonArray">
                             你还未新增高亮词
-                        </span>
-                        <span v-else style=""
-                              v-for="(item, index) in addHighLightJsonArray"
-                              :key="index"
-                              class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
-                                                                 class="el-icon-delete-solid"></i></span>
+                        </div>
+                        <div v-else style="    color: #67c23a;background: #f0f9eb;border-color: #c2e7b0;"
+                             v-for="(item, index) in question.addHighLightJsonArray"
+                             :key="index"
+                             class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
+                                                                class="el-icon-delete-solid"></i></div>
+                    </div>
+                    <div>
+                        <div class="keywords-title">本次新增高亮显示:</div>
+                        <div style=""
+                             v-for="(item, index) in addHighLightJsonArray_new"
+                             :key="index"
+                             class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
+                                                                class="el-icon-delete-solid"></i></div>
                     </div>
                 </div>
                 <div style="display: flex;margin:20px">
@@ -117,9 +125,9 @@
                 question_html: '<p>11</p>',
                 question: {title: '你还没有添加问题'},
                 dialogVisible_HighLight: false,
-                addHighLightJsonArray: [],
+                addHighLightJsonArray_new: [],
                 input_: '',
-                groupers: []
+                groupers: [],
             }
         },
         computed: {
@@ -134,7 +142,7 @@
                 getQuestionByIdAxios(questionId).then((res) => {
                     if (res.code === 1) {
                         this.question = res.data
-                        this.question_html = res.data.content
+                        this.question_html = res.data.html
                         const groupMembersList = res.map.GroupMembersList
                         groupMembersList.map((member) => {
                             this.groupers.push(member.userName)
@@ -142,21 +150,21 @@
                         console.log(this.groupers)
                     }
                 })
-                this.question_html = this.question.content
+                this.question_html = this.question.html
             } else {
                 //获取自己新建的问题
                 getQuestionBySelf().then(
                     res => {
                         if (res.code === 1) {
                             this.question = res.data
-                            this.question_html = res.data.content
+                            this.question_html = res.data.html
                             const groupMembersList = res.map.GroupMembersList
                             groupMembersList.map((member) => {
                                 this.groupers.push(member.userName)
                             })
                             //开始处理question
                             if (this.question_html) {
-                                dealHightLight.excute(this.question);
+                                this.question_html = dealHightLight.excute(this.question, this.question_html);
                             }
                         } else {
                             window.location.href = '/ppat/page/classroom/question/addQuestion.html'
@@ -168,61 +176,52 @@
         },
         methods: {
             deleteKeyWord(index) {
-                this.addHighLightJsonArray.splice(index, 1)
+                this.addHighLightJsonArray_new.splice(index, 1)
             },
             keyWordAdd() {
                 if (this.input_) {
-                    this.addHighLightJsonArray.push(this.input_)
-                    this.input_ = ''
+                    if (this.addHighLightJsonArray_new.includes(this.input_)) {
+                        this.$message.error(this.input_ + "已经存在")
+                    } else {
+                        this.addHighLightJsonArray_new.push(this.input_)
+                        this.input_ = ''
+                    }
                 }
             },
             addHighLight() {
                 this.dialogVisible_HighLight = false
                 //把新增的内容重复的去掉
-                this.addHighLightJsonArray = this.addHighLightJsonArray.filter((obj, index, self) =>
+                this.addHighLightJsonArray_new = this.addHighLightJsonArray_new.filter((obj, index, self) =>
                     index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
                 );
-                let addHighLightJsonArray_RemoveAlreadyHighLight
+                let addHighLightJsonArray_new_RemoveAlreadyHighLight
                 //把已经高亮的去掉
                 if (this.question.highLightJsonArray) {
                     const highLightJsonArray = JSON.parse(this.question.highLightJsonArray)
-                    addHighLightJsonArray_RemoveAlreadyHighLight = this.addHighLightJsonArray.filter(obj =>
+                    addHighLightJsonArray_new_RemoveAlreadyHighLight = this.addHighLightJsonArray_new.filter(obj =>
                         !highLightJsonArray.some(other => obj === other) // 不在b数组中出现过的对象
                     )
-                }else {
-                    addHighLightJsonArray_RemoveAlreadyHighLight= this.addHighLightJsonArray
+                } else {
+                    addHighLightJsonArray_new_RemoveAlreadyHighLight = this.addHighLightJsonArray_new
                 }
-                if (addHighLightJsonArray_RemoveAlreadyHighLight.length === 0){
+                if (addHighLightJsonArray_new_RemoveAlreadyHighLight.length === 0) {
                     this.$message.error("你没有添加新增高亮次或者它已经高亮")
                     return
-                }else {
-                    addHighLightJsonArray_RemoveAlreadyHighLight=JSON.stringify(addHighLightJsonArray_RemoveAlreadyHighLight)
+                } else {
+                    addHighLightJsonArray_new_RemoveAlreadyHighLight = JSON.stringify(addHighLightJsonArray_new_RemoveAlreadyHighLight)
                 }
                 //发送后台处理
-                addHighLight_(this.question.questionId, addHighLightJsonArray_RemoveAlreadyHighLight).then(res => {
-                    if (res.data.code === 1) {
+                addHighLight_(this.question.questionId, addHighLightJsonArray_new_RemoveAlreadyHighLight).then(res => {
+                    if (res.code === 1) {
                         this.$message.success("添加成功")
-                        //处理蓝色
-                        if (this.data.data.addHighLightFlag === 1) {
-                            arrayAdd = JSON.parse(res.data.addHighlightJsonArray);
-                            dealHightLight.preElement(arrayAdd, "addHighLight")
-                        }
-                        //处理黄色
-                        let addHighLightJsonArray = JSON.parse(res.data.addHighLightJsonArray);
-                        if (addHighLightJsonArray && addHighLightJsonArray.size > 0) {
-                            for (let addHighLightJsonArrayElement of addHighLightJsonArray) {
-                                if (!this.data.data.addHighLightJsonArray.includes(addHighLightJsonArrayElement)) {
-                                    for (let value of addHighLightJsonArrayElement) {
-                                        dealHightLight.elementChange(value, 'highlight')
-                                    }
-                                }
-                            }
-                        }
+                        this.question = res.data
+                        this.question_html = dealHightLight.excute(res.data, this.question_html);
+                        this.addHighLightJsonArray_new = null
                     }
                 });
             },
-            editQuestion(){
-                window.location.href = '/ppat/page/classroom/question/addQuestion.html?questionId='+this.question.questionId
+            editQuestion() {
+                window.location.href = '/ppat/page/classroom/question/addQuestion.html?questionId=' + this.question.questionId
             }
         }
 
