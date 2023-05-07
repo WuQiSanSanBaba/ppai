@@ -9,8 +9,8 @@
          title,
          content,
          html,
-         high_light_json_array,
-         high_light_flag,
+         highlight_json_array,
+         highlight_flag,
          underline_json_array,
          underline_flag,
          note_json_array,
@@ -31,8 +31,8 @@
                 #{title},
                 #{content},
                 #{html},
-                #{highLightJsonArray},
-                #{highLightFlag},
+                #{highlightJsonArray},
+                #{highlightFlag},
                 #{underlineJsonArray},
                 #{underlineFlag},
                 #{noteJsonArray},
@@ -63,17 +63,17 @@
             <if test="html != null">
                 html = #{html},
             </if>
-            <if test="highLightFlag != null">
-                high_light_flag = #{highLightFlag},
+            <if test="highlightFlag != null">
+                highlight_flag = #{highlightFlag},
             </if>
-            <if test="highLightJsonArray != null">
-                high_light_json_array = #{highLightJsonArray},
+            <if test="highlightJsonArray != null">
+                highlight_json_array = #{highlightJsonArray},
             </if>
-            <if test="addHighLightFlag != null">
-                add_high_light_flag = #{addHighLightFlag},
+            <if test="addhighlightFlag != null">
+                add_highlight_flag = #{addhighlightFlag},
             </if>
-            <if test="addHighlightJsonArray != null">
-                add_high_light_json_array = #{addHighlightJsonArray},
+            <if test="addhighlightJsonArray != null">
+                add_highlight_json_array = #{addhighlightJsonArray},
             </if>
             <if test="underlineJsonArray != null">
                 underline_json_array = #{underlineJsonArray},
@@ -120,10 +120,10 @@
                title,
                content,
                html,
-               high_light_flag,
-               high_light_json_array,
-               add_high_light_flag,
-               add_high_light_json_array,
+               highlight_flag,
+               highlight_json_array,
+               add_highlight_flag,
+               add_highlight_json_array,
                underline_flag,
                underline_json_array,
                note_json_array,
@@ -148,10 +148,10 @@
             t.title,
             t.content,
             t.html,
-            t.high_light_json_array,
-            t.high_light_flag,
-            t.add_high_light_flag,
-            t.add_high_light_json_array,
+            t.highlight_json_array,
+            t.highlight_flag,
+            t.add_highlight_flag,
+            t.add_highlight_json_array,
             t.underline_json_array,
             t.underline_flag,
             t.note_json_array,
@@ -179,10 +179,10 @@
             t.title,
             t.content,
             t.html,
-            t.add_high_light_flag,
-            t.add_high_light_json_array,
-            t.high_light_json_array,
-            t.high_light_flag,
+            t.add_highlight_flag,
+            t.add_highlight_json_array,
+            t.highlight_json_array,
+            t.highlight_flag,
             t.underline_json_array,
             t.underline_flag,
             t.note_json_array,

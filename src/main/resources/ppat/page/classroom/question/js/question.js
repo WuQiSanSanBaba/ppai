@@ -1,53 +1,65 @@
 const dealHightLight = {
-    excute(question,v_html) {
-        if (question.highLightFlag === 1) {
-            v_html= this.preElement(question.highLightJsonArray, 'highLight',v_html)
+    excute(question,element) {
+        if (question.highlightFlag === 1) {
+             this.preElement(question.highlightJsonArray, 'highLight_old',element)
         }
-        if (question.addHighLightFlag === 1) {
-            v_html= this.preElement(question.addHighlightJsonArray, 'highLight-add',v_html)
+        if (question.addhighlightFlag === 1) {
+             this.preElement(question.addhighlightJsonArray, 'highLight-add',element)
         }
         if (question.underlineFlag === 1) {
-            v_html= this.preElement(question.underlineJsonArray, 'note',v_html)
+             this.preElement(question.underlineJsonArray, 'underline',element)
         }
-        return v_html;
     },
-    preElement(jsonArray, type,v_html) {
+    preElement(jsonArray, type,element) {
         let array = JSON.parse(jsonArray);
         //去重
         array = array.filter((obj, index, self) =>
             index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
         );
         for (let string of array) {
-            for (let element of string) {
-                v_html= this.elementChange(element, type,v_html)
+            for (let element_t of string) {
+                 this.traverse(element,element_t,type)
             }
         }
-        return v_html;
     },
-    elementChange(keyword, type,v_html) {
-        // 创建一个包含匹配到的文本的文本节点
-        if (type === 'highLight') {
-            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<span class="highlight_y">'+ keyword + '</span>')
-        } else if (type === 'note') {
-            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<u class="blue-underline">'+ keyword + '</u>')
-        } else if (type === 'highLight-add') {
-            v_html=v_html.replaceAll(new RegExp(keyword, 'g'), '<span class="highlight-add">'+ keyword + '</span>')
-        }
-        return v_html;
-    },
-    getTextNodesIn(element) {
-        var nodes = element.childNodes;
-        var textNodes = [];
-        for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
-            if (node.nodeType === Node.TEXT_NODE) {
-                textNodes.push(node);
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-                textNodes = textNodes.concat(this.getTextNodesIn(node));
+
+    traverse(node, keyword,type) {
+    const stack = [node];
+    while (stack.length > 0) {
+        const curNode = stack.pop();
+        // 遍历当前节点的孩子节点
+        for (let i = curNode.childNodes.length - 1; i >= 0; i--) {
+            const child = curNode.childNodes[i];
+            // 如果孩子节点是元素节点，则插入到栈中
+            if (child.nodeType === Node.ELEMENT_NODE) {
+                stack.push(child);
+            }
+            // 如果孩子节点是文本节点，并且它的内容包含关键字，则创建并插入包含关键字的节点
+            else if (child.nodeType === Node.TEXT_NODE && child.textContent.includes(keyword)) {
+                const parts = child.textContent.split(keyword);
+                const parentNode = child.parentNode;
+                for (let j = 0; j < parts.length; j++) {
+                    const part = parts[j];
+                    parentNode.insertBefore(document.createTextNode(part), child);
+                    if (j < parts.length - 1) {
+                        const keywordNode = document.createElement('span');
+                        keywordNode.textContent = keyword;
+                        if (type==='underline'){
+                            keywordNode.classList.add('underline');
+                        }else if (type==='highLight-add'){
+                            keywordNode.classList.add('highLight-add');
+                        }else if (type==='highLight-old'){
+                            keywordNode.classList.add('highLight-old');
+                        }
+                        parentNode.insertBefore(keywordNode, child);
+                    }
+                }
+                // 移除当前节点
+                parentNode.removeChild(child);
             }
         }
-        return textNodes;
     }
+}
 }
 
 
