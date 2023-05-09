@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Echarts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/node/ItemStyleEcharts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/node/LabelEcharts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/node/LinkEcharts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/node/NodeEcharts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/EchartsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/EchartsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/EchartsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/js/node.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/node.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/echarts/demo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/echarts/echarts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addNote.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addNote.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/classroom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/classroom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/question.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/question.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" afterDir="false" />
     </list>
@@ -83,7 +73,7 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/开发/ppat/src/main/resources/ppat/plugins/echarts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/开发/ppat/src/main/resources/ppat/page/classroom/question&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -99,10 +89,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\开发\ppat\src\main\resources\ppat\page\classroom\question" />
       <recent name="D:\开发\ppat\src\main\resources\ppat\plugins\echarts" />
       <recent name="D:\开发\ppat\src\main\resources\ppat\images\login" />
       <recent name="D:\开发\ppat\src\main\resources\ppat" />
-      <recent name="D:\开发\ppat\src\main\resources\ppat\page\classroom\question" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\mybatis\mapper\classroom" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -244,7 +234,9 @@
       <workItem from="1683394032668" duration="394000" />
       <workItem from="1683425750715" duration="2504000" />
       <workItem from="1683431741938" duration="5602000" />
-      <workItem from="1683441757170" duration="18641000" />
+      <workItem from="1683441757170" duration="22595000" />
+      <workItem from="1683530633617" duration="350000" />
+      <workItem from="1683596216835" duration="4988000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -288,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683386653931</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="简简单单提交一下而已">
+      <created>1683465745237</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683465745237</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

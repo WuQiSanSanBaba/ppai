@@ -5,9 +5,9 @@
 <mapper namespace="com.wuqisan.ppat.classroom.mapper.ClassroomMapper">
 
     <insert id="addClassroom">
-        INSERT INTO `classroom` (`classroom_id`, `teacher_id`,`stage`, `eff_time`,
+        INSERT INTO `classroom` (`classroom_id`, `teacher_id`,`stage`,`categorizes`, `eff_time`,
                                              `exp_time`, `create_time`)
-        VALUES (#{classroomId}, #{teacherId},#{stage}, #{effTime}, #{expTime}, #{createTime});
+        VALUES (#{classroomId}, #{teacherId},#{stage}, #{categorizes},#{effTime}, #{expTime}, #{createTime});
     </insert>
     <select id="getCurrentClassroomByUserId" resultType="com.wuqisan.ppat.classroom.bean.Classroom">
         SELECT classroom_id, group_leader_ids, teacher_id, subject_id, stage, eff_time, exp_time

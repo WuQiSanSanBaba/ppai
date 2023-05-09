@@ -11,31 +11,6 @@
     <link rel="stylesheet" href="../../../styles/page.css"/>
     <link rel="stylesheet" href="./css/question.css"/>
 </head>
-<style>
-
-    body {
-        overflow: hidden
-    }
-
-    .container {
-        align-items: flex-start;
-        display: flex;
-        justify-content: center;
-    }
-
-    .highLight_old {
-        background-color: rgb(255, 236, 61);
-    }
-
-    .highLight-add {
-        background-color: rgb(61, 181, 255);
-    }
-
-    .underline {
-        text-decoration: underline;
-        text-decoration-color: blue;
-    }
-</style>
 <body>
 <div style="display: flex;
     justify-content:flex-end;margin-right: 10%;
@@ -61,7 +36,7 @@
                     <button style="background-color: #00AEEC"
                             @click="dialogVisible_HighLight=true;">新增高亮显示
                     </button>
-                    <button @click="dialogVisible_HighLight=true;" style="background-color: red">添加注释
+                    <button @click="dialogVisible_Note=true;" style="background-color: red">添加注释
                     </button>
                 </div>
             </div>
@@ -124,19 +99,12 @@
                 width="30%"
         >
             <div>
-                <div>
-                    <div>
-                        <div class="keywords-title">本次新增高亮显示:</div>
-                        <div style=""
-                             v-for="(item, index) in allHighLight"
-                             :key="index"
-                             class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
-                                                                class="el-icon-delete-solid"></i></div>
-                    </div>
-                </div>
-                <div style="display: flex;margin:20px">
-                    <el-input v-model="input_" placeholder="请输入关键词,点击右侧按钮添加"></el-input>
-                    <el-button type="primary" @click="keyWordAdd">添加+</el-button>
+                <div>点击关键词进行注释</div>
+                <div class="note-container">
+                    <el-button type="primary" v-for="(item, index) in allHighLight"
+                               :key="index" @click="addNotePage(item)"> {{item}}
+                    </el-button>
+
                 </div>
             </div>
             <div style="display: flex;justify-content: center;">
@@ -179,12 +147,12 @@
         },
         computed: {
             allHighLight() {
-                const arr = []
+                let arr = []
                 if (this.question.addhighlightFlag && this.question.addhighlightFlag === 1) {
-                    arr.concat(JSON.parse(this.question.addhighlightJsonArray))
+                    arr = arr.concat(JSON.parse(this.question.addhighlightJsonArray))
                 }
                 if (this.question.highlightFlag && this.question.highlightFlag === 1) {
-                    arr.concat(JSON.parse(this.question.highlightJsonArray))
+                    arr = arr.concat(JSON.parse(this.question.highlightJsonArray))
                 }
                 return arr
             }
@@ -287,6 +255,9 @@
             },
             editQuestion() {
                 window.location.href = '/ppat/page/classroom/question/addQuestion.html?questionId=' + this.question.questionId
+            },
+            addNotePage(item){
+                console.log(item)
             }
         }
 

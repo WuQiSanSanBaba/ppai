@@ -1,7 +1,7 @@
 const dealHightLight = {
     excute(question,element) {
         if (question.highlightFlag === 1) {
-             this.preElement(question.highlightJsonArray, 'highLight_old',element)
+             this.preElement(question.highlightJsonArray, 'highLight',element)
         }
         if (question.addhighlightFlag === 1) {
              this.preElement(question.addhighlightJsonArray, 'highLight-add',element)
@@ -48,8 +48,8 @@ const dealHightLight = {
                             keywordNode.classList.add('underline');
                         }else if (type==='highLight-add'){
                             keywordNode.classList.add('highLight-add');
-                        }else if (type==='highLight-old'){
-                            keywordNode.classList.add('highLight-old');
+                        }else if (type==='highLight'){
+                            keywordNode.classList.add('highLight');
                         }
                         parentNode.insertBefore(keywordNode, child);
                     }
