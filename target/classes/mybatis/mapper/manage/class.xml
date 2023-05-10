@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.manage.mapper.ClassMapper">
+    <insert id="addClass">
+        INSERT INTO `grade_class` (`class_id`, `name`, `status`, `create_time`,
+                                         `create_user`, `update_time`, `update_user`)
+        VALUES (#{classId}, #{name}, 1, #{createTime}, #{createUser}, #{updateTime}, #{updateUser});
+    </insert>
+    <delete id="deleteClass">
+        delete
+        from grade_class
+        where class_id = #{id}
+    </delete>
+    <update id="updateClassById">
+        update grade_class
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime !=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user=#{updateUser},
+            </if>
+        </set>
+        where class_id=#{classId}
+    </update>
+    <select id="getClassList" resultType="com.wuqisan.ppat.manage.bean.GradeClass">
+        select a.class_id,
+        a.name,
+        a.status,
+        a.create_time,
+        a.update_time,
+        a.create_user,
+        a.update_user
+        from grade_class a
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null">
+                and a.name like concat(#{name},'%')
+            </if>
+            <if test="classId != null">
+                and a.class_id like concat(#{classId},'%')
+            </if>
+        </trim>
+    </select>
+    <select id="queryClassById" resultType="com.wuqisan.ppat.manage.bean.GradeClass">
+        select a.class_id,
+               a.name,
+               a.status,
+               a.create_time,
+               a.update_time,
+               a.create_user,
+               a.update_user
+        from grade_class a
+        where a.class_id = #{id}
+    </select>
+</mapper>

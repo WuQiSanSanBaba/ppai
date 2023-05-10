@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.classroom.mapper.SubjectMapper">
+
+    <update id="updateSubjectStatus">
+        update subject
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime !=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user=#{updateUser},
+            </if>
+        </set>
+        where subject_id = #{subjectId}
+    </update>
+    <update id="updateSubject">
+        UPDATE subject
+        <set>
+            <if test="subjectName != null">
+                subject_name = #{subjectName},
+            </if>
+            <if test="stage != null">
+                stage = #{stage},
+            </if>
+            <if test="coreConceptJsonArray != null">
+                core_concept_json_array = #{coreConceptJsonArray},
+            </if>
+            <if test="generalConceptJsonArray != null">
+                general_concept_json_array = #{generalConceptJsonArray},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime !=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user=#{updateUser},
+            </if>
+        </set>
+        WHERE `subject_id` = #{subjectId}
+    </update>
+    <delete id="deleteSubject">
+        delete
+        from subject
+        where subject_id = #{subjectId}
+    </delete>
+    <select id="getSUbjectList" resultType="com.wuqisan.ppat.classroom.bean.Subject">
+        select subject_id,
+        (select name from dict_item where dict_id=stage and group_id='stage' limit 1) stage,
+        subject_name,
+        core_concept_json_array,
+        general_concept_json_array,
+        status,
+        create_time,
+        update_time,
+        create_user,
+        update_user
+        from subject
+        where 1=1
+        <if test="subjectName !=null">
+            and subject_name like concat(#{subjectName},'%')
+        </if>
+        <if test="stage !=null">
+            and stage like concat(#{stage},'%')
+        </if>
+    </select>
+    <select id="getSubjectById" resultType="com.wuqisan.ppat.classroom.bean.Subject">
+        select subject_id,
+               stage,
+               subject_name,
+               core_concept_json_array,
+               general_concept_json_array,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from subject
+        where subject_id = #{subjectId}
+    </select>
+    <select id="getSujectsByStage" resultType="com.wuqisan.ppat.classroom.bean.Subject">
+        select subject_id,
+               stage,
+               subject_name,
+               core_concept_json_array,
+               general_concept_json_array,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from subject
+        where stage = #{stage}
+    </select>
+    <insert id="addSubject">
+        INSERT INTO `subject` (`subject_id`, `stage`, `subject_name`, `core_concept_json_array`, `general_concept_json_array`, `status`,
+                                           `create_time`, `update_time`, `create_user`, `update_user`)
+        VALUES (#{subjectId}, #{stage}, #{subjectName}, #{coreConceptJsonArray}, #{generalConceptJsonArray}, #{status}, #{createTime},
+                #{updateTime}, #{createUser}, #{updateUser});
+
+    </insert>
+</mapper>

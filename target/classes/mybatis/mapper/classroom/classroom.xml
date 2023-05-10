@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.classroom.mapper.ClassroomMapper">
+
+    <insert id="addClassroom">
+        INSERT INTO `classroom` (`classroom_id`, `teacher_id`,`stage`,`categorizes`, `eff_time`,
+                                             `exp_time`, `create_time`)
+        VALUES (#{classroomId}, #{teacherId},#{stage}, #{categorizes},#{effTime}, #{expTime}, #{createTime});
+    </insert>
+    <select id="getCurrentClassroomByClassroomId" resultType="com.wuqisan.ppat.classroom.bean.Classroom">
+        SELECT classroom_id, group_leader_ids, teacher_id, subject_id, stage,categorizes, eff_time, exp_time
+        FROM classroom
+        WHERE classroom_id=#{classroomId}
+    </select>
+</mapper>

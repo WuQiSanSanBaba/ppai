@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+    <style>
+        #tree-app .notAdmin::after {
+            border: 0 !important;
+
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container" id="tree-app">
+    <el-input
+            placeholder="输入关键字进行过滤"
+            v-model="filterText">
+    </el-input>
+    <el-tree
+            :data="data"
+            accordion
+            ref="tree"
+            :load="loadNode"
+            :props="props"
+            :filter-node-method="filterNode"
+            lazy
+            ref="tree"
+            show-checkbox
+
+    >
+    </el-tree>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../plugins/axios/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="./js/tree.js"></script>
+<script src="../../../js/common.js"></script>
+
+<script>
+    new Vue({
+        el: '#tree-app',
+        data() {
+            return {
+                data: [],
+                props: {
+                    label: 'name',
+                    children: 'zones',
+                    isLeaf: 'leaf'
+                },
+                selectedName:'',
+                selected:'',
+                filterText:''
+            }
+        },
+        computed: {},
+        mounted() {
+            window.addEventListener('message',e=>{
+                const checkedNodes = this.$refs.tree.getCheckedNodes(true);
+                window.parent.postMessage(checkedNodes)
+            })
+        },
+        watch: {
+            filterText(val) {
+                this.$refs.tree.filter(val);
+            }},
+        methods: {
+            loadNode(node, resolve) {
+                if (node.level === 0) {
+                    getGradeList().then(res => {
+                        const gradeList= res.data.map(item=> {
+                            item.disabled=true
+                            return item
+                        })
+                        return resolve(gradeList);
+                    })
+                }
+                if (node.level == 1) {
+                    getClassList(node.data.value).then(res=>{
+                        const classList= res.data.map(item=> {
+                            item.disabled=true
+                            return item
+                        })
+                    return resolve(classList);
+                    })
+                }
+                if (node.level == 2){
+                    getStudentList(node.data.classId).then(res=>{
+                        const studentList= res.data.map(item=> {
+                              item.leaf=true
+                              return item
+                        })
+                        return resolve(studentList)
+                    })
+                }
+
+            },
+            filterNode(value, data) {
+                if (!value) return true;
+                return data.name.indexOf(value) !== -1;
+            }
+        },
+
+    })
+</script>
+</body>
+</html>

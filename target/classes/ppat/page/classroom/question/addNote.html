@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+    <link rel="stylesheet" href="./css/question.css"/>
+</head>
+<style>
+
+</style>
+<body>
+<div class="addBrand-container" id="addNote-app">
+    <div id="classtitle"></div>
+    <!--问题富文本编辑器-->
+    <div id="wrapper" style="width: 100%" class="fuwenben">
+        <div id="toolbar-container"><!-- 工具栏 --></div>
+        <div id="editor-container"><!-- 编辑器 --></div>
+    </div>
+
+    <div class="editor-containers" id="editor-containers"></div>
+</div>
+<script src="../../../js/index.js"></script>
+<script src="../../../plugins/jquery/jquery.js"></script>
+<script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
+<script src="./js/addNote.js"></script>
+
+
+<script>
+
+    $(document).ready(function(){
+        loadTitle();
+        loadPage();
+
+    })
+</script>
+</body>
+</html>
+

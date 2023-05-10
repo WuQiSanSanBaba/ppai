@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<script src="../plugins/jquery/jquery.js"></script>
+<style>
+    .res {
+        color: Red;
+    }
+
+    .result {
+        background: yellow;
+    }
+</style>
+<script>
+    var preNum = 0;//记录第几次点击查询框
+    var allNum = 0;//总共搜索到几条满足关键字的数据
+    var doing = false;//正在输入
+    $(document).keyup(function (event) {
+        if (event.key == "Enter") {//enter键盘事件
+            search();
+            return;
+        }
+    });
+    document.getElementById('keyword').addEventListener('compositionstart', function (e) {
+        doing = true;
+    }, false);
+    document.getElementById('keyword').addEventListener('input', function (e) {
+        if (!doing) {
+            highLight();
+        }
+    }, false);
+    document.getElementById('keyword').addEventListener('compositionend', function (e) {
+        doing = false;
+        highLight();
+    }, false);
+    function highLight() {
+        cancelhighLight();
+        var searchText = $("#keyword").val();//输入框的值
+        if (searchText.length >0) {
+            var needEachDom = ['a', 'p', 'span', 'h1','div','font'];
+            for (var i = 0; i < needEachDom.length; i++) {
+                var dom = needEachDom[i];
+                changeDom(dom, searchText);
+            }
+            if (allNum > 0 && $(".highlight").size() > 0) {
+                preNum = 0;
+                var new_top = $(".highlight").eq(preNum).offset().top;
+                slide(new_top);
+                $(".highlight").eq(preNum).css('background-color', '#b9a4a4');
+                preNum = preNum + 1;
+            }
+            $('#flagText').val(preNum + "/" + allNum);
+        }
+    }
+    function search()
+    {
+        if ($(".highlight").size() > 1)
+        {
+            if (preNum <allNum) {
+                preNum = preNum + 1;
+                var new_top = $(".highlight").eq(preNum - 1).offset().top;
+                $(".highlight").eq(preNum - 2).css('background-color', '');
+                $(".highlight").eq(preNum - 1).css('background-color', '#b9a4a4');
+                slide(new_top);
+                $('#flagText').val(preNum + "/" + allNum);
+            } else
+            {
+                preNum = 0;
+                var new_top = $(".highlight").eq(preNum).offset().top;
+                $(".highlight").eq(allNum - 1).css('background-color', '');
+                $(".highlight").eq(preNum).css('background-color', '#b9a4a4');
+                slide(new_top);
+                $('#flagText').val(1 + "/" + allNum);
+            }
+        }
+    }
+    function slide(scollTopPx)
+    {
+        //此处我是根据自己的实际情况来判断需要滑动到什么位置，这个可以按照自己的情况实现
+        if (scollTopPx <= 500) {
+            $("html,body").animate({ scrollTop: "10px" });
+        } else if (scollTopPx > 500 && scollTopPx <= 1000) {
+            $("html,body").animate({ scrollTop: "500px" });
+        } else if (scollTopPx > 1000) {
+            $("html,body").animate({ scrollTop: "1000px" });
+        }
+    }
+    function changeDom(domStr, searchText)
+    {
+        var regExp = new RegExp(searchText, 'g');
+        $(domStr).each(function () {
+            var html = $(this)[0].innerHTML;
+            var classListStr = $(this)[0].classList.toString();//不包含隐藏的HTML
+            if (html.indexOf(searchText) >= 0&&classListStr.indexOf("hidden")<0) {
+                if (((domStr == 'font' || domStr == 'p') && $(this)[0].className != "highlight") || ($(this)[0].children.length == 0 && domStr != 'font' && domStr != 'p'))
+                {
+                    var newHtml = html.replace(regExp, '<font class="highlight">' + searchText + '</font>');
+                    $(this).html(newHtml);
+                    //allNum = allNum + 1;
+                }
+            }
+        });
+        allNum = $(".highlight").size();
+    }
+    function cancelSearch()
+    {
+        $('#keyword').val("");//清空搜索框
+        $('#flagText').val("");
+        cancelhighLight();
+    }
+    function cancelhighLight() {
+        for (var i = 0; i < $(".highlight").size(); i++) {
+            $(".highlight").eq(i).css('background-color', '');
+        }
+        //删除高亮标签
+        $(".highlight").each(function () {
+            var content = $(this).html();
+            $(this).replaceWith(content);
+        })
+        //清除数字标记
+        preNum = 0;
+        allNum = 0;
+    }
+
+</script>
+<body>
+<input class="form-control" type="text" placeholder="输入关键字" id="keyword" autocomplete="off">
+<input class="form-control" type="text" style="width:55px;padding:0;margin-left:-5px;" id="flagText" readonly="readonly">
+更新日志：
+2023.2.28
+1、实现子菜单
+2、实现方法级鉴权
+3、角色权限关系模型
+2023.3.8
+1、引入缓存：ehcache
+2、仿照某端设计可以根据dictId和groupId获取的字典组
+3、引入全局配置参数:{1 年级总数：用于控制年级数量 }
+4、引入参数控制
+5、引入公共组件： 班级选择树
+6、用户增删改查完毕
+。。。。。
+</body>
+</html>

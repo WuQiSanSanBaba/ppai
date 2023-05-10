@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+</head>
+<style>
+    .span {
+        display: inline-block;
+        color: #f19c59;
+        margin: 5px;
+        line-height: 26px;
+        height: 26px;
+        padding: 0 10px;
+        background: #fdf4eb;
+        border-radius: 3px;
+        border: solid 1px #fae2cd;
+    }
+
+    body {
+        overflow: hidden
+    }
+
+    .container {
+        align-items: flex-start;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<body>
+<div class="addBrand-container" id="classroom-add-app">
+    <div class="container">
+        <el-form
+                ref="ruleForm"
+                :model="ruleForm"
+                :inline="false"
+                label-width="180px"
+                class="demo-ruleForm"
+        >
+            <el-form-item label="组员:" prop="userId">
+                <div style="min-height: 39px;border: solid 1px #d8dde3;width: 400px">
+                    <span v-for="(item, index) in groupMemberList"
+                          :key="index"
+                          class="span"
+                    >
+                        {{item.userName}}<i class="el-icon-delete-solid" @click="deleteUser(index)"></i>
+                    </span>
+                    <el-button style="float: right"
+                               @click="dialogVisible=true;src='/ppat/page/component/tree/rechekStudentTree.html'"
+                    >+
+                    </el-button>
+                </div>
+            </el-form-item>
+            <div class="subBox">
+                <el-form-item>
+                    <el-button @click="closeDialog_()">
+                        取消
+                    </el-button>
+                    <el-button
+                            type="primary"
+                            @click="submitForm()"
+                    >
+                        选择完成
+                    </el-button>
+                </el-form-item>
+            </div>
+        </el-form>
+    </div>
+
+
+    <!--学生选择树-->
+    <el-dialog
+            title="选择组员，点击方框添加,可多选"
+            :visible.sync="dialogVisible"
+            width="30%"
+
+    >
+        <iframe id="iframe" :src="src" style="height: calc(100% - 50px)"
+                width="100%" frameborder="0" ref="tree"></iframe>
+        <span slot="footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="saveUserList()">确 定</el-button>
+        </span>
+    </el-dialog>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../plugins/axios/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="../../../js/validate.js"></script>
+<script src="../../../js/index.js"></script>
+<script src="./js/groupDefine.js"></script>
+<script src="../../../js/common.js"></script>
+
+<script>
+    new Vue({
+        el: '#classroom-add-app',
+        data() {
+            return {
+                userId: '',
+                actionType: '',
+                ruleForm: {
+                    groupMemberList: undefined,
+                    groupDefine: undefined
+                },
+                options: [],
+                loading: false,
+                subjectList: [],
+                headmanName: '',
+                src: '',
+                dialogVisible: false,
+                groupMemberList: [],
+                user: undefined
+
+            }
+        },
+        computed: {},
+        created() {
+            this.user = JSON.parse(window.localStorage.getItem('user'))
+            getGroupInfo().then(res => {
+                if (res.code === 1) {
+                    this.subjectList = res.data.subjectList;
+                    this.groupMemberList = res.data.groupMemberList;
+                    //判断是否包含自己，如通不包含自己则添加进去
+                    if(!this.groupMemberList.find(item=>{return  item.userId === this.user.userId})) {
+                        this.groupMemberList.unshift({userId: this.user.userId, userName: this.user.name})
+                    }
+                    this.ruleForm.groupDefine = res.data.groupDefine;
+                } else {
+                    this.$message.error(res.msg)
+                }
+            });
+        },
+        mounted() {
+            window.addEventListener('message', event => {
+                this.groupMemberList = event.data.map((item) => {
+                    //不是自己的时候添加
+                    if (item.userId !== this.user.userId) {
+                        return {userId: item.userId, userName: item.name}
+                    }
+                });
+                this.groupMemberList.unshift({userId: this.user.userId, userName: this.user.name})
+            })
+        },
+        methods: {
+            submitForm() {
+                this.ruleForm.groupMemberList = this.groupMemberList;
+                const params = {
+                    ...this.ruleForm
+                }
+                let info={}
+                saveGroupInfo(params).then(res => {
+                    if (res.code === 1) {
+                        info.type='success'
+                        info.message=res.data
+                    } else {
+                        info.type='warning'
+                        info.message=res.msg
+                    }
+                    //关闭src
+                    window.parent.closeDialogMsg(info)
+                })
+
+            }, saveUserList() {
+                this.dialogVisible = false;
+                const mapFrame = this.$refs['tree'];
+                const iframeWin = mapFrame.contentWindow;
+                iframeWin.postMessage("");
+            }, deleteUser(index) {
+                const id = this.groupMemberList[index].userId;
+                if (this.user.userId == id) {
+                    this.$message.error("你不能删除你自己")
+                    return
+                }
+                this.groupMemberList.splice(index, 1)
+            },
+            closeDialog_(){
+                window.parent.closeDialog_()
+            }
+
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.classroom.mapper.ClassroomPartMapper">
+
+    <insert id="addClassroomPartList">
+        insert into classroom_part
+        (part_id,group_id,classroom_id,user_id,user_name,stage,role,status,eff_time,exp_time,create_time,create_user)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.partId}, #{entity.groupId}, #{entity.classroomId}, #{entity.userId}, #{entity.userName}, #{entity.stage}, #{entity.role},#{entity.status}, #{entity.effTime},
+            #{entity.expTime},#{entity.createTime}, #{entity.createUser})
+        </foreach>
+    </insert>
+    <insert id="addClassroomPart">
+        insert into classroom_part (part_id, group_id, classroom_id, user_id, user_name, stage, role, status, eff_time,
+                                    exp_time, create_time, create_user)
+        values (#{part}, #{groupId}, #{classroomId}, #{user_id}, #{user_name}, #{stage}, #{role}, #{status},
+                #{eff_time}, #{exp_time}, #{createTime}, #{createUser})
+    </insert>
+    <update id="updateGroupMember">
+        UPDATE group_member
+        <set>
+            <if test=" groupId!=null">
+                group_id=#{groupId},
+            </if>
+            <if test=" subjectId!=null">
+                subject_id=#{subjectId},
+            </if>
+            <if test=" questionId!=null">
+                question_id=#{questionId},
+            </if>
+        </set>
+        <where>
+            <if test="userId!=null">
+                AND `user_id` = #{userId}
+            </if>
+            <if test="groupMemberId!=null">
+                AND `member_id` = #{groupMemberId}
+            </if>
+            <if test="effTime!=null">
+                AND `eff_time` >= #{effTime}
+            </if>
+        </where>
+    </update>
+    <update id="updateClassroomPartGroup">
+        update classroom_part
+            group_id = #{groupId}
+        where
+            classroom_id = #{classroomId}
+          and userId = #{userId}
+    </update>
+    <update id="updateClassroomPartByPartId">
+        update classroom_part
+        <set>
+            <if test="subjectId!=null">
+                subject_id = #{subjectId},
+            </if>
+            <if test="subjectName!=null">
+                subject_Name = #{subjectName},
+            </if>
+            <if test="questionId!=null">
+                question_id = #{questionId},
+            </if>
+        </set>
+        where
+        part_id = #{partId}
+    </update>
+    <select id="getClassroomPartCurrent" resultType="com.wuqisan.ppat.classroom.bean.ClassroomPart">
+        select part_id,
+               group_id,
+               classroom_id,
+               user_id,
+               user_name,
+               subject_id,
+               subject_name,
+               stage,
+               role,
+               status,
+               eff_time,
+               exp_time,
+               create_time,
+               create_user
+        from classroom_part
+        where user_id = #{userId}
+          and eff_time &lt;= SYSDATE()
+          and exp_time &gt;= SYSDATE()
+        order by eff_time desc limit 1
+    </select>
+    <select id="getGroupMembersByGroupIds" resultType="com.wuqisan.ppat.classroom.bean.ClassroomPart">
+        select part_id,
+               group_id,
+               classroom_id,
+               user_id,
+               user_name,
+               subject_id,
+               subject_name,
+               stage,
+               role,
+               status,
+               eff_time,
+               exp_time,
+               create_time,
+               create_user
+        from classroom_part
+        where group_id =#{groupId}
+    </select>
+
+</mapper>

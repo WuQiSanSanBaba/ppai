@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.classroom.mapper.QuestionMapper">
+    <insert id="addQuestion">
+        INSERT INTO question
+        (question_id,
+         title,
+         content,
+         html,
+         highlight_json_array,
+         highlight_flag,
+         underline_json_array,
+         underline_flag,
+         note_json_array,
+         note_flag,
+         core_concept_json_array,
+         core_concept_flag,
+         general_concept_json_array,
+         general_concept_flag,
+         subject_id,
+         subject_name,
+         update_user,
+         create_user,
+         create_time,
+         update_time,
+         part_id,
+         group_id)
+        VALUES (#{questionId},
+                #{title},
+                #{content},
+                #{html},
+                #{highlightJsonArray},
+                #{highlightFlag},
+                #{underlineJsonArray},
+                #{underlineFlag},
+                #{noteJsonArray},
+                #{noteFlag},
+                #{coreConceptJsonArray},
+                #{coreConceptFlag},
+                #{generalConceptJsonArray},
+                #{generalConceptFlag},
+                #{subjectId},
+                #{subjectName},
+                #{updateUser},
+                #{createUser},
+                #{createTime},
+                #{updateTime},
+                #{partId},
+                #{groupId})
+    </insert>
+    <update id="updateQuestionByQuestionId" >
+        update
+        question
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="html != null">
+                html = #{html},
+            </if>
+            <if test="highlightFlag != null">
+                highlight_flag = #{highlightFlag},
+            </if>
+            <if test="highlightJsonArray != null">
+                highlight_json_array = #{highlightJsonArray},
+            </if>
+            <if test="addhighlightFlag != null">
+                add_highlight_flag = #{addhighlightFlag},
+            </if>
+            <if test="addhighlightJsonArray != null">
+                add_highlight_json_array = #{addhighlightJsonArray},
+            </if>
+            <if test="underlineJsonArray != null">
+                underline_json_array = #{underlineJsonArray},
+            </if>
+            <if test="underlineFlag != null">
+                underline_flag = #{underlineFlag},
+            </if>
+            <if test="noteJsonArray != null">
+                note_json_array = #{noteJsonArray},
+            </if>
+            <if test="noteFlag != null">
+                note_flag = #{noteFlag},
+            </if>
+            <if test="coreConceptJsonArray != null">
+                core_concept_json_array = #{coreConceptJsonArray},
+            </if>
+            <if test="coreConceptFlag != null">
+                core_concept_flag = #{coreConceptFlag},
+            </if>
+            <if test="generalConceptJsonArray != null">
+                general_concept_json_array = #{generalConceptJsonArray},
+            </if>
+            <if test="generalConceptFlag != null">
+                general_concept_flag = #{generalConceptFlag},
+            </if>
+            <if test="subjectId != null">
+                subject_id = #{subjectId},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="partId != null">
+                part_id = #{partId}
+            </if>
+        </set>
+        where
+        question_id = #{questionId}
+    </update>
+    <select id="getQuestionByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.Question">
+        select question_id,
+               title,
+               content,
+               html,
+               highlight_flag,
+               highlight_json_array,
+               add_highlight_flag,
+               add_highlight_json_array,
+               underline_flag,
+               underline_json_array,
+               note_json_array,
+               note_flag,
+               core_concept_json_array,
+               core_concept_flag,
+               general_concept_json_array,
+               general_concept_flag,
+               subject_id,
+               update_user,
+               create_user,
+               create_time,
+               update_time,
+               part_id,
+               group_id
+        from question
+        where question_id = #{questionId}
+    </select>
+    <select id="getHighlightListByGroupIdAndSubjectId" resultType="com.wuqisan.ppat.classroom.bean.Question">
+        SELECT
+            t.question_id,
+            t.title,
+            t.content,
+            t.html,
+            t.highlight_json_array,
+            t.highlight_flag,
+            t.add_highlight_flag,
+            t.add_highlight_json_array,
+            t.underline_json_array,
+            t.underline_flag,
+            t.note_json_array,
+            t.note_flag,
+            t.core_concept_json_array,
+            t.core_concept_flag,
+            t.general_concept_json_array,
+            t.general_concept_flag,
+            t.subject_id,
+            t.update_user,
+            t.create_user,
+            t.create_time,
+            t.update_time,
+            t.part_id,
+            t.group_id
+        FROM
+            question t
+        where
+            group_id = #{groupId}
+            AND subject_id = #{subjectId}
+    </select>
+    <select id="getQuestionByPartId" resultType="com.wuqisan.ppat.classroom.bean.Question">
+        SELECT
+            t.question_id,
+            t.title,
+            t.content,
+            t.html,
+            t.add_highlight_flag,
+            t.add_highlight_json_array,
+            t.highlight_json_array,
+            t.highlight_flag,
+            t.underline_json_array,
+            t.underline_flag,
+            t.note_json_array,
+            t.note_flag,
+            t.core_concept_json_array,
+            t.core_concept_flag,
+            t.general_concept_json_array,
+            t.general_concept_flag,
+            t.subject_id,
+            t.update_user,
+            t.create_user,
+            t.create_time,
+            t.update_time,
+            t.part_id,
+            t.group_id
+        FROM
+            question t
+        where
+            part_id = #{partId}
+    </select>
+</mapper>

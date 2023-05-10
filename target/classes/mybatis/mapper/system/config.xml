@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.system.mapper.ConfigMapper">
+
+    <update id="updateConfigById">
+        update  config set value=#{value} where config_id=#{configId}
+    </update>
+    <select id="getConfigList" resultType="com.wuqisan.ppat.system.bean.Config">
+        select a.config_id,
+        a.name,
+        a.value,
+        a.description
+        from config a
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="name != null">
+                and a.name like concat(#{name},'%')
+            </if>
+            <if test="configid != null">
+                and a.config_id like concat(#{configId},'%')
+            </if>
+        </trim>
+    </select>
+    <select id="queryConfigById" resultType="com.wuqisan.ppat.system.bean.Config">
+        select a.config_id,
+               a.name,
+               a.value,
+               a.description
+        from config a
+        where config_id=#{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+</head>
+<style>
+    .divinput {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 3px;
+        min-height: 39px;
+        border: solid 1px #d8dde3;
+        background: #fff;
+        padding: 0 5px;
+        width: 400px;
+
+    }
+
+</style>
+<body>
+<div class="addBrand-container" id="subject-add-app">
+    <div class="container">
+        <el-form
+                ref="ruleForm"
+                :model="ruleForm"
+                :inline="false"
+                label-width="180px"
+                class="demo-ruleForm"
+        >
+            <el-form-item
+                    label="主题名称:"
+                    prop="name"
+            >
+                <el-input
+                        v-model="ruleForm.name"
+                        placeholder="请输入主题名称"
+                        maxlength="4"
+                />
+            </el-form-item>
+            <el-form-item
+                    label="阶段:"
+                    prop="stage"
+            >
+                <template>
+                    <el-select v-model="ruleForm.stage" placeholder="请选择阶段">
+                        <el-option
+                                v-for="item in stages"
+                                :key="item.dictId"
+                                :label="item.name"
+                                :value="item.dictId">
+                        </el-option>
+                    </el-select>
+                </template>
+            </el-form-item>
+
+            <el-form-item
+                    label="核心概念:"
+                    prop="coreConceptJsonArray"
+            >
+
+                <div >
+                    <span
+                            v-for="(item, index) in coreConceptJsonArray"
+                            :key="index"
+                            class="keywords-span">{{ item }}<i @click="delCoreConcept(index)" class="el-icon-delete-solid"></i></span>
+                    <div style="display: flex;">
+                        <el-input v-model="input_Core" placeholder="请输入关键词,点击右侧按钮添加"></el-input>
+                        <el-button type="primary" @click="keyWordAddCore">添加+</el-button>
+                    </div>
+                </div>
+            </el-form-item>
+            <el-form-item
+                    label="一般概念:"
+                    prop="generalConceptJsonArray"
+            >
+                <div class="" >
+                    <span
+                            v-for="(item, index) in generalConceptJsonArray"
+                            :key="index"
+                            class="keywords-span">{{ item }}<i class="el-icon-delete-solid" @click="delGeneConcept(index)"></i></span>
+                    <div style="display: flex">
+                        <el-input v-model="input_Gene" placeholder="请输入关键词,点击右侧按钮添加"></el-input>
+                        <el-button type="primary" @click="keyWordAddGene">添加+</el-button>
+                    </div>
+                </div>
+            </el-form-item>
+
+            <el-form-item
+                    label="状态:"
+                    prop="status"
+            >
+                <el-radio-groupDefine v-model="ruleForm.status">
+                    <el-radio label="启用"></el-radio>
+                    <el-radio label="禁用"></el-radio>
+                </el-radio-groupDefine>
+            </el-form-item>
+
+            <div class="subBox address">
+                <el-form-item>
+                    <el-button @click="goBack()">
+                        取消
+                    </el-button>
+                    <el-button
+                            type="primary"
+                            @click="submitForm()"
+                    >
+                        保存
+                    </el-button>
+                </el-form-item>
+            </div>
+        </el-form>
+    </div>
+
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../plugins/axios/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="../../../js/validate.js"></script>
+<script src="../../../js/index.js"></script>
+<script src="./js/subject.js"></script>
+<script src="../../../js/common.js"></script>
+
+<script>
+    new Vue({
+        el: '#subject-add-app',
+        data() {
+            return {
+                inputStyle: {'flex': 1},
+                ruleForm: {
+                    'name': '',
+                    'stage': '',
+                    'coreConceptJsonArray': '',
+                    'generalConceptJsonArray': '',
+                    'status': '启用'
+                },
+                stages: [],
+                coreConceptJsonArray: [],
+                generalConceptJsonArray: [],
+                subjectId:'',
+                actionType:'',
+                input_Core:'',
+                input_Gene:''
+            }
+        },
+        created() {
+            this.subjectId = requestUrlParam('subjectId')
+            this.actionType = this.subjectId ? 'edit' : 'add'
+            if (this.subjectId) {
+                this.init()
+            }
+            //加载角色字典项 获取阶段列表-字典组配置
+            getDictListByGroupId("stage").then((res) => {
+                this.stages = res.data
+            });
+
+        },
+        mounted() {
+
+        },
+        methods: {
+            async init() {
+                getSubjectById(this.subjectId).then(res => {
+                    if (String(res.code) === '1') {
+                        console.log(res.data)
+                        this.ruleForm = res.data
+                        this.ruleForm.status = res.data.status === 1 ? '启用' : '禁用'
+                        this.coreConceptJsonArray=JSON.parse(res.data.coreConceptJsonArray)
+                        this.generalConceptJsonArray=JSON.parse(res.data.generalConceptJsonArray)
+
+                    } else {
+                        this.$message.error(res.msg || '操作失败')
+                    }
+                })
+            },
+            submitForm() {
+
+                if (this.ruleForm.name == null || this.ruleForm.name == '') {
+                    this.$message.error("主题名称不能为空")
+                    return
+                }
+                if (this.ruleForm.stage == null || this.ruleForm.stage == '') {
+                    this.$message.error("主题阶段不能为空")
+                    return
+                }
+                if (this.coreConceptJsonArray.length === 0) {
+                    this.$message.error("核心概念不能为空")
+                    return
+                }
+                if (this.generalConceptJsonArray.length === 0) {
+                    this.$message.error("一般概念不能为空")
+                    return
+                }
+                //将核心概念转换为字符串
+                let coreConceptsString = JSON.stringify(this.coreConceptJsonArray);
+
+                //将一般概念转换为字符串
+                let generalConceptsString =JSON.stringify(this.generalConceptJsonArray);
+
+                this.ruleForm.coreConceptJsonArray = coreConceptsString;
+                this.ruleForm.generalConceptJsonArray = generalConceptsString;
+                const params = {...this.ruleForm
+                ,status:this.ruleForm.status==="启用"?1:0}
+                if (this.actionType==='add'){
+                addSubject(params).then(res=>{
+                    if (res.code===1){
+                        this.$message.success("添加成功")
+                        this.goBack()
+                    }else {
+                        this.$message.success(res.msg)
+                    }
+                })}else {
+                    updateSubject(params).then(res=>{
+                        if (res.code===1){
+                            this.$message.success("修改成功")
+                            this.goBack()
+                        }else {
+                            this.$message.success(res.msg)
+                        }
+                })}
+            },
+            goBack() {
+                window.parent.menuHandle({
+                    url: '/ppat/page/classroom/subject/subjectList.html',
+                    name: '主题列表'
+                }, false)
+            },
+            delCoreConcept(index) {
+                this.coreConceptJsonArray.splice(index, 1)
+            },
+            delGeneConcept(index) {
+                this.generalConceptJsonArray.splice(index, 1)
+            },
+            //添加核心概念
+            keyWordAddCore() {
+                if (this.input_Core) {
+                    this.coreConceptJsonArray.push(this.input_Core)
+                    this.input_Core = null
+                }
+            },
+            // 添加一般概念标签
+            keyWordAddGene() {
+                if (this.input_Gene) {
+                    this.generalConceptJsonArray.push(this.input_Gene)
+                    this.input_Gene = null
+                }
+            },
+        }
+    })
+</script>
+</body>
+</html>

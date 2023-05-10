@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+    <style>
+        #subject-app .notAdmin::after {
+            border: 0 !important;
+
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container" id="subject-app">
+    <div class="container">
+        <div >
+            <el-input
+                    v-model="name"
+                    placeholder="请输入名称"
+                    style="width: 250px"
+                    clearable
+                    @keyup.enter.native="handleQuery"
+            >
+            </el-input>
+            <el-select v-model="stage" placeholder="请选择阶段">
+                <el-option
+                        v-for="item in stages"
+                        :key="item.dictId"
+                        :label="item.name"
+                        :value="item.dictId">
+                </el-option>
+            </el-select>
+            <el-button round @click="handleQuery">搜索</el-button>
+
+            <el-button
+                    type="primary"
+                    @click="addUserHandle('add')"
+            >
+                + 添加主题
+            </el-button>
+        </div>
+        <el-table
+                :data="tableData"
+                stripe
+                class="tableBox"
+        >
+            <el-table-column
+                    prop="subjectId"
+                    label="主题ID"
+            ></el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="主题名称"
+            ></el-table-column>
+            <el-table-column
+                    prop="stage"
+                    label="阶段"
+            ></el-table-column>
+            <el-table-column
+                    prop="coreConceptJsonArray"
+                    label="核心概念"
+            ></el-table-column>
+            <el-table-column
+                    prop="generalConceptJsonArray"
+                    label="一般概念"
+            ></el-table-column>
+            <el-table-column label="状态">
+                <template slot-scope="scope">
+                    {{ String(scope.row.status) === '0' ? '已禁用' : '正常' }}
+                </template>
+            </el-table-column>
+            <el-table-column
+                    prop="createTime"
+                    label="创建时间"
+            ></el-table-column>
+            <el-table-column
+                    prop="createUser"
+                    label="创建人"
+            ></el-table-column>
+            <el-table-column
+                    prop="updateTime"
+                    label="修改时间"
+            ></el-table-column>
+            <el-table-column
+                    prop="updateUser"
+                    label="修改人"
+            ></el-table-column>
+            <el-table-column
+                    label="操作"
+                    width="160"
+                    align="center"
+            >
+                <template slot-scope="scope">
+                    <el-button
+                            type="text"
+                            size="small"
+                            class="blueBug"
+                            @click="addUserHandle(scope.row.subjectId)"
+                    >
+                        编辑
+                    </el-button>
+                    <el-button
+                            type="text"
+                            size="small"
+                            class="delBut non"
+                            @click="statusUpdate(scope.row)">
+                        {{ scope.row.status == '1' ? '禁用' : '启用' }}
+                    </el-button>
+                    <el-button
+                            type="text"
+                            size="small"
+                            class="delBut non"
+                            @click="deleteSubject(scope.row)">
+                       删除
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination
+                class="pageList"
+                :page-sizes="[10, 20, 30, 40,2]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="counts"
+                :current-page.sync="page"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+        ></el-pagination>
+    </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../../plugins/axios/axios.min.js"></script>
+<script src="../../../js/request.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="./js/subject.js"></script>
+<script>
+    new Vue({
+        el: '#subject-app',
+        data() {
+            return {
+                name: '',
+                counts: 0,
+                page: 1,
+                pageSize: 10,
+                tableData: [],
+                id: '',
+                status: '',
+                stages:[],
+                stage:''
+            }
+        },
+        computed: {},
+        created() {
+            this.init()
+            getDictListByGroupId("stage").then(res=>{
+                this.stages=res.data;
+            })
+        },
+        mounted() {
+        },
+        methods: {
+            async init() {
+                const params = {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    name: this.name ? this.name : undefined,
+                    stage: this.stage ? this.stage : undefined,
+                }
+
+                await getSUbjectList(params).then(res => {
+                    if (String(res.code) === '1') {
+                        this.tableData = res.data.list || []
+                        //把jsonarray处理成正常人能看懂的数据
+                        this.tableData.map(item=>{
+                            item.generalConceptJsonArray= JSON.parse(item.generalConceptJsonArray).join(",")
+                            item.coreConceptJsonArray=JSON.parse(item.coreConceptJsonArray).join(",")
+                        })
+                        this.counts = res.data.total
+                    } else {
+                        this.$message.error('请求出错了：' + res.msg)
+                    }
+                }).catch(err => {
+                    this.$message.error('请求出错了：' + err)
+                })
+            },
+            handleQuery() {
+                this.page = 1;
+                this.init();
+            },
+            // 添加
+            addUserHandle(st) {
+                if (st === 'add') {
+                    window.parent.menuHandle({
+                        url: '/ppat/page/classroom/subject/addSubject.html',
+                        name: '添加主题'
+                    }, true)
+                } else {
+                    window.parent.menuHandle({
+                        url: '/ppat/page/classroom/subject/addSubject.html?subjectId=' + st,
+                        name: '修改主题'
+                    }, true)
+                }
+            },
+            //状态修改
+            statusUpdate(row) {
+                this.$confirm('确认调整该主题的状态?', '提示', {
+                    'confirmButtonText': '确定',
+                    'cancelButtonText': '取消',
+                    'type': 'warning'
+                }).then(() => {
+                    updateSubjectStatus({'subjectId': row.subjectId, 'status': !row.status ? 1 : 0}).then(res => {
+                        if (String(res.code) === '1') {
+                            this.$message.success('主题状态更改成功！')
+                            this.handleQuery()
+                        }else {
+                            this.$message.error(res.msg)
+
+                        }
+                    }).catch(err => {
+                        this.$message.error('请求出错了：' + err)
+                    })
+                })
+            },deleteSubject(row){
+                this.$confirm('确认删除改主题?', '提示', {
+                    'confirmButtonText': '确定',
+                    'cancelButtonText': '取消',
+                    'type': 'warning'
+                }).then(() => {
+                    deleteSubject(row.subjectId).then(res => {
+                        if (String(res.code) === '1') {
+                            this.$message.success('主题删除成功！')
+                            this.handleQuery()
+                        }else {
+                            this.$message.error(res.msg)
+
+                        }
+                    }).catch(err => {
+                        this.$message.error('请求出错了：' + err)
+                    })
+                })
+            },
+            handleSizeChange(val) {
+                this.pageSize = val
+                this.init()
+            },
+            handleCurrentChange(val) {
+                this.page = val
+                this.init()
+            }
+        }
+    })
+</script>
+</body>
+</html>

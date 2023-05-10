@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/wangEditor/wangEditor.min.css"/>
+    <link rel="stylesheet" href="./css/question.css"/>
+    <script src="../../../plugins/axios/axios.min.js"></script>
+    <script src="../../../js/request.js"></script>
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/index.js"></script>
+    <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
+    <script src="../../../plugins/jquery/jquery.js"></script>
+    <script src="./js/addQuestion.js"></script>
+    <script src="../subject/js/subject.js"></script>
+</head>
+<style>
+    #editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
+    }
+
+    #toolbar-container {
+        border-bottom: 1px solid #ccc;
+    }
+
+    #editor-container {
+        height: 500px;
+    }
+
+
+</style>
+<body>
+<div class="addBrand-container" id="question-app">
+    <div class="question" style="width: 80%">
+        <div class="question-title">问题标题</div>
+        <div style="width: 80%">
+            <!--问题输入框-->
+            <div class="question-menu">
+                <input type="text" id="question-input" class="question-input" placeholder="请输入问题">
+                <div id="editorMenu" class="button-container">
+                    <button style="background-color: grey" onclick="editQuestion()">编辑</button>
+                    <button style="background-color: #00AEEC">新增高亮显示</button>
+                    <button style="background-color: red">添加注释</button>
+                </div>
+            </div>
+
+            <!--问题富文本编辑器-->
+            <div id="editor—wrapper" style="width: 100%" class="fuwenben">
+                <div id="toolbar-container"><!-- 工具栏 --></div>
+                <div id="editor-container"><!-- 编辑器 --></div>
+            </div>
+            <div>
+                <button class="question-button" onclick="submit()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--页面脚本-->
+<script>
+    var editor = undefined
+    var type = undefined
+    $(document).ready(async function () {
+        //加载富文本编辑器
+        editor = loadEditor();
+        const questionId = requestUrlParam('questionId');
+        type = questionId ? 'edit' : 'add';
+
+        //1 编辑 如果Url封装了questionId就是编辑
+        if (type === 'edit') {
+            editorLoad(questionId)
+        }
+        //2 添加   判断url是否添加了questionId，如果没有就是添加 此时页面不做任何处理
+        else if (type === 'add') {
+            //不做任何处理
+        }
+    });
+
+    async function submit() {
+        let result = undefined
+        let code = 0
+        //分析内容
+        await analizyQuestion().then(res => {
+            result = res
+        })
+        if (type === 'add') {
+            //add
+            await addQuestion(result).then((res) => {
+                code = res.data.code
+                if (res.data.code === 1) {
+                    question = res.data.data;
+                } else {
+                    alert(res.data.msg)
+                }
+            })
+        } else {
+            //update
+            result.questionId = question.questionId
+            await updateQuestion(result).then((res) => {
+                code = res.data.code
+                if (res.data.code === 1) {
+                    question = res.data.data;
+                } else {
+                    alert(res.data.msg)
+                }
+            })
+        }
+        if (code === 1) {
+           //跳转
+            window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+        }
+
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.common.mapper.QueryMapper">
+
+    <select id="getUserByCondition" resultType="com.wuqisan.ppat.manage.bean.User">
+        select user_id,
+        name,
+        (select name from dict_item where dict_id=type and status=1) type ,
+        class_id,
+        useraccount,
+        password,
+        phone,
+        sex,
+        id_number,
+        status,
+        create_time,
+        update_time,
+        create_user,
+        update_user
+        from user
+        where
+        1=1
+        <if test="name != null">
+            and name like concat(#{name},'%')
+        </if>
+        <if test="userId != null">
+            and user_id like concat(#{userId},'%')
+        </if>
+        <if test="type != null">
+            and type like concat(#{type},'%')
+        </if>
+        <if test="class_id != null">
+            and class_id like concat(#{class_id},'%')
+        </if>
+        <if test="useraccount != null">
+            and useraccount like concat(#{useraccount},'%')
+        </if>
+        <if test="phone != null">
+            and phone like concat(#{phone},'%')
+        </if>
+        <if test="sex != null">
+            and sex like concat(#{sex},'%')
+        </if>
+        <if test="id_number != null">
+            and id_number like concat(#{id_number},'%')
+        </if>
+        <if test="status != null">
+            and status like concat(#{status},'%')
+        </if>
+    </select>
+</mapper>

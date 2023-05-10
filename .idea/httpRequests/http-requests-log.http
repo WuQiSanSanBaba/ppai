@@ -1,0 +1,25 @@
+POST http://localhost:8080/employee/login
+{:
+"username": "admin",
+"password": "123456"
+}:
+
+<> 2022-09-25T210016.400.html
+
+###
+
+GET http://localhost:8080/category/list?type=1
+
+<> 2022-09-25T205945.200.txt
+
+###
+
+POST http://localhost:8080/employee/login
+{:
+"username": "admin"
+}:
+
+<> 2022-09-17T170331.400.html
+
+###
+

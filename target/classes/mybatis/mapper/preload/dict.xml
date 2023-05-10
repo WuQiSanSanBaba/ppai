@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuqisan.ppat.preLoad.mapper.DictMapper">
+
+    <select id="getDictListByGroupId" resultType="com.wuqisan.ppat.preLoad.bean.DictItem">
+        SELECT
+            dict_id,
+            name,
+            group_id,
+            description,
+            sort,
+            STATUS,
+            create_time,
+            update_time,
+            create_user,
+            update_user
+        FROM
+            dict_item
+        WHERE
+            STATUS =1
+        <if test="groupId != null">
+           and group_id=#{groupId}
+        </if>
+    </select>
+    <select id="getGroupList" resultType="java.lang.String">
+        SELECT group_id from dict_item GROUP BY group_id
+    </select>
+</mapper>

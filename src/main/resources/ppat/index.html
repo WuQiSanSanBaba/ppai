@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ppat</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="styles/common.css"/>
+    <link rel="stylesheet" href="styles/index.css"/>
+    <link rel="stylesheet" href="styles/icon/iconfont.css"/>
+    <style>
+        .body {
+            min-width: 1366px;
+        }
+
+        .app-main {
+            height: calc(100% - 64px);
+        }
+
+        .app-main .divTmp {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="app" id="app">
+    <div class="app-wrapper openSidebar clearfix">
+        <!-- sidebar -->
+        <div class="sidebar-container">
+            <div class="logo">
+                <!-- <img src="images/logo.png" width="122.5" alt="" /> -->
+                <!--<img src="images/login/login-logo.png" alt="" style="width: 117px; height: 32px"/>-->
+            </div>
+            <el-scrollbar wrap-class="scrollbar-wrapper">
+                <el-menu
+                        :default-active="activeIndex"
+                        :unique-opened="false"
+                        :collapse-transition="false"
+                        background-color="#343744"
+                        text-color="#bfcbd9"
+                        active-text-color="#f4f4f5"
+                >
+                    <div>
+
+                        <el-menu-item
+                                ref="menuItems"
+                                v-for="sub in menuList"
+                                :index="sub.menuId"
+                                :key="sub.menuId"
+                                :index="sub.menuId"
+                                @click="menuHandle(sub,false)"
+                                style="width: 100%; "
+                        >
+                            <i class="iconfont" :class="sub.icon"></i>
+                            <span slot="title">{{sub.name}}</span>
+                        </el-menu-item
+                        >
+                    </div>
+                </el-menu>
+            </el-scrollbar>
+        </div>
+        <div class="main-container">
+            <!-- <navbar /> -->
+            <div class="navbar">
+                <div class="head-lable">
+              <span v-if="goBackFlag" class="goBack" @click="goBack()"
+              ><img src="images/icons/btn_back@2x.png" alt=""/> 返回</span
+              >
+                    <span style="margin: 50px;">{{headTitle}}</span>
+                    <span v-if="user.type=='student'">
+                        <span v-if="classroomPart.partId==null">你还没有小组</span>
+                        <span v-else-if="classroomPart.subjectId==null">还没有选择主题 <el-button
+                                style="margin-left: 10px" type="primary" plain
+                                @click="dialogChange('/ppat/page/classroom/subject/selectSubject.html','选择主题',3)">选择主题</el-button></span>
+                        <span v-else>主题:{{classroomPart.subjectName}}</span>
+                         <span v-if="classroomPart.role=='leader'  ">
+                            <el-button style="margin-left: 50px" type="primary" plain
+                                       @click="dialogChange('/ppat/page/classroom/classroomManage/classroomManage.html','添加组员',3)">添加组员+</el-button>
+                        </span>
+                    </span>
+                </div>
+                <div class="right-menu">
+                    <el-button style="margin-right: 10px;height: 40px!important" type="primary" plain
+                               @click="iframeKey++">
+                        刷新当前菜单
+                    </el-button>
+                    <div class="avatar-wrapper">{{ user.name }}</div>
+                    <span v-if="user.type=='student'" style="margin-left: 10px;;">{{className}}</span>
+                    <!-- <div class="logout" @click="logout">退出</div> -->
+                    <img src="images/icons/btn_close@2x.png" class="outLogin" alt="退出" @click="logout"/>
+                </div>
+            </div>
+            <div class="app-main" v-loading="loading">
+                <div class="divTmp" v-show="loading"></div>
+                <iframe
+                        :key="iframeKey"
+                        id="cIframe"
+                        class="c_iframe"
+                        name="cIframe"
+                        :src="iframeUrl"
+                        width="100%"
+                        height="auto"
+                        frameborder="0"
+                        v-show="!loading"
+                ></iframe>
+            </div>
+        </div>
+        <div class="dialog-container">
+            <el-dialog
+                    :title="dialog_src_title"
+                    :visible.sync="dialogVisible"
+                    width="70%"
+            >
+                <iframe id="iframe" :src="dialog_src" :style="[src_style]" frameborder="0"
+                        width="100%">
+
+                </iframe>
+            </el-dialog>
+        </div>
+    </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="plugins/axios/axios.min.js"></script>
+<script src="js/request.js"></script>
+<script src="./api/login.js"></script>
+<script src="./js/common.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                activeIndex: '',
+                iframeKey: 1,
+                user: {},
+                menuList: [],
+                iframeUrl: './page/classroom/node/node.html',
+                headTitle: '主页',
+                goBackFlag: false,
+                loading: true,
+                timer: null,
+                historyStack: [],
+                subject: undefined,
+                subjectId: undefined,
+                dialog_src: '',
+                dialog_src_title: '',
+                dialogVisible: false,
+                src_style: {},
+                classroom: {},
+                classroomPart: {}
+            }
+        },
+        updated() {
+        },
+        computed: {
+            //班级
+            className() {
+                const split = this.user.classId.split(".");
+                return split[0] + "年级" + split[1] + "班";
+            }
+        },
+        created() {
+            //从浏览器存储中获取用户信息
+            this.loadUserInfo();
+            this.closeLoading();
+            this.loadMenu();
+
+        },
+        beforeDestroy() {
+            this.timer = null
+            clearTimeout(this.timer)
+        },
+        mounted() {
+            window.menuHandle = this.menuHandle
+            window.closeDialogMsg = this.closeDialogMsg
+            window.closeDialog_ = this.closeDialog_
+            window.iframUrlChange = this.iframUrlChange
+        },
+        methods: {
+            logout() {
+                logoutApi().then((res) => {
+                    if (res.code === 1) {
+                        localStorage.removeItem('user')
+                        localStorage.removeItem('classroomPart')
+                        window.location.href = '/ppat/page/login/login.html'
+                    }
+                })
+            },
+            goBack() {
+                this.historyStack.pop()
+                const menu = this.historyStack.pop()
+                // this.goBackFlag = false
+                // this.headTitle = menu.name
+                this.menuHandle(menu, false)
+            },
+            menuHandle(item, goBackFlag) {
+                this.historyStack.push(item)
+                this.loading = true
+                this.iframeUrl = item.url
+                this.headTitle = item.name
+                this.goBackFlag = goBackFlag
+                this.closeLoading()
+            },
+            /*加载用户信息*/
+            loadUserInfo() {
+                const user = window.localStorage.getItem('user')
+                if (user) {
+                    this.user = JSON.parse(user)
+                    //如果是学生，获取当前课堂
+                    if (this.user.type === "student") {
+                        loadClassroom().then(result => {
+                            if (result.data) {
+                                this.classroomPart = result.data.classroomPart
+                                window.localStorage.setItem("classroomPart", JSON.stringify(this.classroomPart));
+                                window.localStorage.setItem("classroom", JSON.stringify(this.classroom));
+                            }
+                        });
+                    }
+                }
+            },
+            loadMenu() {
+                getMenuApi().then((res) => {
+                    this.menuList = res.data;
+                })
+            },
+            closeDialogMsg(info) {
+                this.$message({
+                    message: info.message,
+                    type: info.type
+                });
+                this.dialogVisible = false
+                //重新加载用户信息
+                this.loadUserInfo()
+            },
+            closeDialog_() {
+                this.dialogVisible = false
+            },
+            iframUrlChange(activeMemu, src) {
+                if (activeMemu) {
+                    this.activeIndex = activeMemu
+                } else {
+                    this.activeIndex = null
+                }
+                if (src){
+                this.iframeUrl = src
+                }
+            },
+            closeLoading() {
+                //下边这玩意，默认转圈一秒
+                this.timer = null
+                this.timer = setTimeout(() => {
+                    this.loading = false
+                }, 300)
+            },
+
+            dialogChange(src, title, time) {
+                this.dialog_src = src
+                this.dialog_src_title = title
+                this.dialogVisible = true
+                this.src_style = {height: document.body.clientWidth / time + 'px'}
+            }
+
+
+        }
+    })
+
+</script>
+</body>
+</html>
