@@ -14,11 +14,15 @@ public class CommonUtils {
 
     }
     public static long generateKey15(){
-        return Long.parseLong(RandomUtil.randomNumbers(15));
+        long timestamp = System.currentTimeMillis();
+        Random random = new Random(timestamp);
+        String randomStr = String.format("%d%05d", timestamp, random.nextInt(100000));
+        return Long.parseLong(randomStr);
 
     }
 
     public static String generate10String(){
+
      return    RandomUtil.randomNumbers(15);
     }
 

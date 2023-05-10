@@ -24,7 +24,7 @@
         </svg>
     </i>
 </div>
-<div class="addBrand-container" id="question-app">
+<div class="addBrand-container" style="margin-left: 40px" id="question-app">
     <div class="question" style="width: 80%">
         <div class="question-title">问题标题</div>
         <div style="width: 80%">
@@ -36,7 +36,7 @@
                     <button style="background-color: #00AEEC"
                             @click="dialogVisible_HighLight=true;">新增高亮显示
                     </button>
-                    <button @click="dialogVisible_Note=true;" style="background-color: red">添加注释
+                    <button @click="dialogVisible_Annotation=true;" style="background-color: red">添加注释
                     </button>
                 </div>
             </div>
@@ -92,17 +92,17 @@
             </span>
         </el-dialog>
     </div>
-    <div class="note-container">
+    <div class="annotation-container">
         <el-dialog
                 title="注释"
-                :visible.sync="dialogVisible_Note"
+                :visible.sync="dialogVisible_Annotation"
                 width="30%"
         >
             <div>
                 <div>点击关键词进行注释</div>
-                <div class="note-container">
+                <div class="annotation-container">
                     <el-button type="primary" v-for="(item, index) in allHighLight"
-                               :key="index" @click="addNotePage(item)"> {{item}}
+                               :key="index" @click="addAnnotationPage(item)"> {{item}}
                     </el-button>
 
                 </div>
@@ -139,7 +139,7 @@
             return {
                 question: {title: '你还没有添加问题'},
                 dialogVisible_HighLight: false,
-                dialogVisible_Note: false,
+                dialogVisible_Annotation: false,
                 addhighlightJsonArray_new: [],
                 input_: '',
                 groupers: [],
@@ -173,6 +173,8 @@
                         groupMembersList.map((member) => {
                             this.groupers.push(member.userName)
                         })
+                    }else {
+                        window.location.href = '/ppat/page/classroom/question/addQuestion.html'
                     }
                 })
             } else {
@@ -201,6 +203,7 @@
                 this.addhighlightJsonArray_new.splice(index, 1)
             },
             keyWordAdd() {
+                this.input_=this.input_.trim()
                 if (this.input_) {
                     if (this.question.highlightJsonArray) {
                         const highlightJsonArray = JSON.parse(this.question.highlightJsonArray)
@@ -225,17 +228,46 @@
                 this.addhighlightJsonArray_new = this.addhighlightJsonArray_new.filter((obj, index, self) =>
                     index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
                 );
-                let addhighlightJsonArray_new_RemoveAlreadyHighLight
-                //把已经高亮的去掉
+                let addhighlightJsonArray_new_RemoveAlreadyHighLight = this.addhighlightJsonArray_new
+                //把已经高亮的去掉_黄色
                 if (this.question.highlightJsonArray) {
                     const highlightJsonArray = JSON.parse(this.question.highlightJsonArray)
                     addhighlightJsonArray_new_RemoveAlreadyHighLight = this.addhighlightJsonArray_new.filter(obj =>
-                        !highlightJsonArray.some(other => obj === other) // 不在b数组中出现过的对象
+                        !highlightJsonArray.some(other => {
+                            const bb = obj === other
+                            if (bb) {
+                                this.$notify({
+                                    title: '警告',
+                                    message: other + '已经存在',
+                                    type: 'warning',
+                                    position: 'top-left'
+                                });
+                            }
+                            return bb
+                        }) // 不在b数组中出现过的对象
                     )
-                } else {
-                    addhighlightJsonArray_new_RemoveAlreadyHighLight = this.addhighlightJsonArray_new
                 }
+                //把已经高亮的去掉_蓝色
+                if (this.question.addhighlightJsonArray) {
+                    const highlightJsonArray = JSON.parse(this.question.addhighlightJsonArray)
+                    addhighlightJsonArray_new_RemoveAlreadyHighLight = this.addhighlightJsonArray_new.filter(obj =>
+                        !highlightJsonArray.some(other => {
+                            const bb = obj === other
+                            if (bb) {
+                                this.$notify({
+                                    title: '警告',
+                                    message: other + '已经存在',
+                                    type: 'warning',
+                                    position: 'top-left'
+                                });
+                            }
+                            return bb
+                        }) // 不在b数组中出现过的对象
+                    )
+                }
+                //判断是否重复
                 if (addhighlightJsonArray_new_RemoveAlreadyHighLight.length === 0) {
+
                     this.$message.error("你没有添加新增高亮次或者它已经高亮")
                     return
                 } else {
@@ -247,17 +279,20 @@
                         this.$message.success("添加成功")
                         this.question = res.data
                         let _content = $('#question-content');
-                        _content.append(res.data.html);
                         dealHightLight.excute(res.data, _content.get(0));
-                        this.addhighlightJsonArray_new = null
+                        this.addhighlightJsonArray_new = []
                     }
                 });
             },
             editQuestion() {
                 window.location.href = '/ppat/page/classroom/question/addQuestion.html?questionId=' + this.question.questionId
             },
-            addNotePage(item){
-                console.log(item)
+            addAnnotationPage(item) {
+
+                window.location.href = '/ppat/page/classroom/question/addAnnotation.html?' +
+                    'questionId='+ this.question.questionId+"&"+
+                    'annotationWord='+encodeURI(item)+"&"+
+                    'questionTitle='+encodeURI(this.question.title)
             }
         }
 

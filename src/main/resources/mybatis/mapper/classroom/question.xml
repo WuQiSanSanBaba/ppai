@@ -13,8 +13,8 @@
          highlight_flag,
          underline_json_array,
          underline_flag,
-         note_json_array,
-         note_flag,
+         annotation_json_array,
+         annotation_flag,
          core_concept_json_array,
          core_concept_flag,
          general_concept_json_array,
@@ -35,8 +35,8 @@
                 #{highlightFlag},
                 #{underlineJsonArray},
                 #{underlineFlag},
-                #{noteJsonArray},
-                #{noteFlag},
+                #{annotationJsonArray},
+                #{annotationFlag},
                 #{coreConceptJsonArray},
                 #{coreConceptFlag},
                 #{generalConceptJsonArray},
@@ -81,11 +81,11 @@
             <if test="underlineFlag != null">
                 underline_flag = #{underlineFlag},
             </if>
-            <if test="noteJsonArray != null">
-                note_json_array = #{noteJsonArray},
+            <if test="annotationJsonArray != null">
+                annotation_json_array = #{annotationJsonArray},
             </if>
-            <if test="noteFlag != null">
-                note_flag = #{noteFlag},
+            <if test="annotationFlag != null">
+                annotation_flag = #{annotationFlag},
             </if>
             <if test="coreConceptJsonArray != null">
                 core_concept_json_array = #{coreConceptJsonArray},
@@ -126,8 +126,8 @@
                add_highlight_json_array,
                underline_flag,
                underline_json_array,
-               note_json_array,
-               note_flag,
+               annotation_json_array,
+               annotation_flag,
                core_concept_json_array,
                core_concept_flag,
                general_concept_json_array,
@@ -154,8 +154,8 @@
             t.add_highlight_json_array,
             t.underline_json_array,
             t.underline_flag,
-            t.note_json_array,
-            t.note_flag,
+            t.annotation_json_array,
+            t.annotation_flag,
             t.core_concept_json_array,
             t.core_concept_flag,
             t.general_concept_json_array,
@@ -185,8 +185,8 @@
             t.highlight_flag,
             t.underline_json_array,
             t.underline_flag,
-            t.note_json_array,
-            t.note_flag,
+            t.annotation_json_array,
+            t.annotation_flag,
             t.core_concept_json_array,
             t.core_concept_flag,
             t.general_concept_json_array,

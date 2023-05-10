@@ -17,8 +17,8 @@ public class Question extends BaseBean {
     private String addhighlightJsonArray;
     private String underlineJsonArray;
     private Integer underlineFlag;
-    private String noteJsonArray;
-    private String noteFlag;
+    private String annotationJsonArray;
+    private Integer annotationFlag;
     private String coreConceptJsonArray;
     private Integer coreConceptFlag;
     private String generalConceptJsonArray;

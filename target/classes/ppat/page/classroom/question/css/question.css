@@ -82,11 +82,11 @@ body {
     border: solid gray;
 }
 
-.note-container{
+.annotation-container{
     display: grid;
     grid-template-columns: 100px 100px 100px;
     grid-template-rows: 100px 100px 100px;
 }
-.note-container button{
+.annotation-container button{
     display: block;margin: 10px
 }

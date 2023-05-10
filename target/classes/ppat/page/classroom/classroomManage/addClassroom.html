@@ -61,6 +61,7 @@
                     prop="categorizes"
             >
                 <div class="" >
+                    <h4 v-if="categorizes.length===0">没有添加分类</h4>
                     <span
                             v-for="(item, index) in categorizes"
                             :key="index"
@@ -182,7 +183,7 @@
             },
             keyWordAddCategorizes() {
                 if (this.input_) {
-                    this.categorizes.push(this.input_)
+                    this.categorizes.push(this.input_.trim())
                     this.input_ = null
                 }
             },

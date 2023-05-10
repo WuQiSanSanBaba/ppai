@@ -184,6 +184,7 @@
             window.closeDialogMsg = this.closeDialogMsg
             window.closeDialog_ = this.closeDialog_
             window.iframUrlChange = this.iframUrlChange
+            window.dialogChange = this.dialogChange
         },
         methods: {
             logout() {
@@ -220,6 +221,7 @@
                         loadClassroom().then(result => {
                             if (result.data) {
                                 this.classroomPart = result.data.classroomPart
+                                this.classroom = result.data.classroom
                                 window.localStorage.setItem("classroomPart", JSON.stringify(this.classroomPart));
                                 window.localStorage.setItem("classroom", JSON.stringify(this.classroom));
                             }

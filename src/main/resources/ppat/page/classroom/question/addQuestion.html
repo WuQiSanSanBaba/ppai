@@ -14,6 +14,7 @@
     <script src="../../../js/index.js"></script>
     <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
     <script src="../../../plugins/jquery/jquery.js"></script>
+    <script src="./js/hightLight.js"></script>
     <script src="./js/addQuestion.js"></script>
     <script src="../subject/js/subject.js"></script>
 </head>
@@ -83,10 +84,22 @@
     async function submit() {
         let result = undefined
         let code = 0
+        const text=editor.getText();
+        const title=document.getElementById('question-input').value;
+        //内容校验
+        const flag = checkContent(editor.getText(), document.getElementById('question-input').value)
+        if (!flag) {
+            return;
+        }
         //分析内容
-        await analizyQuestion().then(res => {
+        await analizyQuestion(text).then(res => {
             result = res
         })
+        if (result ==='false'){
+            return
+        }
+        //设置标题
+        result.title=title
         if (type === 'add') {
             //add
             await addQuestion(result).then((res) => {

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/wangEditor/wangEditor.min.css"/>
+    <link rel="stylesheet" href="../../../plugins/zui/zui.min.css"/>
+</head>
+<style>
+    input[type="checkbox"] {
+        transform: scale(2);
+        margin: 10px
+    }
+
+    .annotation-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-left: 24px
+    }
+
+    .editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */;
+
+        margin-bottom: 100px;
+    }
+
+    .toolbar-container {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .editor_container {
+        height: 330px;
+    }
+
+    .fixed-button {
+        position: fixed;
+        bottom: 1%;
+        right: 17%;
+    }
+</style>
+<body>
+<!--问题标题-->
+<div style="display: flex;align-items: center;" id="classtitle">
+    <h1 style="color: #1cc7fa;margin-right: 20px">问题标题</h1>
+    <h1 id="question-title"></h1>
+    <h1 id="highlight-word" style="background-color: yellow;margin-left: 20px"></h1>
+    <div id="checkbox-container" style="font-size: 20px;margin-top: 20px;margin-left: 50px"></div>
+</div>
+<!--问题富文本编辑器-->
+<div class="editor-containers" style="width: 80%;height: 800px" id="editor-containers"></div>
+<button class="btn btn-lg btn-primary fixed-button" data-toggle="modal" data-target="#myModal" type="button">保 存
+</button>
+
+
+</div>
+
+<!-- 对话框HTML -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">关闭</span></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title">确定保存吗？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveannotations()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../../js/index.js"></script>
+<script src="../../../plugins/jquery/jquery.js"></script>
+<script src="../../../plugins/zui/zui.min.js"></script>
+<script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
+<script src="./js/addAnnotation.js"></script>
+<script src="./js/hightLight.js"></script>
+
+
+<script>
+    var editorContainerArray = []
+    var questionId = undefined
+    var questionTitle = ''
+    var annotationWord = ''
+    $(document).ready(function () {
+        loadTitle();
+        loadPage();
+    })
+</script>
+</body>
+</html>
+

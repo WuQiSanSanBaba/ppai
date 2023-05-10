@@ -47,7 +47,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public List<Question> getHighLightByGroupIdAndSubjectId() {
-        ClassroomPart  classroomPart= BaseContext.getUser().getClassroomPart();
+        ClassroomPart classroomPart = BaseContext.getUser().getClassroomPart();
         if (classroomPart != null) {
             return questionMapper.getHighlightListByGroupIdAndSubjectId(classroomPart.getGroupId(), classroomPart.getSubjectId());
         } else {
@@ -109,23 +109,33 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> questionList = questionMapper.getHighlightListByGroupIdAndSubjectId(groupId, question.getSubjectId());
         for (Object newItem : newArray) {
             for (Question question_ : questionList) {
-                String highLight = question_.getHighlightJsonArray();
-                JSONArray highLightArray = JSON.parseArray(highLight);
-                if (highLightArray.contains(newItem)) {
-                    //如果存量有了，使其高亮
-                    highlightArray.add(newItem);
-                    //移除新增数组里的该元素
-                    newArray.remove(newItem);
+                if ("1".equals(question_.getHighlightJsonArray())) {
+                    String highLight = question_.getHighlightJsonArray();
+                    JSONArray highLightArray = JSON.parseArray(highLight);
+                    if (highLightArray.contains(newItem)) {
+                        //如果存量有了，使其高亮
+                        highlightArray.add(newItem);
+                        //移除新增数组里的该元素
+                        newArray.remove(newItem);
+                    }
                 }
             }
         }
         if (!highlightArray.isEmpty()) {
-            question.setHighlightFlag(1);
+            //把已经存在的高亮拿出来
+            if (question.getHighlightFlag()==1){
+                highlightArray.addAll(JSON.parseArray(question.getHighlightJsonArray()));
+            }
             question.setHighlightJsonArray(highlightArray.toJSONString());
+            question.setHighlightFlag(1);
         } else {
             question.setHighlightFlag(0);
         }
         if (!newArray.isEmpty()) {
+            //把已经存在的新增高亮拿出来
+            if (question.getAddhighlightFlag()==1){
+                newArray.addAll(JSON.parseArray(question.getAddhighlightJsonArray()));
+            }
             question.setAddhighlightFlag(1);
             question.setAddhighlightJsonArray(newArray.toJSONString());
         } else {
@@ -140,7 +150,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Override
     public Question getQuestionByPartId(Long partId) {
-       return questionMapper.getQuestionByPartId(partId);
+        return questionMapper.getQuestionByPartId(partId);
     }
 
     /**
@@ -163,11 +173,11 @@ public class QuestionServiceImpl implements QuestionService {
             for (Object concept : conceptArray) {
                 for (Question dbQuestion : highLightQuestion) {
                     String highLight = dbQuestion.getHighlightJsonArray();
-                    String note = dbQuestion.getNoteJsonArray();
-                    Optional<String> optionalStr = Optional.ofNullable(note);
-                    note = optionalStr.orElse("");
+                    String annotation = dbQuestion.getAnnotationJsonArray();
+                    Optional<String> optionalStr = Optional.ofNullable(annotation);
+                    annotation = optionalStr.orElse("");
                     if (highLight.contains(concept.toString())) {
-                        if (note.contains(concept.toString())) {
+                        if (annotation.contains(concept.toString())) {
                             underlineArr.add(concept);
                         }
                     } else {
