@@ -5,50 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa659b86-6981-4600-a697-1046b4a69d1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Annotation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/mapper/AnnotationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/AnnotacionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/Annotation.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addAnnotation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addAnnotation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/hightLight.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/zui/demo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/zui/jquery1.12.4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/zui/zui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppat/plugins/zui/zui.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/base/bean/BaseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/base/bean/BaseBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Annotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/AnnotacionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/AnnotacionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/PublicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/PublicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/common/Utils/CommonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/common/Utils/CommonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/classroom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/classroom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/Annotation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/Annotation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/manage/menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/classroomManage/addClassroom.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/classroomManage/addClassroom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/node.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/node.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addNote.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addAnnotation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addQuestion.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/addQuestion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/css/question.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/css/question.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addNote.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addAnnotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addAnnotation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addQuestion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/bean/Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/bean/Question.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/hightLight.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/hightLight.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/subject/addSubject.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/subject/addSubject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/styles/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/base/bean/BaseBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/base/bean/BaseBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/QuestionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/QuestionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/PublicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/PublicService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/QuestionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/QuestionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/common/Utils/CommonUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/common/Utils/CommonUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/classroom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/classroom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/manage/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapper/manage/menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ppat/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/classroomManage/addClassroom.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/classroomManage/addClassroom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/node/node.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/node/node.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/addNote.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/addQuestion.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/addQuestion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/css/question.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/css/question.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/js/addNote.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/js/addQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/js/addQuestion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/subject/addSubject.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/subject/addSubject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/styles/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +61,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="haveCoreAndGeneJsonArray" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -102,40 +98,40 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "OverrideImplement.generate.javadoc": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "D:/开发/ppat/src/main/resources/ppat/page/classroom/question",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "38cf35aedb48c3057e732387131bbea7",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/开发/ppat/src/main/resources/ppat&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;38cf35aedb48c3057e732387131bbea7&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.wuqisan.ppat.classroom.service" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\开发\ppat\src\main\resources\ppat" />
       <recent name="D:\开发\ppat\src\main\resources\ppat\page\classroom\question" />
       <recent name="D:\开发\ppat\src\main\resources\ppat\plugins\echarts" />
       <recent name="D:\开发\ppat\src\main\resources\ppat\images\login" />
-      <recent name="D:\开发\ppat\src\main\resources\ppat" />
       <recent name="D:\开发\PROJECTA\ruiJiWaiMai\ruiJiWaiMai\src\main\resources\mybatis\mapper\classroom" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -200,8 +196,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.PPAT" />
-        <item itemvalue="Application.GlobalExceptionHandler" />
         <item itemvalue="HTTP Request.generated-requests#3" />
+        <item itemvalue="Application.GlobalExceptionHandler" />
+        <item itemvalue="Spring Boot.PPAT" />
+        <item itemvalue="Application.GlobalExceptionHandler" />
       </list>
     </recent_temporary>
   </component>
@@ -281,7 +279,9 @@
       <workItem from="1683530633617" duration="350000" />
       <workItem from="1683596216835" duration="8447000" />
       <workItem from="1683683537133" duration="10865000" />
-      <workItem from="1683699692178" duration="10995000" />
+      <workItem from="1683699692178" duration="15926000" />
+      <workItem from="1683738389670" duration="5379000" />
+      <workItem from="1683775096298" duration="249000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -346,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683692728093</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="简简单单提交一下而已">
+      <created>1683724835272</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1683724835272</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,6 +374,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/mapper/QuestionMapper.java</url>
           <line>8</line>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

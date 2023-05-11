@@ -29,10 +29,11 @@ public class AnnotationController {
     @PostMapping("addAnnotation")
     @ApiOperation("添加注释")
     public R<String> addClassroom(@RequestBody List<Annotation> annotationList) {
-        annotacionService.addAnnotacionList(annotationList);
 
+        //1将注释的内容添加到question表
         Annotation annotation = annotationList.get(0);
         Question questionByQuestionId = questionService.getQuestionByQuestionId(annotation.getQuestionId());
+        //1.1创建用于更新的questionbean
         Question question = new Question();
         question.setQuestionId(annotation.getQuestionId());
         question.setAnnotationFlag(1);
@@ -43,6 +44,11 @@ public class AnnotationController {
         annotations.add(annotation.getAnnotationWord());
         question.setAnnotationJsonArray(annotations.toJSONString());
         questionService.updateQuestionByQuestionId(question);
-        return R.success("1");
+        //2处理获取高亮内容
+        annotacionService.doHighlightBatch(annotationList,questionByQuestionId);
+        //3入库
+        annotacionService.addAnnotacionList(annotationList);
+
+        return R.success("添加成功");
     }
 }

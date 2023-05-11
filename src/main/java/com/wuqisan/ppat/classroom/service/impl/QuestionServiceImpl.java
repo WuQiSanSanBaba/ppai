@@ -55,28 +55,6 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
-    /**
-     * 将核心概念和一般概念合并
-     *
-     * @param question
-     * @return
-     */
-    @Override
-    public JSONArray getAllConcepts(Question question) {
-        //概念列表
-        JSONArray concepts = new JSONArray();
-        //如果有核心概念
-        if (question.getCoreConceptFlag().equals(1)) {
-            concepts.addAll(JSON.parseArray(question.getCoreConceptJsonArray()));
-        }
-
-        //如果有一般概念
-        if (question.getGeneralConceptFlag().equals(1)) {
-            concepts.addAll(JSON.parseArray(question.getGeneralConceptJsonArray()));
-
-        }
-        return concepts;
-    }
 
     /**
      * 更新问题
@@ -151,51 +129,5 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getQuestionByPartId(Long partId) {
         return questionMapper.getQuestionByPartId(partId);
-    }
-
-    /**
-     * 概念和数据库查出来的同组同主题的问题进行比较
-     *
-     * @param question
-     * @param underlineArr
-     * @param highLightArr
-     */
-    @Override
-    public void dealConcepts(Question question, JSONArray underlineArr, JSONArray highLightArr, JSONArray conceptArray) {
-        int underlineFlag = 0;
-        int highlightFlag = 0;
-        List<Question> highLightQuestion = this.getHighLightByGroupIdAndSubjectId();
-        //--------------------------------分为如下几种情况--------------------------------------------------------
-        //1.为零直接把概念显示为高亮
-        if (highLightQuestion.isEmpty()) {
-            highLightArr.addAll(conceptArray);
-        } else {
-            for (Object concept : conceptArray) {
-                for (Question dbQuestion : highLightQuestion) {
-                    String highLight = dbQuestion.getHighlightJsonArray();
-                    String annotation = dbQuestion.getAnnotationJsonArray();
-                    Optional<String> optionalStr = Optional.ofNullable(annotation);
-                    annotation = optionalStr.orElse("");
-                    if (highLight.contains(concept.toString())) {
-                        if (annotation.contains(concept.toString())) {
-                            underlineArr.add(concept);
-                        }
-                    } else {
-                        highLightArr.add(concept);
-                    }
-                }
-            }
-
-        }
-        if (!underlineArr.isEmpty()) {
-            underlineFlag = 1;
-        }
-        if (!highLightArr.isEmpty()) {
-            highlightFlag = 1;
-        }
-        question.setHighlightFlag(highlightFlag);
-        question.setUnderlineFlag(underlineFlag);
-        question.setHighlightJsonArray(highLightArr.toJSONString());
-        question.setUnderlineJsonArray(underlineArr.toJSONString());
     }
 }

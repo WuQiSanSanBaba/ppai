@@ -8,13 +8,14 @@
         INSERT INTO annotation(annotation_id, question_title, question_id, annotation_word,
         annotation_title, content, html, part_id, group_id, classroom_id,
         user_id, user_name, subject_id, subject_name, create_time,
-        update_time, create_user, update_user)
+        update_time, create_user, update_user,highlight_flag,highlight_json_array,underline_flag,underline_json_array)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.annotationId}, #{item.questionTitle}, #{item.questionId}, #{item.annotationWord},
             #{item.annotationTitle}, #{item.content}, #{item.html}, #{item.partId}, #{item.groupId},
             #{item.classroomId}, #{item.userId}, #{item.userName}, #{item.subjectId}, #{item.subjectName},
-            #{item.createTime}, #{item.updateTime}, #{item.createUser}, #{item.updateUser})
+            #{item.createTime}, #{item.updateTime}, #{item.createUser}, #{item.updateUser},#{item.highlightFlag},
+            #{item.highlightJsonArray}, #{item.underlineFlag},#{item.underlineJsonArray})
         </foreach>
     </insert>
 </mapper>

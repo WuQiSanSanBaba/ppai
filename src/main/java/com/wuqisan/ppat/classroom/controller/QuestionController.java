@@ -8,6 +8,7 @@ import com.wuqisan.ppat.classroom.bean.ClassroomPart;
 import com.wuqisan.ppat.classroom.bean.Question;
 import com.wuqisan.ppat.classroom.bean.Subject;
 import com.wuqisan.ppat.classroom.service.ClassroomPartService;
+import com.wuqisan.ppat.classroom.service.PublicService;
 import com.wuqisan.ppat.classroom.service.QuestionService;
 import com.wuqisan.ppat.classroom.service.SubjectService;
 import com.wuqisan.ppat.common.Utils.CommonUtils;
@@ -32,6 +33,8 @@ public class QuestionController {
     ClassroomPartService classroomPartService;
     @Autowired
     SubjectService subjectService;
+    @Autowired
+    PublicService publicService;
 
     @RequestMapping("addQuestion")
     @ApiOperation("新增问题")
@@ -114,15 +117,13 @@ public class QuestionController {
      * @param question
      */
     private Question dealQuestion(Question question) {
-        JSONArray underlineArr = new JSONArray();
-        JSONArray highLightArr = new JSONArray();
 
         //情况1核心概念和一般概念都没有 不做标记
-        if (question.getCoreConceptFlag().equals(1) || question.getGeneralConceptFlag().equals(1)) {
+        if (question.getFlag1().equals(1)) {
             //将前台传来的核心概念和一般概念合并
-            JSONArray conceptsArray = questionService.getAllConcepts(question);
+            JSONArray jsonArray1 = JSON.parseArray(question.getJsonArray1());
             //查库并处理概念和高亮
-            questionService.dealConcepts(question, underlineArr, highLightArr, conceptsArray);
+            publicService.dealConcepts(question, jsonArray1);
         }
         return question;
     }

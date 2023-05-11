@@ -28,5 +28,13 @@ public class BaseBean {
 
     private Integer  status;
 
+    /**
+     * 1作为新建课堂的种类
+     * 2作为新建问题匹配概念的json数组
+     */
     private String jsonArray1;
+    /**
+     * 1.作为新建问题匹配概念的flag
+     */
+    private Integer flag1;
 }

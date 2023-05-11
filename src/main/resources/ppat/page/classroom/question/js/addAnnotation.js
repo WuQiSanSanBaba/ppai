@@ -26,16 +26,17 @@ async function saveannotations() {
             annotationTitle: item.annotationTitle,
             content: text,
             html: item.editor.getHtml(),
-            partId: classroomPart.partId,
-            groupId: classroomPart.groupId,
-            classroomId: classroomPart.classroomId,
-            userId: classroomPart.userId,
-            userName: classroomPart.userName,
-            subjectId: classroomPart.subjectId,
-            subjectName: classroomPart.subjectName,
         }
-        await analizyQuestion(text).then(res=>{
-            annotation
+        await analizyQuestion(text,item.editor).then(res=>{
+            annotation.jsonArray1=res.jsonArray1
+            annotation.flag1=res.flag1
+            annotation.partId=res.partId
+            annotation.groupId=res.groupId
+            annotation.userId=res.userId
+            annotation.userName=res.userName
+            annotation.subjectId=res.subjectId
+            annotation.subjectName=res.subjectName
+            annotation.classroomId=res.classroomId
         });
         annotations.push(annotation)
     }

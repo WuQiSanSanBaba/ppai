@@ -8,12 +8,15 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../../../plugins/wangEditor/wangEditor.min.css"/>
     <link rel="stylesheet" href="./css/question.css"/>
+    <link rel="stylesheet" href="../../../plugins/zui/zui.min.css"/>
     <script src="../../../plugins/axios/axios.min.js"></script>
     <script src="../../../js/request.js"></script>
     <script src="../../../js/common.js"></script>
     <script src="../../../js/index.js"></script>
     <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
     <script src="../../../plugins/jquery/jquery.js"></script>
+    <script src="../../../plugins/zui/zui.min.js"></script>
+    <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
     <script src="./js/hightLight.js"></script>
     <script src="./js/addQuestion.js"></script>
     <script src="../subject/js/subject.js"></script>
@@ -87,12 +90,12 @@
         const text=editor.getText();
         const title=document.getElementById('question-input').value;
         //内容校验
-        const flag = checkContent(editor.getText(), document.getElementById('question-input').value)
+        const flag = checkContent(text, title)
         if (!flag) {
             return;
         }
         //分析内容
-        await analizyQuestion(text).then(res => {
+        await analizyQuestion(text,editor).then(res => {
             result = res
         })
         if (result ==='false'){

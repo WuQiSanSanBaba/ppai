@@ -16,7 +16,7 @@
                update_user,
                auth_id,
                parent_id,
-               @rownum:=@rownum+1  id
+               @rownum:=@rownum+1  row_id
         from menu,(SELECT @rownum:=0) a
         WHERE auth_id in (SELECT auth_id from auth_view WHERE user_id = #{userId})
         order by sort asc

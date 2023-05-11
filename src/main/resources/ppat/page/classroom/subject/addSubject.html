@@ -40,7 +40,7 @@
                     prop="name"
             >
                 <el-input
-                        v-model="ruleForm.name"
+                        v-model="ruleForm.subjectName"
                         placeholder="请输入主题名称"
                         maxlength="4"
                 />
@@ -67,6 +67,9 @@
             >
 
                 <div >
+                    <span v-if="coreConceptJsonArray.length===0">
+                        暂未添加核心概念
+                    </span>
                     <span
                             v-for="(item, index) in coreConceptJsonArray"
                             :key="index"
@@ -82,6 +85,9 @@
                     prop="generalConceptJsonArray"
             >
                 <div class="" >
+                     <span v-if="generalConceptJsonArray.length===0">
+                        暂未添加一般概念
+                    </span>
                     <span
                             v-for="(item, index) in generalConceptJsonArray"
                             :key="index"
@@ -97,10 +103,10 @@
                     label="状态:"
                     prop="status"
             >
-                <el-radio-groupDefine v-model="ruleForm.status">
+                <el-radio-group  v-model="ruleForm.status">
                     <el-radio label="启用"></el-radio>
                     <el-radio label="禁用"></el-radio>
-                </el-radio-groupDefine>
+                </el-radio-group >
             </el-form-item>
 
             <div class="subBox address">
@@ -186,7 +192,7 @@
             },
             submitForm() {
 
-                if (this.ruleForm.name == null || this.ruleForm.name == '') {
+                if (this.ruleForm.subjectName == null || this.ruleForm.subjectName == '') {
                     this.$message.error("主题名称不能为空")
                     return
                 }

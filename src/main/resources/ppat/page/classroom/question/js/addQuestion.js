@@ -100,16 +100,13 @@ function addQuestion(params) {
     return axios.post('/classroom/question/addQuestion', {
         title: params.title,
         content: params.content,
+        flag1: params.flag1,
+        jsonArray1: params.jsonArray1,
         html: params.html,
-        coreConceptFlag: params.coreConceptFlag,
-        coreConceptJsonArray: params.coreConceptJsonArray,
-        generalConceptFlag: params.generalConceptFlag,
-        generalConceptJsonArray: params.generalConceptJsonArray,
-        groupMemberId: params.groupMemberId,
+        groupId: params.groupId,
         subjectId: params.subjectId,
         subjectName: params.subjectName,
         partId: params.partId,
-        groupId: params.groupId
     })
 }
 function updateQuestion(params) {

@@ -18,22 +18,6 @@ public interface QuestionService {
      * @return
      */
     List<Question> getHighLightByGroupIdAndSubjectId();
-    /**
-     * 概念和数据库查出来的同组同主题的问题进行比较
-     *
-     * @param question
-     * @param underlineArr
-     * @param highLightArr
-     */
-    void dealConcepts(Question question, JSONArray underlineArr, JSONArray highLightArr, JSONArray conceptArray);
-
-
-    /**
-     * 将核心概念和一般概念合并
-     * @param question
-     * @return
-     */
-    JSONArray getAllConcepts(Question question) ;
 
     /**
      *更新问题

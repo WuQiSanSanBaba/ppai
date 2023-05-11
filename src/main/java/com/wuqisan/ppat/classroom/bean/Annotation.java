@@ -24,4 +24,6 @@ public class Annotation extends BaseBean {
 
     private Integer highlightFlag;
     private String highlightJsonArray;
+    private Integer underlineFlag;
+    private String underlineJsonArray;
 }

@@ -17,8 +17,6 @@ o
 ?src/main/java/com/wuqisan/ppat/common/service/QueryService.java,5\c\5c350b706ca715bd514143f187d9bd6b2a750d93
 j
 :src/main/java/com/wuqisan/ppat/manage/bean/GradeClass.java,6\2\629bea8168d78044d20314231fe8e4da4e753d3e
-d
-4src/main/java/com/wuqisan/ppat/manage/bean/Menu.java,2\3\2392ad5d64b372b75ddeaefc20bff97daee12989
 x
 Hsrc/main/java/com/wuqisan/ppat/common/service/impl/QueryServiceImpl.java,c\d\cdc14ff03eed580f658bdc7454d68ca95093d4b2
 o
@@ -83,12 +81,8 @@ w
 Gsrc/main/java/com/wuqisan/ppat/manage/service/impl/UserServiceImpl.java,d\4\d42cf7ed75e0f3165fdd6b901829a67365fce2e2
 x
 Hsrc/main/java/com/wuqisan/ppat/manage/service/impl/LoginServiceImpl.java,4\2\42c9cf33b1c29d4063128e3efa2cb323c1e399c4
-w
-Gsrc/main/java/com/wuqisan/ppat/manage/service/impl/MenuServiceImpl.java,c\3\c329594cd947a92c3c61d37aeeec5b23c9d0ba97
 _
 /src/main/java/com/wuqisan/ppat/base/bean/R.java,d\8\d8e1714f7b941e71452f3dfc92e2fea553c0a55d
-f
-6src/main/java/com/wuqisan/ppat/base/bean/BaseBean.java,0\c\0c558bb2f204d5efac36df915307712a8401be9e
 x
 Hsrc/main/java/com/wuqisan/ppat/classroom/mapper/ClassroomPartMapper.java,3\4\343dde3634293b342ca9fb8155466a7e6798ab61
 q
@@ -116,8 +110,6 @@ Dsrc/main/java/com/wuqisan/ppat/classroom/mapper/ClassroomMapper.java,0\1\017a8
 y
 Isrc/main/java/com/wuqisan/ppat/manage/controller/ClassInfoController.java,5\4\541aff150a3b7323dbf38ad173abfe013b45df63
 t
-Dsrc/main/java/com/wuqisan/ppat/manage/controller/MenuController.java,f\c\fcd4d22e995b0d851fa61529cb9611cb44a12f7f
-t
 Dsrc/main/java/com/wuqisan/ppat/manage/controller/UserController.java,2\e\2e76c8b7e3f50fbac49f491d397263d6e50ddafc
 ‰
 Ysrc/main/java/com/wuqisan/ppat/config/mybatis/autoFillField/AotuFillFieldInterceptor.java,f\2\f2de50118c5bc31a7bb30781b2344699263e02a3
@@ -139,14 +131,8 @@ z
 Jsrc/main/java/com/wuqisan/ppat/classroom/service/ClassroomPartService.java,d\2\d21b9a3ee99b8d42d8fcf3f5b65a003945c6857a
 k
 ;src/main/java/com/wuqisan/ppat/common/Utils/ParamUtils.java,b\e\bef62542d4e1aef54d62522e04da0213facfd58a
-s
-Csrc/main/java/com/wuqisan/ppat/classroom/service/PublicService.java,f\a\fa5b364ac04a595d6156d39486a1a602699eca91
-u
-Esrc/main/java/com/wuqisan/ppat/classroom/service/QuestionService.java,5\7\5768a9efdf41a3a548b64e4ff0d53bbecd1223e1
 }
 Msrc/main/java/com/wuqisan/ppat/classroom/service/impl/SubjectServiceImpl.java,e\7\e72d8081f7ab9b4ea8d22f51e672312f6082b492
-|
-Lsrc/main/java/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.java,9\8\98487317336b0445519f266fd7800cfc209e18c0
 €
 Psrc/main/java/com/wuqisan/ppat/config/mybatis/autoFillField/anno/CreateTime.java,4\f\4fb85353f6d89b1f9027a4959161ebb13bed2b2b
 €
