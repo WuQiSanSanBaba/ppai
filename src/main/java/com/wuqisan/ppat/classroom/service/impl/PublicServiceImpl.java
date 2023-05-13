@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wuqisan.ppat.base.context.BaseContext;
-import com.wuqisan.ppat.classroom.bean.Annotation;
-import com.wuqisan.ppat.classroom.bean.HighlightAnnotation;
-import com.wuqisan.ppat.classroom.bean.Question;
-import com.wuqisan.ppat.classroom.bean.Subject;
+import com.wuqisan.ppat.classroom.bean.*;
 import com.wuqisan.ppat.classroom.mapper.PublicMapper;
 import com.wuqisan.ppat.classroom.service.AnnotationService;
 import com.wuqisan.ppat.classroom.service.PublicService;
@@ -47,11 +44,11 @@ public class PublicServiceImpl implements PublicService {
         JSONArray highLightArr = new JSONArray();
         Integer underlineFlag = 0;
         Integer highlightFlag = 0;
-        List<HighlightAnnotation> highlightUnderList = new ArrayList<HighlightAnnotation>();
+        List<HighlightAnnotation> highlightUnderList;
         //存量问题列表
         List<Question> highLightQuestion = questionService.getHighLightByGroupIdAndSubjectId(groupId, subjectId);
-        List<Annotation> highLightAnnotations = annotationService.getAnnotationListByGroupIdAndSubjectId(groupId, subjectId);
-        highlightUnderList = this.addAllHighAnnotation(highLightQuestion, highLightAnnotations, type, userId);
+        List<Annotation> highLightAnnotationBatches = annotationService.getAnnotationListByGroupIdAndSubjectId(groupId, subjectId);
+        highlightUnderList = this.addAllHighAnnotation(highLightQuestion, highLightAnnotationBatches, type, userId);
         //获取所有被高亮的词
         JSONArray highlightAll = this.getHighlightArray(highlightUnderList);
         //获取所有被注释的词
@@ -87,7 +84,6 @@ public class PublicServiceImpl implements PublicService {
 
     /**
      * @param jsonArray
-     * @param type
      * @param groupId
      * @param subjectId
      * @return
@@ -98,7 +94,6 @@ public class PublicServiceImpl implements PublicService {
         List<Question> highLightQuestionList = questionService.getHighLightByGroupIdAndSubjectId(groupId, subjectId);
         Subject subjectById = subjectService.getSubjectById(subjectId);
         JSONArray allHighlight = this.allAddHighListAndConcept(highLightQuestionList, subjectById);
-        List<Annotation> annotationListByGroupIdAndSubjectId = annotationService.getAnnotationListByGroupIdAndSubjectId(groupId, subjectId);
         //本次新增的
         JSONArray newArray = JSON.parseArray(jsonArray);
         //用数组存放处理完的的对象
@@ -143,7 +138,7 @@ public class PublicServiceImpl implements PublicService {
         JSONArray jsonArray = new JSONArray();
         for (HighlightAnnotation highlightAnnotation : highlightUnderList) {
             if (highlightAnnotation.getAnnotationFlag() == 1) {
-                JSONArray jsonArray1 = JSON.parseArray(highlightAnnotation.getHighlightJsonArray());
+                JSONArray jsonArray1 = JSON.parseArray(highlightAnnotation.getAnnotationJsonArray());
                 jsonArray.addAll(jsonArray1);
             }
         }
@@ -171,7 +166,7 @@ public class PublicServiceImpl implements PublicService {
         return jsonArray;
     }
 
-    private List<HighlightAnnotation> addAllHighAnnotation(List<Question> highLightQuestion, List<Annotation> highLightAnnotations, String type, Long userId) {
+    private List<HighlightAnnotation> addAllHighAnnotation(List<Question> highLightQuestion, List<Annotation> highLightAnnotationBatches, String type, Long userId) {
         List<HighlightAnnotation> list = new ArrayList<HighlightAnnotation>();
         for (Question question : highLightQuestion) {
             //操作问题时 不操作自己的
@@ -202,7 +197,7 @@ public class PublicServiceImpl implements PublicService {
             }
             list.add(highlightAnnotation);
         }
-        for (Annotation annotation : highLightAnnotations) {
+        for (Annotation annotation : highLightAnnotationBatches) {
             //操作问题时 不操作自己的
             if (annotation.getCreateUser().equals(userId) && StringUtils.equals(type, "annotation")) {
                 continue;

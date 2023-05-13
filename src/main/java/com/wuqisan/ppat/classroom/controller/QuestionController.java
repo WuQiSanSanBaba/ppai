@@ -148,6 +148,10 @@ public class QuestionController {
         question.setQuestionId(questionId);
         question.setQuestionId(question.getQuestionId());
         question.setAddHighlightFlag(1);
+        //把旧的高亮和新的合一起
+        if (questionByQuestionId.getAddHighlightFlag()!=null&&questionByQuestionId.getAddHighlightFlag()==1){
+            addHighLightJsonArray.addAll(JSON.parseArray(questionByQuestionId.getAddHighlightJsonArray()));
+        }
         question.setAddHighlightJsonArray(addHighLightJsonArray.toJSONString());
         questionService.updateQuestionByQuestionId(question);
         return R.success(question);

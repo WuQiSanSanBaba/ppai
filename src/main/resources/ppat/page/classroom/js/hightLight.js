@@ -1,48 +1,47 @@
-async function analizyQuestion(text, editor) {
-    let classInfo
-    let subject
-    let classroomPart
-    //获取主题
-    await loadClassroom().then(result => {
-        classroomPart = result.data.classroomPart
-    });
-    if (classroomPart) {
-        classInfo = classroomPart
-    } else {
-        new $.zui.Messager('提示消息：成功', {
-            type: 'danger' // 定义颜色主题
-        }).show();
+async function analizyQuestion(text, editor, classroomPart, subject) {
+    if (!classroomPart) {
+        //获取主题
+        await loadClassroom().then(result => {
+            classroomPart = result.data.classroomPart
+        });
+        if (classroomPart == null) {
+            new $.zui.Messager('提示消息：获取课堂失败', {
+                type: 'danger' // 定义颜色主题
+            }).show();
+        }
     }
-    const boolen = valiateClassAndSubject(classInfo)
+    const boolen = valiateClassAndSubject(classroomPart)
     if (boolen === false) {
         return 'false'
     }
-    if (classInfo.partId) await getSubjectById(classInfo.subjectId).then(res => {
-        subject = res.data
-    })
+    if (!subject) {
+        await getSubjectById(classroomPart.subjectId).then(res => {
+            subject = res.data
+        })
+    }
 
     //分析核心概念和一般概念
     let result = checkConcepts(text, subject, editor)
-    result.partId = classInfo.partId
-    result.subjectId = classInfo.subjectId
-    result.subjectName = classInfo.subjectName
-    result.groupId = classInfo.groupId
-    result.classroomId = classInfo.classroomId
-    result.userId = classInfo.userId
-    result.userName = classInfo.userName
+    result.partId = classroomPart.partId
+    result.subjectId = classroomPart.subjectId
+    result.subjectName = classroomPart.subjectName
+    result.groupId = classroomPart.groupId
+    result.classroomId = classroomPart.classroomId
+    result.userId = classroomPart.userId
+    result.userName = classroomPart.userName
     return result;
     //保存
 }
 
-function valiateClassAndSubject(classInfo) {
+function valiateClassAndSubject(classroomPart) {
     let boo = true
-    if (classInfo == null) {
+    if (classroomPart == null) {
         new $.zui.Messager('你还没有加入课堂', {
             type: 'danger' // 定义颜色主题
         }).show();
         boo = false;
     }
-    if (!classInfo.subjectId) {
+    if (!classroomPart.subjectId) {
         new $.zui.Messager('你还没有选择主题', {
             type: 'danger' // 定义颜色主题
         }).show();
@@ -50,7 +49,7 @@ function valiateClassAndSubject(classInfo) {
         window.parent.dialogChange('/ppat/page/classroom/subject/selectSubject.html', '选择主题', 3)
         boo = false;
     }
-    if (classInfo.questionId != null) {
+    if (classroomPart.questionId != null) {
         new $.zui.Messager('你已经新建问题了请勿重复新建', {
             type: 'danger' // 定义颜色主题
         }).show();
@@ -110,7 +109,12 @@ var dealHightLight = {
     hadHighArray: [],
     hadUnderlineArray: [],
     hadAddHighlightArray: [],
+    hadAnnotationArray: [],
     excute(question, element) {
+        dealHightLight.hadHighArray = []
+        dealHightLight.hadUnderlineArray = []
+        dealHightLight.hadAddHighlightArray = []
+        dealHightLight.hadAnnotationArray = []
         if (question.highlightFlag === 1) {
             this.preElement(question.highlightJsonArray, 'highLight', element)
         }
@@ -119,6 +123,9 @@ var dealHightLight = {
         }
         if (question.underlineFlag === 1) {
             this.preElement(question.underlineJsonArray, 'underline', element)
+        }
+        if (question.annotationFlag === 1) {
+            this.preElement(question.annotationJsonArray, 'annotation', element)
         }
     },
     preElement(jsonArray, type, element) {
@@ -130,6 +137,9 @@ var dealHightLight = {
         for (let string of array) {
             if (type === 'addHighlight') {
                 this.traverseAddHighlight(element, string, type)
+            } else if (type === 'annotation') {
+                this.traverseAnnotation(element, string, type)
+
             } else {
                 this.traverse(element, string, type)
             }
@@ -141,11 +151,9 @@ var dealHightLight = {
             // 判断当前节点是否包含关键词
             if ($(this).text().indexOf(keyword) >= 0 || $(this).text().indexOf(keyword.word)) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
-                $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='highlight'>" + keyword + "</span>"));
-
                 if (type === 'underline' && dealHightLight.hadUnderlineArray.indexOf(keyword) < 0) {
                     dealHightLight.hadUnderlineArray.push(keyword);
-                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='underline'>" + keyword + "</span>"));
+                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span title='双击进入注释详情' ondblclick='addAnnotationJS(" + keyword + ")' class='underline'>" + keyword + "</span>"));
                 } else if (type === 'highLight' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
                     dealHightLight.hadHighArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='highLight'>" + keyword + "</span>"));
@@ -159,8 +167,6 @@ var dealHightLight = {
             // 判断当前节点是否包含关键词
             if ($(this).text().indexOf(word) >= 0 || $(this).text().indexOf(word)) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
-                $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='highlight'>" + word + "</span>"));
-
                 if (flag === 'addHighlight') {
                     $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='addHighlight'>" + word + "</span>"));
 
@@ -169,6 +175,17 @@ var dealHightLight = {
                 }
                 dealHightLight.hadAddHighlightArray.push(word);
 
+            }
+        });
+    }, traverseAnnotation(node, keyword, type) {
+        const annotationGroupId = keyword.annotationGroupId;
+        const annotationWord = keyword.annotationWord;
+        $(node).find("*").each(function () {
+            // 判断当前节点是否包含关键词
+            if ($(this).text().indexOf(annotationWord) >= 0 || $(this).text().indexOf(annotationWord)) {
+                // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
+                $(this).html($(this).html().replace(new RegExp(annotationWord, "i"), "<span title='双击进入注释详情' ondblclick='toAnnotation(" + annotationGroupId + ")' class='annotation'>" + annotationWord + "</span>"));
+                dealHightLight.hadAnnotationArray.push(annotationWord);
             }
         });
     }

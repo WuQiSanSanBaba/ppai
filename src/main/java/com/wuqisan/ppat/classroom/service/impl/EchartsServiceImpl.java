@@ -3,7 +3,7 @@ package com.wuqisan.ppat.classroom.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.wuqisan.ppat.classroom.bean.Annotation;
+import com.wuqisan.ppat.classroom.bean.AnnotationBatch;
 import com.wuqisan.ppat.classroom.bean.Echarts;
 import com.wuqisan.ppat.classroom.bean.Question;
 import com.wuqisan.ppat.classroom.bean.node.ItemStyleEcharts;
@@ -37,10 +37,10 @@ public class EchartsServiceImpl implements EchartsService {
     public Echarts gneneEcharts(Long partId) {
         Echarts echarts = new Echarts();
         Question question = questionService.getQuestionByPartId(partId);
-        List<Annotation> annotationList = annotationService.getAnnotationListByQuestionId(question.getQuestionId());
+        List<AnnotationBatch> annotationBatch = annotationService.getAnnotationListByQuestionId(question.getQuestionId());
         QuestionAnnotationDto questionAnnotationDto = new QuestionAnnotationDto();
         questionAnnotationDto.setQuestion(question);
-        questionAnnotationDto.setAnnotations(annotationList);
+        questionAnnotationDto.setAnnotationBatches(annotationBatch);
         //节点列表
         List<NodeEcharts> list = new ArrayList<>();
         List<LinkEcharts> linkEchartsList=new ArrayList<>();
@@ -77,12 +77,12 @@ public class EchartsServiceImpl implements EchartsService {
         JSONArray annotationArray = JSON.parseArray(question.getAnnotationJsonArray());
         for (int i = 0; i < annotationArray.size(); i++) {
             JSONObject jsonObject = annotationArray.getJSONObject(i);
-            Long annotationGroupId = jsonObject.getLong("annotationGroupId");
+            Long annotationId = jsonObject.getLong("annotationId");
             String annotationWord = jsonObject.getString("annotationWord");
             NodeEcharts nodeEcharts = new NodeEcharts();
             nodeEcharts.setId(CommonUtils.generate15String());
             nodeEcharts.setName(annotationWord);
-            nodeEcharts.setAnnotationGroupId(annotationGroupId);
+            nodeEcharts.setAnnotationId(annotationId);
             nodeEcharts.setQuestionTitle(question.getTitle());
             //问题节点50  普通节点30 30在类里默认
             nodeEcharts.setSymbolSize("30");

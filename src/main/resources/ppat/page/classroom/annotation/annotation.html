@@ -24,23 +24,36 @@
     <script src="./js/annotation.js"></script>
     <script src="../js/hightLight.js"></script>
     <style>
-        #annotation-app .notAdmin::after {
+        #annotationBatch-app .notAdmin::after {
             border: 0 !important;
 
         }
     </style>
 </head>
 <body>
-<div class="dashboard-container" id="annotation-app">
+<div class="dashboard-container" id="annotationBatch-app">
     <!--问题标题-->
     <div style="display: flex;align-items: center;" id="classtitle">
         <h1 style="color: #1cc7fa;margin-right: 20px">问题标题</h1>
-        <h1 id="question-title">{{questionTitle}}</h1>
+        <el-popover
+                placement="top-start"
+                title="提示"
+                width="200"
+                trigger="hover"
+                content="双击标题进去问题详情页面">
+            <h1 id="question-title" slot="reference" @dblclick="toQuestionHtml">{{questionTitle}}</h1>
+        </el-popover>
         <h1 id="highlight-word" style="background-color: yellow;margin-left: 20px">{{annotationWord}}</h1>
-        <button style="background-color: grey" @click="editorAnnotaton">编辑</button>
-
+        <div id="editorMenu" class="button-container">
+            <button style="background-color: grey" @click="editorAnnotaton">编辑</button>
+            <button style="background-color: #00AEEC"
+                    @click="dialogVisible_HighLight=true;">新增高亮显示
+            </button>
+            <button @click="dialogVisible_Annotation=true;" style="background-color: red">添加注释
+            </button>
+        </div>
     </div>
-    <div id="annotationContainer" class="annotation-container-page">
+    <div id="annotationContainer" class="annotationBatch-container-page">
 
     </div>
     <div class="container bottom-bar bottom-flex">
@@ -63,11 +76,70 @@
                     :key="index">{{ item }}、</span>
         </div>
     </div>
+
+
+    <div class="hightLight-container">
+        <el-dialog
+                title="新增高亮显示"
+                :visible.sync="dialogVisible_HighLight"
+                width="30%"
+        >
+            <div>
+                <div style="margin: 25px;font-size: 18px">
+                    <div class="keywords-title">已有的高亮显示:</div>
+                    <div>
+                        <div style="font-size:20px;" v-if="hightLigtWord.length===0">
+                            你还未新增高亮词
+                        </div>
+                        <div v-else style="    color: #67c23a;background: #f0f9eb;border-color: #c2e7b0;"
+                             v-for="(item, index) in hightLigtWord"
+                             :key="index"
+                             class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
+                                                                class="el-icon-delete-solid"></i></div>
+                    </div>
+                    <div>
+                        <div class="keywords-title">本次新增高亮显示:</div>
+                        <div style=""
+                             v-for="(item, index) in addHighlightJsonArray_new"
+                             :key="index"
+                             class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
+                                                                class="el-icon-delete-solid"></i></div>
+                    </div>
+                </div>
+                <div style="display: flex;margin:20px">
+                    <el-input v-model="input_" placeholder="请输入关键词,点击右侧按钮添加"></el-input>
+                    <el-button type="primary" @click="keyWordAdd">添加+</el-button>
+                </div>
+            </div>
+            <div style="display: flex;justify-content: center;">
+                <el-button @click="dialogVisible_HighLight = false">取 消</el-button>
+                <el-button type="primary" @click="addHighLight">保 存</el-button>
+            </div>
+            </span>
+        </el-dialog>
+    </div>
+    <div class="annotationBatch-container">
+        <el-dialog
+                title="注释"
+                :visible.sync="dialogVisible_Annotation"
+                width="30%"
+        >
+            <div>
+                <div>点击关键词进行注释</div>
+                <div class="annotationBatch-container">
+                    <el-button type="primary" v-for="(item, index) in hightLigtWord"
+                               :key="index" @click="addAnnotationPage(item)"> {{item}}
+                    </el-button>
+                </div>
+            </div>
+        </el-dialog>
+    </div>
+
 </div>
 
 <script>
     new Vue({
-        el: '#annotation-app',
+        el: '#annotationBatch-app',
         data() {
             return {
                 name: '',
@@ -76,19 +148,82 @@
                 pageSize: 2,
                 tableData: [],
                 questionTitle: '',
+                questionId: null,
                 annotationWord: '',
                 groupers: [],
-                annoationGroupId: undefined
+                annotationId: undefined,
+                dialogVisible_HighLight: false,
+                dialogVisible_Annotation: false,
+                input_: '',
+                addHighlightJsonArray_new: []
+
             }
         },
-        computed: {},
+        computed: {
+            hightLigtWord() {
+                const hightLigtWord = []
+                this.tableData.map(res => {
+                    if (res.highlightFlag !== null && res.highlightFlag === 1) {
+                        const highlightJsonArray = JSON.parse(res.highlightJsonArray)
+                        highlightJsonArray.map(res => {
+                            hightLigtWord.push(res)
+                        })
+                    }
+                    if (res.addHighlightFlag !== null && res.addHighlightFlag === 1) {
+                        const addHighlightJsoArray = JSON.parse(res.addHighlightJsonArray)
+                        addHighlightJsoArray.map(res => {
+                            hightLigtWord.push(res)
+                        })
+                    }
+
+                })
+                return hightLigtWord;
+            },
+            content() {
+                let content=''
+                this.tableData.map(res => {
+                  content=content+res.content
+                })
+            }
+        },
         created() {
-            this.annotationGroupId = requestUrlParam('annotationGroupId');
+            this.annotationId = requestUrlParam('annotationId');
         },
         mounted() {
             this.init()
         },
         methods: {
+            deleteKeyWord(index) {
+                this.addHighlightJsonArray_new.splice(index, 1)
+            },
+            keyWordAdd() {
+                this.input_ = this.input_.trim()
+                if (this.input_) {
+                    if (this.content.indexOf(this.input_) < 0) {
+                        this.$message.error(this.input_ + "没有出现在正文中")
+                        return;
+                    }
+                    if (this.hightLigtWord) {
+                        for (let i = 0; i < this.hightLigtWord.length; i++) {
+                            if (this.hightLigtWord[i].indexOf(this.input_) > -1) {
+                                this.$message.error(hightLigtWord[i] + "已经高亮显示，请重试")
+                                return
+                            }
+                        }
+                    }
+                    if (this.addHighlightJsonArray_new) {
+                        for (let i = 0; i < this.addHighlightJsonArray_new.length; i++) {
+                            if (this.addHighlightJsonArray_new[i].indexOf(this.input_) > -1) {
+                                this.$message.error(this.input_ + "已经高亮显示，请重试")
+                                return
+                            }
+                        }
+                    }
+                    this.addHighlightJsonArray_new.push(this.input_)
+                    this.input_ = ''
+                }
+            }
+            ,
             handleQuery() {
                 this.page = 1;
                 this.init();
@@ -105,14 +240,15 @@
                 const params = {
                     page: this.page,
                     pageSize: this.pageSize,
-                    annotationGroupId: this.annotationGroupId
+                    annotationId: this.annotationId
                 }
-                getAnnotationListByAnnotationGroupIdPage(params).then(res => {
+                getAnnotationListByAnnotationId(params).then(res => {
                     if (res.code === 1) {
                         $('#annotationContainer').empty()
                         this.tableData = res.data.list || []
                         this.annotationWord = this.tableData[0].annotationWord
                         this.questionTitle = this.tableData[0].questionTitle
+                        this.questionId = this.tableData[0].questionId
                         this.counts = res.data.total
                         const groupMembersList = res.map.groupMembersList
                         groupMembersList.map((member) => {
@@ -122,16 +258,26 @@
                     }
                 })
             }, editorAnnotaton() {
-                const annotation = this.tableData[0]
-                debugger
+                const annotationBatch = this.tableData[0]
                 window.parent.menuHandle({
                     menuId: 'updateAnnotation',
                     name: '修改注释',
-                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationGroupId=' + annotation.annotationGroupId+
-                    '&questionId=' + annotation.questionId+
-                        '&annotationWord=' + encodeURI(annotation.annotationWord)+
-                        '&questionTitle=' + encodeURI(annotation.questionTitle)
+                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationId=' + annotationBatch.annotationGroupId +
+                        '&questionId=' + annotationBatch.questionId +
+                        '&annotationWord=' + encodeURI(annotationBatch.annotationWord) +
+                        '&questionTitle=' + encodeURI(annotationBatch.questionTitle)
                 }, true);
+            },
+            toQuestionHtml() {
+                window.parent.menuHandle({
+                    menuId: 'question',
+                    name: '问题详情',
+                    url: '/ppat/page/classroom/question/question.html?questionId=' + this.questionId
+                }, true);
+            },addAnnotationPage(){
+
+            },addHighLight(){
+
             }
         }
     })

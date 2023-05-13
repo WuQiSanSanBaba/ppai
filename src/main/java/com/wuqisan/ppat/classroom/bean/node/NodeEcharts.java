@@ -7,7 +7,7 @@ public class NodeEcharts {
     private String id;
     private Long questionId;
     private String questionTitle;
-    private Long annotationGroupId;
+    private Long annotationId;
     private String name;
     private String type;
     private LabelEcharts label=new LabelEcharts(true,"inside");

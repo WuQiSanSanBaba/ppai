@@ -1,47 +1,72 @@
 async function saveannotations() {
     let classroomPart
-    const classroomPartJson = window.localStorage.getItem("classroomPart");
-    if (classroomPartJson) {
-        classroomPart = JSON.parse(window.localStorage.getItem("classroomPart"));
-    } else {
-        new $.zui.Messager('提示消息：你没有加入小组，无法操作', {
+    let subject
+    //获取主题
+    await loadClassroom().then(result => {
+        classroomPart = result.data.classroomPart
+    });
+    if (classroomPart==null) {
+        new $.zui.Messager('提示消息：获取课堂失败', {
             type: 'danger' // 定义颜色主题
         }).show();
-        return;
     }
+    await getSubjectById(classroomPart.subjectId).then(res => {
+        subject = res.data
+    })
     $('#myModal').modal('hide')
-    const annotations = []
     if (editorContainerArray == null || editorContainerArray.length === 0) {
         new $.zui.Messager('提示消息：你还没有注释请先注释', {
             type: 'danger' // 定义颜色主题
         }).show();
         return;
     }
+    let annotationDto={}
+    let annotation={
+        questionId: questionId,
+        questionTitle: questionTitle,
+        annotationWord: annotationWord,
+        partId : classroomPart.partId,
+        groupId : classroomPart.groupId,
+        subjectId : classroomPart.subjectId,
+        subjectName : classroomPart.subjectName,
+        classroomId : classroomPart.classroomId,
+        annotationType : 'question',
+    }
+    const annotationBatchList = []
+    let jsonArray=[]
     for (let item of editorContainerArray) {
         const text = item.editor.getText();
-        let annotation = {
+        let annotationBatch = {
             questionId: questionId,
-            questionTitle: questionTitle,
             annotationWord: annotationWord,
             annotationTitle: item.annotationTitle,
             content: text,
             html: item.editor.getHtml(),
             categorize: item.categorize,
         }
-        await analizyQuestion(text, item.editor).then(res => {
-            annotation.jsonArray1 = res.jsonArray1
-            annotation.flag1 = res.flag1
-            annotation.partId = res.partId
-            annotation.groupId = res.groupId
-            annotation.userId = res.userId
-            annotation.userName = res.userName
-            annotation.subjectId = res.subjectId
-            annotation.subjectName = res.subjectName
-            annotation.classroomId = res.classroomId
+        await analizyQuestion(text, item.editor,classroomPart,subject).then(res => {
+            if (res.flag1===1){
+                jsonArray.push(...JSON.parse(res.jsonArray1))
+            }
+            annotationBatch.partId = res.partId
+            annotationBatch.groupId = res.groupId
+            annotationBatch.classroomId = res.classroomId
         });
-        annotations.push(annotation)
+        annotationBatchList.push(annotationBatch)
     }
-    const data = JSON.stringify(annotations)
+    if (jsonArray.length>0){
+        const newArray=  jsonArray.filter((item,index)=>{
+            return jsonArray.indexOf(item)===index
+        })
+        annotation.jsonArray1=JSON.stringify(newArray)
+        annotation.flag1=1
+
+    }else {
+        annotation.flag1=0
+    }
+    annotationDto.annotation=annotation
+    annotationDto.annotationBatchList=annotationBatchList
+    const data = JSON.stringify(annotationDto)
     $.ajax({
         url: '/classroom/annotation/addAnnotation',
         type: 'POST',

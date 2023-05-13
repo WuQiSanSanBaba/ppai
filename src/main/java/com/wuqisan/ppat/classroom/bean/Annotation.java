@@ -8,29 +8,21 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Annotation extends BaseBean {
     private Long annotationId;
+    private String annotationWord;
+    private Long partId;
     private String questionTitle;
     private Long questionId;
-    private String annotationWord;
-    private String annotationTitle;
-    private String categorize;
-    private String content;
-    private String html;
-    private Long partId;
     private Long groupId;
     private Long classroomId;
-    private Long userId;
-    private String userName;
     private Long subjectId;
     private String subjectName;
-
     private Integer highlightFlag;
-    private String highlightJsonArray;
     private Integer underlineFlag;
+    private String highlightJsonArray;
     private String underlineJsonArray;
-    private Long annotationGroupId;
-    private Integer addHighlightFlag;
-    private String addHighlightJsonArray;
+    private String annotationType;
     private String annotationJsonArray;
     private Integer annotationFlag;
-
+    private Integer addHighlightFlag;
+    private String addHighlightJsonArray;
 }

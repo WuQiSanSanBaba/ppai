@@ -87,6 +87,7 @@
           and eff_time &lt;= SYSDATE()
           and exp_time &gt;= SYSDATE()
         order by eff_time desc limit 1
+        /*NO_PAGE*/
     </select>
     <select id="getGroupMembersByGroupIds" resultType="com.wuqisan.ppat.classroom.bean.ClassroomPart">
         select part_id,

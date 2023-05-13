@@ -1,4 +1,4 @@
-.highLight {
+.highlight {
     background-color: rgb(255, 236, 61);
 }
 
@@ -9,6 +9,12 @@
 .underline {
     text-decoration: underline;
     text-decoration-color: blue;
+    text-decoration-thickness: 3px;
+    text-decoration-style: solid;
+}
+.annotation {
+    text-decoration: underline;
+    text-decoration-color: red;
     text-decoration-thickness: 3px;
     text-decoration-style: solid;
 }

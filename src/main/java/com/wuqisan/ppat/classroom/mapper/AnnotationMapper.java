@@ -1,19 +1,23 @@
 package com.wuqisan.ppat.classroom.mapper;
 
 import com.wuqisan.ppat.classroom.bean.Annotation;
+import com.wuqisan.ppat.classroom.bean.AnnotationBatch;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface AnnotationMapper {
-    void addAnnotacionList(List<Annotation> list);
+    void addAnnotationBatchList(List<AnnotationBatch> list);
 
-    List<Annotation> getAnnotationByQuestionId(Long annotationId);
+    List<AnnotationBatch> getAnnotationByQuestionId(Long annotationId);
 
-    List<Annotation> getAnnotationByAnnotationGroupId(Long annotationGroupId);
+    Annotation getAnnotationByAnnotationId(Long annotationGroupId);
+    List<AnnotationBatch> getAnnotationBatchListByAnnotationId(Long annotationGroupId);
 
-    void updateAnnotationByAnnotationId(Annotation annotation);
+    void updateAnnotationByAnnotationId(AnnotationBatch annotationBatch);
 
     List<Annotation> getAnnotationListBySubjectId(Long groupId, Long subjectId);
+
+    void addAddAnnotation(Annotation annotation);
 }

@@ -1,6 +1,6 @@
-function getAnnotationListByAnnotationGroupIdPage (pageMap) {
+function getAnnotationListByAnnotationId (pageMap) {
     return $axios({
-        url: `/classroom/annotation/getAnnotationListByAnnotationGroupIdPage`,
+        url: `/classroom/annotation/getAnnotationListByAnnotationId`,
         method: 'post',
         data:pageMap
     })
@@ -18,8 +18,11 @@ function loadAnnotationContainer (data){
             class: 'annotation-title'
         })
         wrapper.append(title_container);
+        const richTextDiv = $('<div/>', {
+        });
         const richText$=$(item.html).attr('id', item.annotationId).addClass('richText')
-        wrapper.append(richText$)
-        dealHightLight.excute(item,richText$.get(0))
+        richTextDiv.append(richText$)
+        wrapper.append(richTextDiv)
+        dealHightLight.excute(item,richTextDiv)
     })
 }

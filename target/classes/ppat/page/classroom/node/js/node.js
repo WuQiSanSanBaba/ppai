@@ -78,14 +78,14 @@ function generateChart(data, this_) {
         }
         if (params.data.type === 'child'){
             // 获取节点名字
-            const annotationGroupId = params.data.annotationGroupId;
+            const annotationId = params.data.annotationId;
             // 执行节点点击事件
             //window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + questionId
             window.parent.menuHandle({
-                menuId: 'question',
-                name: '问题详情',
+                menuId: 'annotation',
+                name: '注释详情',
                 url: '/ppat/page/classroom/annotation/annotation.html?' +
-                    'annotationGroupId=' + annotationGroupId
+                    'annotationId=' + annotationId
 
             }, false);
         }

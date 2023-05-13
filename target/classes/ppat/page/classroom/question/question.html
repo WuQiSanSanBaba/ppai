@@ -9,8 +9,32 @@
     <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="../../../styles/common.css"/>
     <link rel="stylesheet" href="../../../styles/page.css"/>
-    <link rel="stylesheet" href="./css/question.css"/>
     <link rel="stylesheet" href="../css/highlight.css"/>
+    <style>
+        span[title] {
+
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+            cursor: help; /* 鼠标指针样式 */
+            transition: all 0.3s ease-in-out; /* 动画效果 */
+        }
+
+        span[title]:hover:after {
+
+            content: attr(title);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            opacity: 0.9; /* 透明度 */
+            z-index: 9999; /* 置于最上方 */
+        }
+    </style>
 </head>
 <body>
 <div class="addBrand-container" style="margin-left: 40px" id="question-app">
@@ -20,7 +44,7 @@
             <!--问题输入框-->
             <div class="question-menu">
                 <input type="text" id="question-input" class="question-input" readonly v-model="question.title">
-                <div id="editorMenu" class="button-container">
+                <div id="editorMenu" class="button-container" style="  position: absolute; z-index: 1000;">
                     <button style="background-color: grey" @click="editQuestion">编辑</button>
                     <button style="background-color: #00AEEC"
                             @click="dialogVisible_HighLight=true;">新增高亮显示
@@ -51,14 +75,14 @@
                 <div style="margin: 25px;font-size: 18px">
                     <div class="keywords-title">已有的高亮显示:</div>
                     <div>
-                        <div style="font-size:20px;" v-if="question.addHighlightFlag===1">
+                        <div style="font-size:20px;" v-if="question.addHighlightFlag!==1">
                             你还未新增高亮词
                         </div>
                         <div v-else style="    color: #67c23a;background: #f0f9eb;border-color: #c2e7b0;"
                              v-for="(item, index) in addHighlightJsonArray"
                              :key="index"
                              class="keywords-span">{{ item.word }}<i @click="deleteKeyWord(index)"
-                                                                class="el-icon-delete-solid"></i></div>
+                                                                     class="el-icon-delete-solid"></i></div>
                     </div>
                     <div>
                         <div class="keywords-title">本次新增高亮显示:</div>
@@ -81,7 +105,7 @@
             </span>
         </el-dialog>
     </div>
-    <div class="annotation-container">
+    <div class="annotationBatch-container">
         <el-dialog
                 title="注释"
                 :visible.sync="dialogVisible_Annotation"
@@ -89,17 +113,12 @@
         >
             <div>
                 <div>点击关键词进行注释</div>
-                <div class="annotation-container">
+                <div class="annotationBatch-container">
                     <el-button type="primary" v-for="(item, index) in allHighLight"
                                :key="index" @click="addAnnotationPage(item)"> {{item}}
                     </el-button>
                 </div>
             </div>
-            <div style="display: flex;justify-content: center;">
-                <el-button @click="dialogVisible_HighLight = false">取 消</el-button>
-                <el-button type="primary" @click="addHighLight">保 存</el-button>
-            </div>
-            </span>
         </el-dialog>
     </div>
 </div>
@@ -128,15 +147,15 @@
                 addHighlightJsonArray_new: [],
                 input_: '',
                 groupers: [],
-                content:''
+                content: ''
             }
         },
         computed: {
             allHighLight() {
                 let arr = []
                 if (this.question.addHighlightFlag && this.question.addHighlightFlag === 1) {
-                    const addHightlightArray= JSON.parse(this.question.addHighlightJsonArray)
-                    addHightlightArray.map(res=>{
+                    const addHightlightArray = JSON.parse(this.question.addHighlightJsonArray)
+                    addHightlightArray.map(res => {
                         arr.push(res.word)
                     })
                 }
@@ -145,21 +164,23 @@
                 }
                 return arr
             },
-            addHighlightJsonArray(){
+            addHighlightJsonArray() {
                 if (this.question.addHighlightFlag)
-              return  JSON.parse(this.question.addHighlightJsonArray)
+                    return JSON.parse(this.question.addHighlightJsonArray)
             }
         },
         created() {
 
         },
         mounted() {
+            //将新增注册到window上以便jquery生成的dom调用
+            window.addAnnotationPage = this.addAnnotationPage
             const questionId = requestUrlParam('questionId');
             if (questionId) {
                 getQuestionByIdAxios(questionId).then((res) => {
                     if (res.code === 1) {
                         this.question = res.data
-                        this.content=res.data.content
+                        this.content = res.data.content
                         let _content = $('#question-content');
                         _content.append(res.data.html);
                         dealHightLight.excute(res.data, _content.get(0));
@@ -183,7 +204,7 @@
                     res => {
                         if (res.code === 1) {
                             this.question = res.data
-                            this.content=res.data.content
+                            this.content = res.data.content
                             //用jq渲染页面
                             let _content = $('#question-content');
                             _content.append(res.data.html);
@@ -211,22 +232,22 @@
             keyWordAdd() {
                 this.input_ = this.input_.trim()
                 if (this.input_) {
-                    if (this.content.indexOf(this.input_)<0) {
+                    if (this.content.indexOf(this.input_) < 0) {
                         this.$message.error(this.input_ + "没有出现在正文中")
                         return;
                     }
                     if (this.question.highlightJsonArray) {
                         const highlightJsonArray = JSON.parse(this.question.highlightJsonArray)
                         for (let i = 0; i < highlightJsonArray.length; i++) {
-                           if( highlightJsonArray[i].indexOf(this.input_)>-1 ) {
-                               this.$message.error(highlightJsonArray[i] + "已经高亮显示，请重试")
-                               return
-                           }
+                            if (highlightJsonArray[i].indexOf(this.input_) > -1) {
+                                this.$message.error(highlightJsonArray[i] + "已经高亮显示，请重试")
+                                return
+                            }
                         }
                     }
                     if (this.addHighlightJsonArray_new) {
-                        for (let i = 0; i <this.addHighlightJsonArray_new.length; i++) {
-                            if( this.addHighlightJsonArray_new[i].indexOf(this.input_)>-1 ) {
+                        for (let i = 0; i < this.addHighlightJsonArray_new.length; i++) {
+                            if (this.addHighlightJsonArray_new[i].indexOf(this.input_) > -1) {
                                 this.$message.error(this.input_ + "已经高亮显示，请重试")
                                 return
                             }
@@ -236,7 +257,7 @@
                     if (this.question.addHighlightJsonArray) {
                         const addHighlightJsonArray = JSON.parse(this.question.addHighlightJsonArray)
                         for (let i = 0; i < addHighlightJsonArray.length; i++) {
-                            if( addHighlightJsonArray[i].word.indexOf(this.input_)>-1 ) {
+                            if (addHighlightJsonArray[i].word.indexOf(this.input_) > -1) {
                                 this.$message.error(this.input_ + "已经高亮显示，请重试")
                                 return
                             }
@@ -255,7 +276,8 @@
                 addHighLight_(this.question.questionId, arr).then(res => {
                     if (res.code === 1) {
                         this.$message.success("添加成功")
-                        this.question = res.data
+                        this.question.addHighlightFlag = res.data.addHighlightFlag
+                        this.question.addHighlightJsonArray = res.data.addHighlightJsonArray
                         let _content = $('#question-content');
                         dealHightLight.excute(res.data, _content.get(0));
                         this.addHighlightJsonArray_new = []
@@ -274,7 +296,14 @@
             }
             ,
             addAnnotationPage(item) {
-
+                if (this.question.annotationFlag && this.question.annotationFlag === 1) {
+                    const annotationJsonArray = JSON.parse(this.question.annotationJsonArray)
+                    annotationJsonArray.map(res => {
+                        if (res.annotationWord === item) {
+                            toAnnotation(res.annotationGroupId);
+                        }
+                    })
+                }
                 /* window.location.href = '/ppat/page/classroom/question/addAnnotation.html?' +
                      'questionId='+ this.question.questionId+"&"+
                      'annotationWord='+encodeURI(item)+"&"+
@@ -284,10 +313,24 @@
                     'annotationWord=' + encodeURI(item) + "&" +
                     'questionTitle=' + encodeURI(this.question.title)
                 window.parent.menuHandle({menuId: 'addAnnotation', name: '添加注释', url: href}, true);
-            }
+            },
         }
 
     })
+
+    function toAnnotation(annotationGroupId) {
+        window.parent.menuHandle({
+            menuId: 'annotationBatch',
+            name: '注释详情',
+            url: '/ppat/page/classroom/annotation/annotation.html?' +
+                'annotationGroupId=' + annotationGroupId
+
+        }, true);
+    }
+
+    function addAnnotationJS(annotationWord) {
+        window.addAnnotationPage(annotationWord)
+    }
 </script>
 </body>
 </html>

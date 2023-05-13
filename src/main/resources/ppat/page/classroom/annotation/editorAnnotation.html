@@ -26,7 +26,7 @@
         margin: 10px
     }
 
-    .annotation-title {
+    .annotationBatch-title {
         font-size: 24px;
         font-weight: bold;
         margin-left: 24px
@@ -61,7 +61,7 @@
 <div style="display: flex;align-items: center;" id="classtitle">
     <h1 style="color: #1cc7fa;margin-right: 20px">问题标题</h1>
     <h1 id="question-title"></h1>
-    <h1 id="annotation-word" style="background-color: yellow;margin-left: 20px"></h1>
+    <h1 id="annotationBatch-word" style="background-color: yellow;margin-left: 20px"></h1>
     <div id="checkbox-container" style="font-size: 20px;margin-top: 20px;margin-left: 50px"></div>
 </div>
 <!--问题富文本编辑器-->
@@ -95,8 +95,8 @@
     var questionTitle = ''
     var annotationWord = ''
     $(document).ready(function () {
-        getAnnotationsByAnnotationGroupId(requestUrlParam("annotationGroupId")).then(res=>{
-            loadTitle($('#question-title'),$('#annotation-word'));
+        getAnnotationDtoByAnnotationId(requestUrlParam("annotationId")).then(res=>{
+            loadTitle($('#question-title'),$('#annotationBatch-word'));
             const categorizes= loadPage($('#checkbox-container'),$('#editor-containers'));
             loadEdit(res.data,categorizes)
         })

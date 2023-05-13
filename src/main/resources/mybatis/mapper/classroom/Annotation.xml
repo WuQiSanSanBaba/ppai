@@ -4,22 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wuqisan.ppat.classroom.mapper.AnnotationMapper">
 
-    <insert id="addAnnotacionList" parameterType="java.util.List">
-        INSERT INTO annotation(annotation_id, question_title, question_id, annotation_word,
-        annotation_title, content, html, part_id, group_id, classroom_id,
-        user_id, user_name, subject_id, subject_name, create_time,
-        update_time, create_user, update_user,highlight_flag,highlight_json_array,underline_flag,underline_json_array,categorize,annotation_group_id)
+    <insert id="addAnnotationBatchList" parameterType="java.util.List">
+        INSERT INTO annotation_batch (annotation_id, annotation_batch_id, annotation_word, annotation_title, content,
+        html, categorize, part_id, group_id, classroom_id, create_time, update_time, create_user, update_user,
+        question_id)
         VALUES
-        <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.annotationId}, #{item.questionTitle}, #{item.questionId}, #{item.annotationWord},
-            #{item.annotationTitle}, #{item.content}, #{item.html}, #{item.partId}, #{item.groupId},
-            #{item.classroomId}, #{item.userId}, #{item.userName}, #{item.subjectId}, #{item.subjectName},
-            #{item.createTime}, #{item.updateTime}, #{item.createUser}, #{item.updateUser},#{item.highlightFlag},
-            #{item.highlightJsonArray}, #{item.underlineFlag},#{item.underlineJsonArray},#{item.categorize},#{item.annotationGroupId})
+        <foreach collection="list" item="item" separator=",">
+            (#{item.annotationId}, #{item.annotationBatchId}, #{item.annotationWord}, #{item.annotationTitle},
+            #{item.content}, #{item.html}, #{item.categorize}, #{item.partId}, #{item.groupId}, #{item.classroomId},
+            #{item.createTime}, #{item.updateTime}, #{item.createUser}, #{item.updateUser}, #{item.questionId})
         </foreach>
     </insert>
+    <insert id="addAddAnnotation">
+
+        INSERT INTO annotation (annotation_id, part_id, question_title, question_id, group_id, classroom_id, subject_id,
+                                subject_name, update_time, update_user, highlight_flag, underline_flag,
+                                highlight_json_array, underline_json_array, create_user, create_time, annotation_type,
+                                annotation_json_array, annotation_flag, add_highlight_flag, add_highlight_json_array,
+                                annotation_word)
+        VALUES (#{annotationId}, #{partId}, #{questionTitle}, #{questionId}, #{groupId}, #{classroomId}, #{subjectId},
+                #{subjectName}, #{updateTime}, #{updateUser}, #{highlightFlag}, #{underlineFlag}, #{highlightJsonArray},
+                #{underlineJsonArray}, #{createUser}, #{createTime}, #{annotationType}, #{annotationJsonArray},
+                #{annotationFlag}, #{addHighlightFlag}, #{addHighlightJsonArray}, #{annotationWord})
+
+    </insert>
+
     <update id="updateAnnotationByAnnotationId">
-        update annotation
+        update annotation_batch
         <set>
             <if test="content != null">
                 content = #{content},
@@ -27,106 +38,103 @@
             <if test="html !=null">
                 html=#{html},
             </if>
-            <if test="underlineFlag !=null">
-                underline_flag=#{underlineFlag},
-            </if>
-            <if test="underlineJsonArray !=null">
-                underline_json_array=#{underlineJsonArray},
-            </if>
-            <if test="highlightFlag !=null">
-                highlight_flag=#{highlightFlag},
-            </if>
-            <if test="highlightJsonArray !=null">
-                highlight_json_array=#{highlightJsonArray},
-            </if>
         </set>
-        where annotation_id = #{annotationId}
+        where annotation_batch_id = #{annotationBatchId}
     </update>
-    <select id="getAnnotationByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.Annotation">
-        SELECT
-            annotation_id,
-            question_title,
-            question_id,
-            annotation_word,
-            annotation_title,
-            content,
-            html,
-            part_id,
-            group_id,
-            classroom_id,
-            user_id,
-            user_name,
-            subject_id,
-            subject_name,
-            create_time,
-            update_time,
-            create_user,
-            update_user,
-            highlight_flag,
-            underline_flag,
-            highlight_json_array,
-            underline_json_array,
-            categorize,
-            annotation_group_id
-        FROM
-            annotation
-        where question_id=#{questionId}
-    </select>
-    <select id="getAnnotationByAnnotationGroupId" resultType="com.wuqisan.ppat.classroom.bean.Annotation">
+    <select id="getAnnotationByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.AnnotationBatch">
         SELECT annotation_id,
+               part_id,
                question_title,
                question_id,
-               annotation_word,
-               annotation_title,
-               content,
-               html,
-               part_id,
                group_id,
                classroom_id,
-               user_id,
-               user_name,
                subject_id,
                subject_name,
-               create_time,
                update_time,
-               create_user,
                update_user,
                highlight_flag,
                underline_flag,
                highlight_json_array,
                underline_json_array,
-               categorize,
-               annotation_group_id
+               create_user,
+               create_time,
+               annotation_type,
+               annotation_json_array,
+               annotation_flag,
+               add_highlight_flag,
+               add_highlight_json_array,
+               annotation_word
         FROM annotation
-        where annotation_group_id = #{annotationGroupId}
+        where question_id = #{questionId}
+    </select>
+    <select id="getAnnotationBatchListByAnnotationId" resultType="com.wuqisan.ppat.classroom.bean.AnnotationBatch">
+        SELECT annotation_id,
+               annotation_batch_id,
+               annotation_word,
+               annotation_title,
+               content,
+               html,
+               categorize,
+               part_id,
+               group_id,
+               classroom_id,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+               question_id
+        FROM annotation_batch
+        where annotation_id = #{annotationId}
+    </select>
+    <select id="getAnnotationByAnnotationId" resultType="com.wuqisan.ppat.classroom.bean.Annotation">
+        SELECT annotation_id,
+               part_id,
+               question_title,
+               question_id,
+               group_id,
+               classroom_id,
+               subject_id,
+               subject_name,
+               update_time,
+               update_user,
+               highlight_flag,
+               underline_flag,
+               highlight_json_array,
+               underline_json_array,
+               create_user,
+               create_time,
+               annotation_type,
+               annotation_json_array,
+               annotation_flag,
+               add_highlight_flag,
+               add_highlight_json_array
+        FROM annotation
+        where annnotation_id = #{annotationId}
     </select>
     <select id="getAnnotationListBySubjectId" resultType="com.wuqisan.ppat.classroom.bean.Annotation">
         SELECT annotation_id,
+               part_id,
                question_title,
                question_id,
-               annotation_word,
-               annotation_title,
-               content,
-               html,
-               part_id,
                group_id,
                classroom_id,
-               user_id,
-               user_name,
                subject_id,
                subject_name,
-               create_time,
                update_time,
-               create_user,
                update_user,
                highlight_flag,
                underline_flag,
                highlight_json_array,
                underline_json_array,
-               categorize,
-               annotation_group_id
+               create_user,
+               create_time,
+               annotation_type,
+               annotation_json_array,
+               annotation_flag,
+               add_highlight_flag,
+               add_highlight_json_array
         FROM annotation
         where group_id = #{groupId}
-        and subject_id = #{subjectId}
+          and subject_id = #{subjectId}
     </select>
 </mapper>

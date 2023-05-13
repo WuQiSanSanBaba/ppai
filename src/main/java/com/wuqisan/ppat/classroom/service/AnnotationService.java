@@ -3,21 +3,25 @@ package com.wuqisan.ppat.classroom.service;
 
 import com.github.pagehelper.PageInfo;
 import com.wuqisan.ppat.classroom.bean.Annotation;
+import com.wuqisan.ppat.classroom.bean.AnnotationBatch;
 import com.wuqisan.ppat.classroom.bean.Question;
 
 import java.util.List;
 
 public interface AnnotationService {
-  void addAnnotacionList(List<Annotation> list, Long annotionGroupId);
+  Annotation getAnnotationByAnnotationId(Long annotationId);
+  void addAnnotationBatchList(List<AnnotationBatch> list, Long annotionGroupId);
 
-  List<Annotation> doHighlightBatch(List<Annotation> list, Question question);
-  PageInfo<Annotation> getAnnotationListByAnnotationGroupIdPage(Long annotationId);
-  List<Annotation> getAnnotationListByAnnotationGroupId(Long annotationId);
-  List<Annotation> getAnnotationListByQuestionId(Long annotationId);
+  Annotation doHighlightAnnotation(Annotation list, Question question,Long groupId,Long subjectId);
+  PageInfo<AnnotationBatch> getAnnotationBatchListByAnnotationIdPage(Long annotationId);
+  List<AnnotationBatch> getAnnotationListByAnnotationBatchByAnnotationId(Long annotationId);
+  List<AnnotationBatch> getAnnotationListByQuestionId(Long annotationId);
 
   List<Annotation> getAnnotationListByGroupIdAndSubjectId(Long groupId, Long subjectId);
 
-  Long updateQuestionAnnotation(Annotation annotation);
+  Long updateQuestionAnnotation(String annotationList, Question questionByQuestionId);
 
-  void updateAnnotationByAnnotationId(Annotation annotation);
+  void updateAnnotionBatchListById(List<AnnotationBatch> annotationBatch);
+
+  void addAddAnnotation(Annotation annotation);
 }
