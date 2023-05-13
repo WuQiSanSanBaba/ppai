@@ -37,12 +37,17 @@ public class AnnotationController extends BaseController {
 
     @RequestMapping("getAnnotationListByAnnotationId")
     @ApiOperation("根据annotationId查询所有注释分页")
-    public R<PageInfo<AnnotationBatch>> getAnnotationListByAnnotationId(@RequestBody(required = false) Map<String, String> pageMap) {
+    public R<AnnotationDto> getAnnotationListByAnnotationId(@RequestBody(required = false) Map<String, String> pageMap) {
         setPage(pageMap);
-        PageInfo<AnnotationBatch> anntations = annotationService.getAnnotationBatchListByAnnotationIdPage(Long.valueOf(pageMap.get("annotationId")));
+        Long annotationId = Long.valueOf(pageMap.get("annotationId"));
+        PageInfo<AnnotationBatch> anntations = annotationService.getAnnotationBatchListByAnnotationIdPage(annotationId);
+        Annotation annotation = annotationService.getAnnotationByAnnotationId(annotationId);
+        AnnotationDto annotationDto = new AnnotationDto();
+        annotationDto.setAnnotation(annotation);
+        annotationDto.setPageInfo(anntations);
         List<ClassroomPart> groupMembersList = classroomPartService.getGroupMembersByGroupIds(anntations.getList().get(0).getGroupId());
 
-        return R.success(anntations).add("groupMembersList", groupMembersList);
+        return R.success(annotationDto).add("groupMembersList", groupMembersList);
     }
 
     @PostMapping("updateAnnotation")
@@ -64,8 +69,10 @@ public class AnnotationController extends BaseController {
                 annotation.setUnderlineFlag(1);
                 annotation.setUnderlineJsonArray(underlineJsonArray.toJSONString());
             }
-            annotationService.updateAnnotionBatchListById(annotationBatcheList);
         }
+        //只要新增的高亮和下划线才更新
+        annotationService.updateAnnotationByAnnotionId(annotation);
+        annotationService.updateAnnotionBatchListById(annotationBatcheList);
         return R.success("修改成功");
     }
 
@@ -75,11 +82,11 @@ public class AnnotationController extends BaseController {
 
         //1将注释的内容添加到question表
         Annotation annotation = annotationDto.getAnnotation();
-        String annotationWord=annotation.getAnnotationWord();
+        String annotationWord = annotation.getAnnotationWord();
         List<AnnotationBatch> annotationBatch = annotationDto.getAnnotationBatchList();
         Question questionByQuestionId = questionService.getQuestionByQuestionId(annotation.getQuestionId());
         //2处理获取高亮内容
-        annotation = annotationService.doHighlightAnnotation(annotation, questionByQuestionId,annotation.getGroupId(),annotation.getSubjectId());
+        annotation = annotationService.doHighlightAnnotation(annotation, questionByQuestionId, annotation.getGroupId(), annotation.getSubjectId());
         //更新问题的注释词
         Long annotationId = annotationService.updateQuestionAnnotation(annotationWord, questionByQuestionId);
         annotation.setAnnotationId(annotationId);

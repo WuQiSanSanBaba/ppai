@@ -4,6 +4,7 @@ function loadTitle($questionTitle,$annotationWord) {
     questionId =urlParams.get('questionId'); // 获取param1的值
     annotationWord = decodeURI(urlParams.get('annotationWord')); // 获取param2的值
     questionTitle =decodeURI( urlParams.get('questionTitle')); // 获取param2的值
+    annotationId =decodeURI( urlParams.get('annotationId')); // 获取param2的值
     $questionTitle.text(questionTitle);
     $annotationWord.text(annotationWord);
     console.log(questionId, annotationWord,questionTitle); // 输出value1 value2

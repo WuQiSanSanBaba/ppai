@@ -15,9 +15,11 @@ public interface AnnotationMapper {
     Annotation getAnnotationByAnnotationId(Long annotationGroupId);
     List<AnnotationBatch> getAnnotationBatchListByAnnotationId(Long annotationGroupId);
 
-    void updateAnnotationByAnnotationId(AnnotationBatch annotationBatch);
+    void updateAnnotionBatchListById(AnnotationBatch annotationBatch);
 
     List<Annotation> getAnnotationListBySubjectId(Long groupId, Long subjectId);
 
     void addAddAnnotation(Annotation annotation);
+
+    void updateAnnotationByAnnotionId(Annotation annotation);
 }

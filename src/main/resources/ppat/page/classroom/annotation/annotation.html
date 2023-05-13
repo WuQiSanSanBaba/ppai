@@ -155,7 +155,8 @@
                 dialogVisible_HighLight: false,
                 dialogVisible_Annotation: false,
                 input_: '',
-                addHighlightJsonArray_new: []
+                addHighlightJsonArray_new: [],
+                annotation:undefined
 
             }
         },
@@ -184,6 +185,7 @@
                 this.tableData.map(res => {
                   content=content+res.content
                 })
+                return content
             }
         },
         created() {
@@ -245,27 +247,28 @@
                 getAnnotationListByAnnotationId(params).then(res => {
                     if (res.code === 1) {
                         $('#annotationContainer').empty()
-                        this.tableData = res.data.list || []
-                        this.annotationWord = this.tableData[0].annotationWord
-                        this.questionTitle = this.tableData[0].questionTitle
-                        this.questionId = this.tableData[0].questionId
-                        this.counts = res.data.total
+                        this.tableData = res.data.pageInfo.list || []
+                        this.annotation = res.data.annotation
+                        this.annotationWord = this.annotation.annotationWord
+                        this.questionTitle = this.annotation.questionTitle
+                        this.questionId = this.annotation.questionId
+                        this.counts = res.data.pageInfo.total
                         const groupMembersList = res.map.groupMembersList
                         groupMembersList.map((member) => {
                             this.groupers.push(member.userName)
                         })
                         loadAnnotationContainer(this.tableData)
+                        dealHightLight.excute(this.annotation,$('.richText'))
                     }
                 })
             }, editorAnnotaton() {
-                const annotationBatch = this.tableData[0]
                 window.parent.menuHandle({
                     menuId: 'updateAnnotation',
                     name: '修改注释',
-                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationId=' + annotationBatch.annotationGroupId +
-                        '&questionId=' + annotationBatch.questionId +
-                        '&annotationWord=' + encodeURI(annotationBatch.annotationWord) +
-                        '&questionTitle=' + encodeURI(annotationBatch.questionTitle)
+                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationId=' + this.annotationId +
+                        '&questionId=' + this.questionId +
+                        '&annotationWord=' + encodeURI(this.annotationWord) +
+                        '&questionTitle=' + encodeURI(this.questionTitle)
                 }, true);
             },
             toQuestionHtml() {

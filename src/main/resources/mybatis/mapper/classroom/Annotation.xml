@@ -29,7 +29,7 @@
 
     </insert>
 
-    <update id="updateAnnotationByAnnotationId">
+    <update id="updateAnnotionBatchListById">
         update annotation_batch
         <set>
             <if test="content != null">
@@ -40,6 +40,32 @@
             </if>
         </set>
         where annotation_batch_id = #{annotationBatchId}
+    </update>
+    <update id="updateAnnotationByAnnotionId">
+        update annotation
+        <set>
+            <if test="highlightFlag != null">
+                highlight_flag = #{highlightFlag},
+            </if>
+            <if test="highlightJsonArray !=null">
+                highlight_json_array=#{highlightJsonArray},
+            </if>
+            <if test="underlineFlag != null">
+                underline_flag = #{underlineFlag},
+            </if>
+            <if test="underlineJsonArray !=null">
+                underline_json_array=#{underlineJsonArray},
+            </if>
+            <if test="updateTime !=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user=#{updateUser},
+            </if>
+
+        </set>
+        where
+            annotation_id=#{annotationId}
     </update>
     <select id="getAnnotationByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.AnnotationBatch">
         SELECT annotation_id,
@@ -104,12 +130,13 @@
                create_user,
                create_time,
                annotation_type,
+               annotation_word,
                annotation_json_array,
                annotation_flag,
                add_highlight_flag,
                add_highlight_json_array
         FROM annotation
-        where annnotation_id = #{annotationId}
+        where annotation_id = #{annotationId}
     </select>
     <select id="getAnnotationListBySubjectId" resultType="com.wuqisan.ppat.classroom.bean.Annotation">
         SELECT annotation_id,
@@ -132,7 +159,8 @@
                annotation_json_array,
                annotation_flag,
                add_highlight_flag,
-               add_highlight_json_array
+               add_highlight_json_array,
+               annotation_word
         FROM annotation
         where group_id = #{groupId}
           and subject_id = #{subjectId}

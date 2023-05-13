@@ -135,8 +135,6 @@ x
 Hsrc/main/java/com/wuqisan/ppat/system/service/impl/ConfigerviceImpl.java,b\9\b9afe57b501f3b7ca45a57827ffbaa4716b749ac
 v
 Fsrc/main/java/com/wuqisan/ppat/system/controller/ConfigController.java,c\c\cc88d4832d148254ae37667fc500ff65b6b201ee
-{
-Ksrc/main/java/com/wuqisan/ppat/config/Exception/GlobalExceptionHandler.java,4\c\4c8d46c631b3ae518539bc3ba456547129fe55df
 c
 3src/main/java/com/wuqisan/ppat/preLoad/PreLoad.java,e\3\e3391277800762391818338b6d0abaeb8c143a5e
 y

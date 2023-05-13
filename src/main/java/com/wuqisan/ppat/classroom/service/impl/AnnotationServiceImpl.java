@@ -153,7 +153,7 @@ public class AnnotationServiceImpl implements AnnotationService {
     @Override
     public void updateAnnotionBatchListById(List<AnnotationBatch> list) {
         for (AnnotationBatch annotationBatch : list) {
-            annotationMapper.updateAnnotationByAnnotationId(annotationBatch);
+            annotationMapper.updateAnnotionBatchListById(annotationBatch);
         }
     }
 
@@ -163,6 +163,15 @@ public class AnnotationServiceImpl implements AnnotationService {
     @Override
     public void addAddAnnotation(Annotation annotation) {
         annotationMapper.addAddAnnotation(annotation);
+
+    }
+
+    /**
+     * @param annotation
+     */
+    @Override
+    public void updateAnnotationByAnnotionId(Annotation annotation) {
+        annotationMapper.updateAnnotationByAnnotionId(annotation);
 
     }
 }

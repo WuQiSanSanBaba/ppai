@@ -24,4 +24,6 @@ public interface AnnotationService {
   void updateAnnotionBatchListById(List<AnnotationBatch> annotationBatch);
 
   void addAddAnnotation(Annotation annotation);
+
+  void updateAnnotationByAnnotionId(Annotation annotation);
 }

@@ -94,6 +94,7 @@
     var questionId = undefined
     var questionTitle = ''
     var annotationWord = ''
+    var annotationId=''
     $(document).ready(function () {
         getAnnotationDtoByAnnotationId(requestUrlParam("annotationId")).then(res=>{
             loadTitle($('#question-title'),$('#annotationBatch-word'));

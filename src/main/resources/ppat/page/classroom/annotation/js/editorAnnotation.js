@@ -20,6 +20,7 @@ async function  saveannotationsEditor(){
     let annotation={
         questionId: questionId,
         questionTitle: questionTitle,
+        annotationId: annotationId,
         annotationWord: annotationWord,
         partId : classroomPart.partId,
         groupId : classroomPart.groupId,
@@ -31,27 +32,39 @@ async function  saveannotationsEditor(){
         annotationType : 'question',
     }
     const annotationBatchList = []
+    let jsonArray=[]
     for (let item of editorContainerArray) {
         const text = item.editor.getText();
         const checkBox$= $('[name="'+item.categorize+'"][type="checkbox"]')
         let annotationBatch = {
             questionId: questionId,
-            questionTitle: questionTitle,
             annotationWord: annotationWord,
             annotationTitle: item.annotationTitle,
             content: text,
             html: item.editor.getHtml(),
             categorize: item.categorize,
-            annotationId: checkBox$.prop('annotationBatchId'),
+            annotationBatchId: checkBox$.prop('annotationBatchId'),
         }
         await analizyQuestion(text, item.editor).then(res => {
-            annotationBatch.jsonArray1 = res.jsonArray1
-            annotationBatch.flag1 = res.flag1
+            if (res.flag1===1){
+                jsonArray.push(...JSON.parse(res.jsonArray1))
+            }
             annotationBatch.partId = res.partId
             annotationBatch.groupId = res.groupId
             annotationBatch.classroomId = res.classroomId
         });
+
         annotationBatchList.push(annotationBatch)
+    }
+    if (jsonArray.length>0){
+        const newArray=  jsonArray.filter((item,index)=>{
+            return jsonArray.indexOf(item)===index
+        })
+        annotation.jsonArray1=JSON.stringify(newArray)
+        annotation.flag1=1
+
+    }else {
+        annotation.flag1=0
     }
     annotationDto.annotation=annotation
     annotationDto.annotationBatchList=annotationBatchList
@@ -104,7 +117,7 @@ function loadEdit(annotation,categorizes){
             //1.3多选框为选择
             //1.4触发点击事件创建富文本编辑器
             checkBox$.click();
-            checkBox$.prop('annotationId',item.annotationId)
+            checkBox$.prop('annotationBatchId',item.annotationBatchId)
 
         }
         editorContainerArray.map(res=>{

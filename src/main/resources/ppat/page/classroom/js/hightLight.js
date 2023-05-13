@@ -116,7 +116,7 @@ var dealHightLight = {
         dealHightLight.hadAddHighlightArray = []
         dealHightLight.hadAnnotationArray = []
         if (question.highlightFlag === 1) {
-            this.preElement(question.highlightJsonArray, 'highLight', element)
+            this.preElement(question.highlightJsonArray, 'highlight', element)
         }
         if (question.addHighlightFlag === 1) {
             this.preElement(question.addHighlightJsonArray, 'addHighlight', element)
@@ -154,9 +154,9 @@ var dealHightLight = {
                 if (type === 'underline' && dealHightLight.hadUnderlineArray.indexOf(keyword) < 0) {
                     dealHightLight.hadUnderlineArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span title='双击进入注释详情' ondblclick='addAnnotationJS(" + keyword + ")' class='underline'>" + keyword + "</span>"));
-                } else if (type === 'highLight' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
+                } else if (type === 'highlight' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
                     dealHightLight.hadHighArray.push(keyword);
-                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='highLight'>" + keyword + "</span>"));
+                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='highlight'>" + keyword + "</span>"));
                 }
             }
         });

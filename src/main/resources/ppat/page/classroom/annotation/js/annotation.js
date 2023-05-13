@@ -19,10 +19,10 @@ function loadAnnotationContainer (data){
         })
         wrapper.append(title_container);
         const richTextDiv = $('<div/>', {
+            class: 'richText'
         });
-        const richText$=$(item.html).attr('id', item.annotationId).addClass('richText')
+        const richText$=$(item.html).attr('id', item.annotationId)
         richTextDiv.append(richText$)
         wrapper.append(richTextDiv)
-        dealHightLight.excute(item,richTextDiv)
     })
 }

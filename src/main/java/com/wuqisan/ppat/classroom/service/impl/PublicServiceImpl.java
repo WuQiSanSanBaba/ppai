@@ -42,8 +42,8 @@ public class PublicServiceImpl implements PublicService {
         JSONArray conceptArray = JSON.parseArray(jsonArray);
         JSONArray underlineArr = new JSONArray();
         JSONArray highLightArr = new JSONArray();
-        Integer underlineFlag = 0;
-        Integer highlightFlag = 0;
+        int underlineFlag = 0;
+        int highlightFlag = 0;
         List<HighlightAnnotation> highlightUnderList;
         //存量问题列表
         List<Question> highLightQuestion = questionService.getHighLightByGroupIdAndSubjectId(groupId, subjectId);

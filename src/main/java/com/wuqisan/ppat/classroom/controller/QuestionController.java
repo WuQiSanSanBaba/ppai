@@ -75,7 +75,7 @@ public class QuestionController {
         Question currentQuestion= questionService.getQuestionByQuestionId(question.getQuestionId());
         //处理新增的符合概念的关键词
         if (question.getFlag1() != null && question.getFlag1() == 1) {
-            JSONObject jsonObject = publicService.dealConcepts(question.getJsonArray1(), "annotation", currentQuestion.getGroupId(), question.getSubjectId());
+            JSONObject jsonObject = publicService.dealConcepts(question.getJsonArray1(), "question", currentQuestion.getGroupId(), question.getSubjectId());
             if (jsonObject.getInteger("highlightFlag") == 1) {
                 JSONArray highLightJsonArray = jsonObject.getJSONArray("highLightJsonArray");
                 question.setHighlightFlag(1);
