@@ -4,5 +4,6 @@ import com.wuqisan.ppat.classroom.bean.Echarts;
 import com.wuqisan.ppat.classroom.bean.Question;
 
 public interface EchartsService {
-    Echarts geneEchars(Question question);
+
+    Echarts gneneEcharts(Long partId);
 }

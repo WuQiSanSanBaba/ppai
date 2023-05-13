@@ -34,7 +34,7 @@ public class EchartsController {
             return R.error("你还没有新建问题");
         }
         //处理生成echarts数据
-        Echarts e = echartsService.geneEchars(question);
+        Echarts e = echartsService.gneneEcharts(partId);
         return R.success(e);
     }
 }

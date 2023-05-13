@@ -12,6 +12,7 @@ public class Annotation extends BaseBean {
     private Long questionId;
     private String annotationWord;
     private String annotationTitle;
+    private String categorize;
     private String content;
     private String html;
     private Long partId;
@@ -26,4 +27,10 @@ public class Annotation extends BaseBean {
     private String highlightJsonArray;
     private Integer underlineFlag;
     private String underlineJsonArray;
+    private Long annotationGroupId;
+    private Integer addHighlightFlag;
+    private String addHighlightJsonArray;
+    private String annotationJsonArray;
+    private Integer annotationFlag;
+
 }

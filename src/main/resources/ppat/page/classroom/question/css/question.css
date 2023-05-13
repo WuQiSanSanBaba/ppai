@@ -1,6 +1,4 @@
-body {
-    overflow: hidden
-}
+
 
 .container {
     align-items: flex-start;
@@ -8,18 +6,7 @@ body {
     justify-content: center;
 }
 
-.highLight {
-    background-color: rgb(255, 236, 61);
-}
 
-.highLight-add {
-    background-color: rgb(61, 181, 255);
-}
-
-.underline {
-    text-decoration: underline;
-    text-decoration-color: blue;
-}
 #question-app{
     padding: 0;
     display: flex;

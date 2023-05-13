@@ -38,7 +38,7 @@
             </div>
             <el-scrollbar wrap-class="scrollbar-wrapper">
                 <el-menu
-                        :default-active="activeIndex"
+                        :default-active="activeMenuId"
                         :unique-opened="false"
                         :collapse-transition="false"
                         background-color="#343744"
@@ -68,11 +68,6 @@
             <!-- <navbar /> -->
             <div class="navbar">
                 <div class="head-lable">
-
-              <span v-if="goBackFlag" class="goBack" @click="goBack()"
-              ><img src="images/icons/btn_back@2x.png" alt=""/> 返回</span
-              >
-
                     <span style="margin: 50px;">{{headTitle}}</span>
                     <span v-if="user.type=='student'">
                         <span v-if="classroomPart.partId==null">你还没有小组</span>
@@ -86,18 +81,7 @@
                         </span>
                     </span>
                 </div>
-
                 <div class="right-menu">
-                    <el-button style="margin-right: 10px;height: 40px!important" type="primary" plain
-                               @click="iframeKey++">
-                        刷新当前菜单
-                    </el-button>
-                    <el-button
-                            size="small"
-                            @click="addTab(editableTabsValue)"
-                    >
-                        add tab
-                    </el-button>
                     <div class="avatar-wrapper">{{ user.name }}</div>
                     <span v-if="user.type=='student'" style="margin-left: 10px;;">{{className}}</span>
                     <!-- <div class="logout" @click="logout">退出</div> -->
@@ -107,7 +91,8 @@
 
             <div class="app-main" v-loading="loading">
                 <div class="divTmp" v-show="true">
-                    <el-tabs class="divTmp" v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+                    <el-tabs class="divTmp" v-model="editableTabsValue" @tab-click="tabClick" type="card" closable
+                             @tab-remove="removeTab">
                         <el-tab-pane class="divTmp"
                                      v-for="(item, index) in editableTabs"
                                      :key="item.name"
@@ -115,13 +100,13 @@
                                      :name="item.name"
                         >
                             <iframe
-                                    :key="iframeKey"
                                     id="cIframe"
                                     class="c_iframe"
                                     name="cIframe"
                                     :src="item.url"
+                                    :ref="item.name"
                                     width="100%"
-                                    height="auto"
+                                    height="90%"
                                     frameborder="0"
                                     v-show="!loading"
                             ></iframe>
@@ -159,16 +144,13 @@
         el: '#app',
         data() {
             return {
-                activeIndex: '',
-                iframeKey: 1,
+                activeMenuId: '',
                 user: {},
                 menuList: [],
                 iframeUrl: './page/classroom/node/node.html',
                 headTitle: '主页',
-                goBackFlag: false,
                 loading: true,
                 timer: null,
-                historyStack: [],
                 subject: undefined,
                 subjectId: undefined,
                 dialog_src: '',
@@ -179,11 +161,13 @@
                 classroomPart: {},
                 editableTabsValue: '1',
                 editableTabs: [{
-                    title: 'Tab 1',
+                    title: '关系图',
                     name: '1',
-                    url: './page/main.html'
+                    url: './page/classroom/node/node.html',
+                    menuId: 'node'
                 }],
-                tabIndex: 1
+                tabIndex: 1,
+                menuActiveIndexs: []
             }
         },
         updated() {
@@ -224,25 +208,27 @@
                 })
             },
             goBack() {
-                this.historyStack.pop()
-                const menu = this.historyStack.pop()
-                // this.goBackFlag = false
-                // this.headTitle = menu.name
-                this.menuHandle(menu, false)
+                this.editableTabs.pop()
+                const item = this.editableTabs.length - 1;
+                this.editableTabsValue = this.editableTabs[item].name
             },
-            menuHandle(item, goBackFlag) {
-                this.historyStack.push(item)
+            menuHandle(item, reloadFlag) {
                 this.loading = true
                 this.headTitle = item.name
-                this.goBackFlag = goBackFlag
                 this.closeLoading()
+                const exists = this.editableTabs.findIndex(item_ => item_.menuId === item.menuId);
+                if (exists > -1) {
+                    this.editableTabs.splice(exists);
+                }
                 let newTabName = ++this.tabIndex + '';
                 this.editableTabs.push({
                     title: item.name,
                     name: newTabName,
-                    url: item.url
+                    url: item.url,
+                    menuId: item.menuId
                 });
                 this.editableTabsValue = newTabName;
+
             },
             /*加载用户信息*/
             loadUserInfo() {
@@ -279,16 +265,6 @@
             closeDialog_() {
                 this.dialogVisible = false
             },
-            iframUrlChange(activeMemu, src) {
-                if (activeMemu) {
-                    this.activeIndex = activeMemu
-                } else {
-                    this.activeIndex = null
-                }
-                if (src) {
-                    this.iframeUrl = src
-                }
-            },
             closeLoading() {
                 //下边这玩意，默认转圈一秒
                 this.timer = null
@@ -319,16 +295,14 @@
                 this.editableTabsValue = activeName;
                 this.editableTabs = tabs.filter(tab => tab.name !== targetName);
                 if (this.editableTabs.length === 0) {
-                    let newTabName = ++this.tabIndex + '';
-                    this.editableTabs.push({
-                        title: '关系图',
-                        name: newTabName,
-                        url: './page/classroom/node/node.html'
-                    })
-                    this.editableTabsValue = newTabName;
+                    menuHandle({
+                        menuId: 'node',
+                        name: '首页关系图',
+                        url: '/ppat/page/classroom/node/node.html'
+                    }, false);
                 }
-                console.log(this.tabIndex)
-
+            }, tabClick(targetName) {
+                this.activeMenuId = this.editableTabs[targetName.index].menuId
             }
         }
     })

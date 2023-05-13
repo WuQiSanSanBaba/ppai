@@ -1,0 +1,14 @@
+
+.bottom-bar{
+    font-size: 18px;
+    position: fixed !important;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.bottom-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

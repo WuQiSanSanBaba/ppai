@@ -153,9 +153,11 @@
             submitForm() {
                 if (this.userIds.length===0) {
                     this.$message.error('组长不能为空')
+                    return
                 }
                 if (this.ruleForm.stage == null || this.ruleForm.stage === '') {
                     this.$message.error('阶段不能为空')
+                    return
                 }
                 //分类暂时不校验
                 if (this.categorizes.length>0){

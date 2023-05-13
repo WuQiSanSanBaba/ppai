@@ -6,8 +6,8 @@
 
     <insert id="addClassroom">
         INSERT INTO classroom (classroom_id, teacher_id, stage, categorizes, eff_time,
-                               exp_time, create_user, create_time, update_user, update_time)
-        VALUES (#{classroomId}, #{teacherId}, #{stage}, #{categorizes}, #{effTime}, #{expTime}, #{createTime});
+                               exp_time, create_user, create_time)
+        VALUES (#{classroomId}, #{teacherId}, #{stage}, #{categorizes}, #{effTime}, #{expTime}, #{createUser},#{createTime});
     </insert>
     <select id="getCurrentClassroomByClassroomId" resultType="com.wuqisan.ppat.classroom.bean.Classroom">
         SELECT classroom_id,  teacher_id, stage,categorizes, eff_time, exp_time,create_user,create_time,update_user,update_time

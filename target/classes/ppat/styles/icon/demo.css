@@ -72,7 +72,7 @@
   line-height: 1;
   height: 110px;
   margin-top: -50px;
-  overflow: hidden;
+
   *zoom: 1;
 }
 
@@ -95,7 +95,7 @@
 
 .icon_lists {
   width: 100% !important;
-  overflow: hidden;
+
   *zoom: 1;
 }
 
@@ -137,7 +137,7 @@
   fill: currentColor;
   /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
       normalize.css 中也包含这行 */
-  overflow: hidden;
+
 }
 
 .icon_lists li .name,

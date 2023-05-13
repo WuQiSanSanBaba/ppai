@@ -8,6 +8,7 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../../../plugins/wangEditor/wangEditor.min.css"/>
     <link rel="stylesheet" href="./css/question.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
     <link rel="stylesheet" href="../../../plugins/zui/zui.min.css"/>
     <script src="../../../plugins/axios/axios.min.js"></script>
     <script src="../../../js/request.js"></script>
@@ -17,7 +18,8 @@
     <script src="../../../plugins/jquery/jquery.js"></script>
     <script src="../../../plugins/zui/zui.min.js"></script>
     <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
-    <script src="./js/hightLight.js"></script>
+    <script src="../../../plugins/zui/zui.min.js"></script>
+    <script src="../js/hightLight.js"></script>
     <script src="./js/addQuestion.js"></script>
     <script src="../subject/js/subject.js"></script>
 </head>
@@ -45,11 +47,6 @@
             <!--问题输入框-->
             <div class="question-menu">
                 <input type="text" id="question-input" class="question-input" placeholder="请输入问题">
-                <div id="editorMenu" class="button-container">
-                    <button style="background-color: grey" onclick="editQuestion()">编辑</button>
-                    <button style="background-color: #00AEEC">新增高亮显示</button>
-                    <button style="background-color: red">添加注释</button>
-                </div>
             </div>
 
             <!--问题富文本编辑器-->
@@ -57,10 +54,13 @@
                 <div id="toolbar-container"><!-- 工具栏 --></div>
                 <div id="editor-container"><!-- 编辑器 --></div>
             </div>
-            <div>
-                <button class="question-button" onclick="submit()">确认</button>
-            </div>
+
         </div>
+    </div>
+    <div>
+        <button class="btn btn-primary fixed-button " style="width:70px;height: 50px;" onclick="submit()" type="button">
+            确认
+        </button>
     </div>
 </div>
 
@@ -68,10 +68,11 @@
 <script>
     var editor = undefined
     var type = undefined
+    var questionId = undefined
     $(document).ready(async function () {
         //加载富文本编辑器
         editor = loadEditor();
-        const questionId = requestUrlParam('questionId');
+        questionId = requestUrlParam('questionId');
         type = questionId ? 'edit' : 'add';
 
         //1 编辑 如果Url封装了questionId就是编辑
@@ -87,35 +88,40 @@
     async function submit() {
         let result = undefined
         let code = 0
-        const text=editor.getText();
-        const title=document.getElementById('question-input').value;
+        const text = editor.getText();
+        const title = document.getElementById('question-input').value;
         //内容校验
         const flag = checkContent(text, title)
         if (!flag) {
             return;
         }
         //分析内容
-        await analizyQuestion(text,editor).then(res => {
+        await analizyQuestion(text, editor).then(res => {
             result = res
         })
-        if (result ==='false'){
+        if (result === 'false') {
             return
         }
         //设置标题
-        result.title=title
+        result.title = title
         if (type === 'add') {
             //add
             await addQuestion(result).then((res) => {
                 code = res.data.code
                 if (res.data.code === 1) {
                     question = res.data.data;
+                    questionId = question.questionId
                 } else {
                     alert(res.data.msg)
                 }
             })
         } else {
             //update
-            result.questionId = question.questionId
+            result.questionId = questionId
+            result.highlightFlag = question.highlightFlag
+            result.highlightJsonArray = question.highlightJsonArray
+            result.underlineFlag = question.underlineFlag
+            result.underlineJsonArray = question.underlineJsonArray
             await updateQuestion(result).then((res) => {
                 code = res.data.code
                 if (res.data.code === 1) {
@@ -126,8 +132,13 @@
             })
         }
         if (code === 1) {
-           //跳转
-            window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+            //跳转
+            //window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+            window.parent.menuHandle({
+                menuId: 'question',
+                name: '问题详情',
+                url: '/ppat/page/classroom/question/question.html?questionId=' + questionId
+            }, true);
         }
 
     }

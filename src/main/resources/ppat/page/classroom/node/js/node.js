@@ -51,8 +51,17 @@ function generateChart(data, this_) {
             // 获取节点名字
             var nodeName = params.data.name;
             // 执行节点点击事件
-            this_.$message.success('双击进去问题详情：标题：' + nodeName);
+            this_.$message.success('双击进入问题详情：标题：' + nodeName);
         }
+
+        // 判断是否是节点
+        if (params.data.type === 'child') {
+            // 获取节点名字
+            var nodeName = params.data.name;
+            // 执行节点点击事件
+            this_.$message.success('双击进入注释详情：标题：' + nodeName);
+        }
+
     });
     chart.on('dblclick', function (params) {
         // 判断是否是节点
@@ -60,11 +69,25 @@ function generateChart(data, this_) {
             // 获取节点名字
             const questionId = params.data.questionId;
             // 执行节点点击事件
-            if (window.parent.iframUrlChange) {
-                window.parent.iframUrlChange('question',  '/ppat/page/classroom/question/question.html?questionId=' + questionId);
-            } else {
-                window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + questionId
-            }
+            //window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + questionId
+            window.parent.menuHandle({
+                menuId: 'question',
+                name: '问题详情',
+                url: '/ppat/page/classroom/question/question.html?questionId=' + questionId
+            }, false);
+        }
+        if (params.data.type === 'child'){
+            // 获取节点名字
+            const annotationGroupId = params.data.annotationGroupId;
+            // 执行节点点击事件
+            //window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + questionId
+            window.parent.menuHandle({
+                menuId: 'question',
+                name: '问题详情',
+                url: '/ppat/page/classroom/annotation/annotation.html?' +
+                    'annotationGroupId=' + annotationGroupId
+
+            }, false);
         }
     });
     chart.setOption(option);

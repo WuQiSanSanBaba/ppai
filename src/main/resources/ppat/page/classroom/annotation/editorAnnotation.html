@@ -15,8 +15,9 @@
     <script src="../../../plugins/jquery/jquery.js"></script>
     <script src="../../../plugins/zui/zui.min.js"></script>
     <script src="../../../plugins/wangEditor/wangEditor.min.js"></script>
-    <script src="./js/addAnnotation.js"></script>
-    <script src="./js/hightLight.js"></script>
+    <script src="./js/annotationCommon.js"></script>
+    <script src="./js/editorAnnotation.js"></script>
+    <script src="../js/hightLight.js"></script>
     <script src="../subject/js/subject.js"></script>
 </head>
 <style>
@@ -51,13 +52,16 @@
         bottom: 1%;
         right: 17%;
     }
+    body{
+        margin-left:100px;
+    }
 </style>
 <body>
 <!--问题标题-->
 <div style="display: flex;align-items: center;" id="classtitle">
     <h1 style="color: #1cc7fa;margin-right: 20px">问题标题</h1>
     <h1 id="question-title"></h1>
-    <h1 id="highlight-word" style="background-color: yellow;margin-left: 20px"></h1>
+    <h1 id="annotation-word" style="background-color: yellow;margin-left: 20px"></h1>
     <div id="checkbox-container" style="font-size: 20px;margin-top: 20px;margin-left: 50px"></div>
 </div>
 <!--问题富文本编辑器-->
@@ -65,8 +69,6 @@
 <button class="btn btn-lg btn-primary fixed-button" data-toggle="modal" data-target="#myModal" type="button">保 存
 </button>
 
-
-</div>
 
 <!-- 对话框HTML -->
 <div class="modal fade" id="myModal">
@@ -81,15 +83,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="saveannotations()">确定</button>
+                <button type="button" class="btn btn-primary" onclick="saveannotationsEditor()">确定</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 <script>
     var editorContainerArray = []
@@ -97,8 +95,11 @@
     var questionTitle = ''
     var annotationWord = ''
     $(document).ready(function () {
-        loadTitle();
-        loadPage();
+        getAnnotationsByAnnotationGroupId(requestUrlParam("annotationGroupId")).then(res=>{
+            loadTitle($('#question-title'),$('#annotation-word'));
+            const categorizes= loadPage($('#checkbox-container'),$('#editor-containers'));
+            loadEdit(res.data,categorizes)
+        })
     })
 </script>
 </body>

@@ -1,12 +1,14 @@
 package com.wuqisan.ppat.classroom.service;
 
 import com.alibaba.fastjson.JSONArray;
-import com.wuqisan.ppat.classroom.bean.Question;
+import com.alibaba.fastjson.JSONObject;
 import com.wuqisan.ppat.classroom.bean.Subject;
 
 import java.util.List;
 
 public interface PublicService {
     List<Subject> querySubjectByStage(String stage);
-    void dealConcepts(Question question, JSONArray conceptArray);
+    JSONObject dealConcepts(String jsonArray,String type,Long groupId,Long subjectId);
+
+    JSONArray doAddHighlight(String jsonArray,  Long groupId, Long subjectId);
 }

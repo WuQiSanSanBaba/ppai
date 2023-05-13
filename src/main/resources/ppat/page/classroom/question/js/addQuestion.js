@@ -1,8 +1,3 @@
-
-
-
-
-
 function getQuestionByIdJquery(questionId) {
     var question = undefined;
     $.ajax({
@@ -20,7 +15,7 @@ function getQuestionByIdJquery(questionId) {
 }
 
 function editorLoad(questionId) {
-     //首先根据questionId去请求问题内容
+    //首先根据questionId去请求问题内容
     question = getQuestionByIdJquery(questionId)
     if (question) {
         //设置编辑器内容
@@ -31,10 +26,14 @@ function editorLoad(questionId) {
 }
 
 function editQuestion() {
-    window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+    //window.location.href = '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+    window.parent.menuHandle({
+        menuId: 'question',
+        name: '编辑问题',
+        url: '/ppat/page/classroom/question/question.html?questionId=' + question.questionId
+    }, true);
+
 }
-
-
 
 
 //概念处理
@@ -109,16 +108,18 @@ function addQuestion(params) {
         partId: params.partId,
     })
 }
+
 function updateQuestion(params) {
     return axios.post('/classroom/question/updateQuestion', {
         content: params.content,
         html: params.html,
-        coreConceptFlag: params.coreConceptFlag,
-        coreConceptJsonArray: params.coreConceptJsonArray,
-        generalConceptFlag: params.generalConceptFlag,
-        generalConceptJsonArray: params.generalConceptJsonArray,
-        questionId: params.questionId
-
+        flag1: params.flag1,
+        jsonArray1: params.jsonArray1,
+        questionId: params.questionId,
+        highlightFlag: params.highlightFlag,
+        highlightJsonArray: params.highlightJsonArray,
+        underlineFlag: params.underlineFlag,
+        underlineJsonArray: params.underlineJsonArray,
     })
 }
 

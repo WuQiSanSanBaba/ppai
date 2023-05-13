@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../../styles/common.css"/>
+    <link rel="stylesheet" href="../../../styles/page.css"/>
+    <link rel="stylesheet" href="../css/highlight.css"/>
+    <link rel="stylesheet" href="./css/annotation.css"/>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="../../../plugins/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="../../../plugins/element-ui/index.js"></script>
+    <!-- 引入axios -->
+    <script src="../../../plugins/axios/axios.min.js"></script>
+    <script src="../../../plugins/jquery/jquery.js"></script>
+    <script src="../../../js/request.js"></script>
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/index.js"></script>
+    <script src="./js/annotation.js"></script>
+    <script src="../js/hightLight.js"></script>
+    <style>
+        #annotation-app .notAdmin::after {
+            border: 0 !important;
+
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container" id="annotation-app">
+    <!--问题标题-->
+    <div style="display: flex;align-items: center;" id="classtitle">
+        <h1 style="color: #1cc7fa;margin-right: 20px">问题标题</h1>
+        <h1 id="question-title">{{questionTitle}}</h1>
+        <h1 id="highlight-word" style="background-color: yellow;margin-left: 20px">{{annotationWord}}</h1>
+        <button style="background-color: grey" @click="editorAnnotaton">编辑</button>
+
+    </div>
+    <div id="annotationContainer" class="annotation-container-page">
+
+    </div>
+    <div class="container bottom-bar bottom-flex">
+        <div>
+            <el-pagination
+                    class="pageList"
+                    :page-sizes="[10, 20, 30, 40,2]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="counts"
+                    :current-page.sync="page"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+            ></el-pagination>
+        </div>
+        <div style="margin-top: 25px;border: black 1px solid">
+            <span style="font-weight: bold">所属成员:</span>
+            <span
+                    v-for="(item, index) in groupers"
+                    :key="index">{{ item }}、</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#annotation-app',
+        data() {
+            return {
+                name: '',
+                counts: 0,
+                page: 1,
+                pageSize: 2,
+                tableData: [],
+                questionTitle: '',
+                annotationWord: '',
+                groupers: [],
+                annoationGroupId: undefined
+            }
+        },
+        computed: {},
+        created() {
+            this.annotationGroupId = requestUrlParam('annotationGroupId');
+        },
+        mounted() {
+            this.init()
+        },
+        methods: {
+            handleQuery() {
+                this.page = 1;
+                this.init();
+            },
+            handleSizeChange(val) {
+                this.pageSize = val
+                this.init()
+            },
+            handleCurrentChange(val) {
+                this.page = val
+                this.init()
+            },
+            init() {
+                const params = {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    annotationGroupId: this.annotationGroupId
+                }
+                getAnnotationListByAnnotationGroupIdPage(params).then(res => {
+                    if (res.code === 1) {
+                        $('#annotationContainer').empty()
+                        this.tableData = res.data.list || []
+                        this.annotationWord = this.tableData[0].annotationWord
+                        this.questionTitle = this.tableData[0].questionTitle
+                        this.counts = res.data.total
+                        const groupMembersList = res.map.groupMembersList
+                        groupMembersList.map((member) => {
+                            this.groupers.push(member.userName)
+                        })
+                        loadAnnotationContainer(this.tableData)
+                    }
+                })
+            }, editorAnnotaton() {
+                const annotation = this.tableData[0]
+                debugger
+                window.parent.menuHandle({
+                    menuId: 'updateAnnotation',
+                    name: '修改注释',
+                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationGroupId=' + annotation.annotationGroupId+
+                    '&questionId=' + annotation.questionId+
+                        '&annotationWord=' + encodeURI(annotation.annotationWord)+
+                        '&questionTitle=' + encodeURI(annotation.questionTitle)
+                }, true);
+            }
+        }
+    })
+</script>
+</body>
+</html>

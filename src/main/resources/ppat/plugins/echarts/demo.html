@@ -9,8 +9,84 @@
 <body>
 <div id="main" style="width: 1000px;height: 1000px"></div>
 <script>
-  const data={"nodeList":[{"id":"492904479969069","questionId":"198798417892082","name":"123ttt","type":"root","label":{"show":true,"position":"bottom"},"itemStyle":{"color":"red"},"symbolSize":"50"}],"linkList":[]}
-  generateChart(data)
+  const data={};
+  const nodeList=[
+      {
+          "id": "694311689965034",
+          "questionId": "168381441288475737",
+          "annotationId": "202305120953562",
+          "name": "蔡徐坤",
+          "type": "child",
+          "label": {
+              "show": true,
+              "position": "inside"
+          },
+          "itemStyle": null,
+          "symbolSize": "30"
+      },
+      {
+          "id": "509656715109546",
+          "questionId": "168381441288475737",
+          "annotationId": "202305120954316",
+          "name": "蔡徐坤",
+          "type": "child",
+          "label": {
+              "show": true,
+              "position": "inside"
+          },
+          "itemStyle": null,
+          "symbolSize": "30"
+      },
+      {
+          "id": "416447955971899",
+          "questionId": "168381441288475737",
+          "annotationId": "202305120954321",
+          "name": "蔡徐坤",
+          "type": "child",
+          "label": {
+              "show": true,
+              "position": "inside"
+          },
+          "itemStyle": null,
+          "symbolSize": "30"
+      },
+      {
+          "id": "278007285088581",
+          "questionId": "168381441288475737",
+          "annotationId": null,
+          "name": "蔡徐坤为什么叫鸡哥蔡徐坤为什么叫鸡哥",
+          "type": "root",
+          "label": {
+              "show": true,
+              "position": "bottom"
+          },
+          "itemStyle": {
+              "color": "red"
+          },
+          "symbolSize": "50"
+      }
+  ];
+  const linkList=[
+      {
+          "source": "202305120953562",
+          "target": "168381441288475737"
+      },
+      {
+          "source": "202305120954316",
+          "target": "168381441288475737"
+      },
+      {
+          "source": "202305120954321",
+          "target": "168381441288475737"
+      },
+      {
+          "source": "null",
+          "target": "168381441288475737"
+      }
+  ]
+  data.nodeList=nodeList;
+  data.linkList=linkList;
+          generateChart(data)
   function generateChart(data) {
     var chart = echarts.init(document.getElementById('main'));
     var option = {

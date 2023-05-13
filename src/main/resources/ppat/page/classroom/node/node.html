@@ -57,14 +57,19 @@
                         this.mainStyle.width = (this.nodeData.nodeList.length + this.nodeData.linkList.length) * 100 + 'px'
                         this.mainStyle.height = (this.nodeData.nodeList.length + this.nodeData.linkList.length) * 100 + 'px'
                     }
-                   generateChart(this.nodeData,this)
-                }else {
-                    window.location.href = '/ppat/page/classroom/question/addQuestion.html'
+                    generateChart(this.nodeData, this)
+                } else {
+                    //window.location.href = '/ppat/page/classroom/question/addQuestion.html'
+                    window.parent.menuHandle({
+                        menuId: 'question',
+                        name: '新建问题和回答',
+                        url: '/ppat/page/classroom/question/addQuestion.html'
+                    }, false);
+
                 }
             })
         },
-        methods: {
-        }
+        methods: {}
     })
 </script>
 </body>

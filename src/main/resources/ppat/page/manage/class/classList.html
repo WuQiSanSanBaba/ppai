@@ -155,11 +155,13 @@
             addUserHandle(st) {
                 if (st === 'add') {
                     window.parent.menuHandle({
+                        menuId:'addClass',
                         url: '/ppat//page/manage/class/addClass.html',
                         name: '添加班级'
                     }, true)
                 } else {
                     window.parent.menuHandle({
+                        menuId:'updateClass',
                         url: '/ppat//page/manage/class/addClass.html?id=' + st,
                         name: '修改班级'
                     }, true)

@@ -1,67 +1,24 @@
-async function saveannotations() {
-    let classroomPart
-    const classroomPartJson = window.localStorage.getItem("classroomPart");
-    if (classroomPartJson) {
-        classroomPart = JSON.parse(window.localStorage.getItem("classroomPart"));
-    }else {
-        new $.zui.Messager('提示消息：你没有加入小组，无法操作', {
-            type: 'danger' // 定义颜色主题
-        }).show();
-        return ;
-    }
-    $('#myModal').modal('hide')
-    const annotations = []
-    if (editorContainerArray==null || editorContainerArray.length===0) {
-        new $.zui.Messager('提示消息：你还没有注释请先注释', {
-            type: 'danger' // 定义颜色主题
-        }).show();
-        return ;
-    }
-    for (let item of editorContainerArray) {
-        const text= item.editor.getText();
-        let annotation = {
-            questionId: questionId,
-            questionTitle: questionTitle,
-            annotationWord: annotationWord,
-            annotationTitle: item.annotationTitle,
-            content: text,
-            html: item.editor.getHtml(),
-        }
-        await analizyQuestion(text,item.editor).then(res=>{
-            annotation.jsonArray1=res.jsonArray1
-            annotation.flag1=res.flag1
-            annotation.partId=res.partId
-            annotation.groupId=res.groupId
-            annotation.userId=res.userId
-            annotation.userName=res.userName
-            annotation.subjectId=res.subjectId
-            annotation.subjectName=res.subjectName
-            annotation.classroomId=res.classroomId
-        });
-        annotations.push(annotation)
-    }
-    const data=JSON.stringify(annotations)
-    $.ajax({
-        url: '/classroom/annotation/addAnnotation',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: data,
-        success: function(data) {
-            // 请求成功后的逻辑处理，数据为 JSON 格式
-            console.log(data);
-        },
-        error: function(error) {
-            // 请求失败后的逻辑处理
-            console.log(error);
-        }
-    });
+function loadTitle($questionTitle,$annotationWord) {
+    //获取参数 采用urlCoder 编码 防止乱码
+    const urlParams = new URLSearchParams(window.location.search); // 获取URL的查询参数部分
+    questionId =urlParams.get('questionId'); // 获取param1的值
+    annotationWord = decodeURI(urlParams.get('annotationWord')); // 获取param2的值
+    questionTitle =decodeURI( urlParams.get('questionTitle')); // 获取param2的值
+    $questionTitle.text(questionTitle);
+    $annotationWord.text(annotationWord);
+    console.log(questionId, annotationWord,questionTitle); // 输出value1 value2
 }
 
-function loadPage() {
+
+/**
+ * 创建多选框和多选框点击创建富文本编辑器事件
+ * @param checkBox$ 多选框盒子
+ * @param editorContainers$ 富文本编辑器盒子
+ */
+function loadPage(checkBox$, editorContainers$) {
     const categorizes_JSON = JSON.parse(window.localStorage.getItem("classroom")).categorizes;
     const categorizes = JSON.parse(categorizes_JSON);
-
+    categorizes.push('其他')
     for (let i = 0; i < categorizes.length; i++) {
         // 创建多选框元素
         var checkbox = $('<input/>', {
@@ -76,11 +33,10 @@ function loadPage() {
             for: 'checkbox' + i,
         });
         // 将多选框和文本添加到文档中
-        $('#checkbox-container').append(checkbox).append(label);
+        checkBox$.append(checkbox).append(label);
         // 为多选框添加点击事件
         checkbox.on('click', function () {
-            console.log(i)
-            console.log($(this).prop('checked') + " - " + $(this).next('label').text());
+            let checkboxInfo={}
             //创建富文本编辑器
             if ($(this).prop('checked') === true && $('#editor_container' + i).length === 0) {
                 //创建富文本编辑器容器
@@ -88,9 +44,9 @@ function loadPage() {
                     'class': 'editor—wrapper',
                     'id': 'editor—wrapper' + i
                 });
-                $('#editor-containers').append(wrapper);
+                editorContainers$.append(wrapper);
                 //标题
-                const title = categorizes[i] + $('#highlight-word').text();
+                const title = categorizes[i] + $('#annotation-word').text();
                 var title_container = $('<h1/>', {
                     text: title,
                     class: 'annotation-title'
@@ -112,7 +68,8 @@ function loadPage() {
                 const editorContainer = {
                     'id': 'editorContainer' + i,
                     'editor': editor,
-                    'annotationTitle': categorizes[i] + questionTitle
+                    'annotationTitle': categorizes[i] + questionTitle,
+                    'categorize':categorizes[i]
                 }
                 editorContainerArray.push(editorContainer);
             } else if ($(this).prop('checked') === false && $('#editor_container' + i).length > 0) {
@@ -124,18 +81,7 @@ function loadPage() {
         });
 
     }
-
-}
-
-function loadTitle() {
-    //获取参数 采用urlCoder 编码 防止乱码
-    const urlParams = new URLSearchParams(window.location.search); // 获取URL的查询参数部分
-    questionId =urlParams.get('questionId'); // 获取param1的值
-    annotationWord = decodeURI(urlParams.get('annotationWord')); // 获取param2的值
-    questionTitle =decodeURI( urlParams.get('questionTitle')); // 获取param2的值
-    $('#question-title').text(questionTitle);
-    $('#highlight-word').text(annotationWord);
-    console.log(questionId, annotationWord,questionTitle); // 输出value1 value2
+    return categorizes;
 }
 
 

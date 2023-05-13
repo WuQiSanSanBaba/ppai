@@ -15,10 +15,6 @@
          underline_flag,
          annotation_json_array,
          annotation_flag,
-         core_concept_json_array,
-         core_concept_flag,
-         general_concept_json_array,
-         general_concept_flag,
          subject_id,
          subject_name,
          update_user,
@@ -37,10 +33,6 @@
                 #{underlineFlag},
                 #{annotationJsonArray},
                 #{annotationFlag},
-                #{coreConceptJsonArray},
-                #{coreConceptFlag},
-                #{generalConceptJsonArray},
-                #{generalConceptFlag},
                 #{subjectId},
                 #{subjectName},
                 #{updateUser},
@@ -69,11 +61,11 @@
             <if test="highlightJsonArray != null">
                 highlight_json_array = #{highlightJsonArray},
             </if>
-            <if test="addhighlightFlag != null">
-                add_highlight_flag = #{addhighlightFlag},
+            <if test="addHighlightFlag != null">
+                add_highlight_flag = #{addHighlightFlag},
             </if>
-            <if test="addhighlightJsonArray != null">
-                add_highlight_json_array = #{addhighlightJsonArray},
+            <if test="addHighlightJsonArray != null">
+                add_highlight_json_array = #{addHighlightJsonArray},
             </if>
             <if test="underlineJsonArray != null">
                 underline_json_array = #{underlineJsonArray},
@@ -86,18 +78,6 @@
             </if>
             <if test="annotationFlag != null">
                 annotation_flag = #{annotationFlag},
-            </if>
-            <if test="coreConceptJsonArray != null">
-                core_concept_json_array = #{coreConceptJsonArray},
-            </if>
-            <if test="coreConceptFlag != null">
-                core_concept_flag = #{coreConceptFlag},
-            </if>
-            <if test="generalConceptJsonArray != null">
-                general_concept_json_array = #{generalConceptJsonArray},
-            </if>
-            <if test="generalConceptFlag != null">
-                general_concept_flag = #{generalConceptFlag},
             </if>
             <if test="subjectId != null">
                 subject_id = #{subjectId},
@@ -128,10 +108,6 @@
                underline_json_array,
                annotation_json_array,
                annotation_flag,
-               core_concept_json_array,
-               core_concept_flag,
-               general_concept_json_array,
-               general_concept_flag,
                subject_id,
                update_user,
                create_user,
@@ -156,10 +132,6 @@
             t.underline_flag,
             t.annotation_json_array,
             t.annotation_flag,
-            t.core_concept_json_array,
-            t.core_concept_flag,
-            t.general_concept_json_array,
-            t.general_concept_flag,
             t.subject_id,
             t.update_user,
             t.create_user,
@@ -187,10 +159,6 @@
             t.underline_flag,
             t.annotation_json_array,
             t.annotation_flag,
-            t.core_concept_json_array,
-            t.core_concept_flag,
-            t.general_concept_json_array,
-            t.general_concept_flag,
             t.subject_id,
             t.update_user,
             t.create_user,

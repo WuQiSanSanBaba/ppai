@@ -218,11 +218,13 @@
             addUserHandle(st) {
                 if (st === 'add') {
                     window.parent.menuHandle({
+                        menuId:'addUser',
                         url: '/ppat/page/manage/user/addUser.html',
                         name: '添加账号'
                     }, true)
                 } else {
                     window.parent.menuHandle({
+                        menuId:'updateUser',
                         url: '/ppat/page/manage/user/addUser.html?userId=' + st,
                         name: '修改账号'
                     }, true)

@@ -186,11 +186,7 @@
                             item.coreConceptJsonArray=JSON.parse(item.coreConceptJsonArray).join(",")
                         })
                         this.counts = res.data.total
-                    } else {
-                        this.$message.error('请求出错了：' + res.msg)
                     }
-                }).catch(err => {
-                    this.$message.error('请求出错了：' + err)
                 })
             },
             handleQuery() {
@@ -201,11 +197,13 @@
             addUserHandle(st) {
                 if (st === 'add') {
                     window.parent.menuHandle({
+                        menuId:'addSubject',
                         url: '/ppat/page/classroom/subject/addSubject.html',
                         name: '添加主题'
                     }, true)
                 } else {
                     window.parent.menuHandle({
+                        menuId:'updateSubject',
                         url: '/ppat/page/classroom/subject/addSubject.html?subjectId=' + st,
                         name: '修改主题'
                     }, true)

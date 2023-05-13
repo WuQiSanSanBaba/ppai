@@ -17,7 +17,7 @@ public interface QuestionService {
      * 根据小组ID和主题ID高亮问题
      * @return
      */
-    List<Question> getHighLightByGroupIdAndSubjectId();
+    List<Question> getHighLightByGroupIdAndSubjectId(Long groupId, Long subjectId);
 
     /**
      *更新问题

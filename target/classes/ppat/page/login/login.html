@@ -110,7 +110,6 @@
                   localStorage.setItem('user', JSON.stringify(res.data))
                   window.location.href = '../../index.html'
                 } else {
-                  this.$message.error(res.msg)
                   this.loading = false
                 }
               } finally {

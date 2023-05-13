@@ -52,7 +52,7 @@
   border-radius: 6px;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+
 }
 .addBrand-container .avatar-uploader .el-upload:hover {
   border-color: #409eff;
@@ -198,7 +198,7 @@
   width: 100%;
   height: 36px;
   line-height: 36px;
-  overflow: hidden;
+
 }
 .flavorBox .flavor .cont .items .delFlavor {
   display: inline-block;

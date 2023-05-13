@@ -1,0 +1,25 @@
+.highLight {
+    background-color: rgb(255, 236, 61);
+}
+
+.addHighlight {
+    background-color: rgb(61, 181, 255);
+}
+
+.underline {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 3px;
+    text-decoration-style: solid;
+}
+
+.richText{
+    border: grey solid 2px;
+    width: 80%;
+    padding: 20px;
+
+}
+
+.editor—wrapper{
+    margin:25px
+}

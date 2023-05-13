@@ -9,4 +9,11 @@ import java.util.List;
 public interface AnnotationMapper {
     void addAnnotacionList(List<Annotation> list);
 
+    List<Annotation> getAnnotationByQuestionId(Long annotationId);
+
+    List<Annotation> getAnnotationByAnnotationGroupId(Long annotationGroupId);
+
+    void updateAnnotationByAnnotationId(Annotation annotation);
+
+    List<Annotation> getAnnotationListBySubjectId(Long groupId, Long subjectId);
 }

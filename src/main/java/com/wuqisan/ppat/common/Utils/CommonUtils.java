@@ -1,7 +1,10 @@
 package com.wuqisan.ppat.common.Utils;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -14,14 +17,18 @@ public class CommonUtils {
 
     }
     public static long generateKey15(){
+        // 获取当前时间戳
         long timestamp = System.currentTimeMillis();
-        Random random = new Random(timestamp);
-        String randomStr = String.format("%d%05d", timestamp, random.nextInt(100000));
-        return Long.parseLong(randomStr);
-
+        String timestampStr=   DateUtil.format(new Date(timestamp),"yyyyMMddHHmmss");
+        // 生成随机数
+        SecureRandom random = new SecureRandom();
+        int randomNum = random.nextInt(10) ; // 生成6位随机数
+        // 组合成15位随机数
+        String randomNumber = timestampStr + randomNum;
+        return Long.parseLong(randomNumber);
     }
 
-    public static String generate10String(){
+    public static String generate15String(){
 
      return    RandomUtil.randomNumbers(15);
     }
