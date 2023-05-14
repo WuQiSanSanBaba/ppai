@@ -34,12 +34,16 @@ public class LogincheckFilter implements Filter {
         boolean flag = check(requestURI, urls);
         //3..如果不需要处理..则直接放行
         if (flag) {
+/*
             log.info("本次请求不需要处理");
+*/
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
         long id = Thread.currentThread().getId();
+/*
         log.info("线程id:{}",id);
+*/
         //4..判断登录状态...如果已登录...则直接放行
         //判断后台
         //4.1用户信息放入threadlocal

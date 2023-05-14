@@ -22,4 +22,10 @@ public interface AnnotationMapper {
     void addAddAnnotation(Annotation annotation);
 
     void updateAnnotationByAnnotionId(Annotation annotation);
+
+    void deleteAnnotationBatchByAnnotationBatchId(Long annotationBatchId);
+
+    void addAnnotationBatch(AnnotationBatch annotationBatch);
+
+    AnnotationBatch getAnnotationBatchByAnnotationBatchId(Long annotationBatchId);
 }

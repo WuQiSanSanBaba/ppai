@@ -53,6 +53,12 @@
             </button>
         </div>
     </div>
+    <div v-if="tableData.length===0">
+        <el-alert
+                title="注释已被删除，请点击编辑按钮进入编辑"
+                type="warning">
+        </el-alert>
+    </div>
     <div id="annotationContainer" class="annotationBatch-container-page">
 
     </div>
@@ -163,17 +169,19 @@
         computed: {
             hightLigtWord() {
                 let arr = []
-                if (this.annotation.addHighlightFlag && this.annotation.addHighlightFlag === 1) {
-                    const addHightlightArray = JSON.parse(this.annotation.addHighlightJsonArray)
+                if (this.annotation.addJSONArray) {
+                    const addHightlightArray = JSON.parse(this.annotation.addJSONArray)
                     addHightlightArray.map(res => {
                         arr.push(res.word)
                     })
                 }
-                if (this.annotation.highlightFlag && this.annotation.highlightFlag === 1) {
-                    arr = arr.concat(JSON.parse(this.annotation.highlightJsonArray))
+                if (this.annotation.coreJsonArray) {
+                    arr = arr.concat(JSON.parse(this.annotation.coreJsonArray))
+                }
+                if (this.annotation.geneJsonArray ) {
+                    arr = arr.concat(JSON.parse(this.annotation.geneJsonArray))
                 }
                 return arr
-                return arr;
             },
             content() {
                 let content = ''
@@ -280,7 +288,6 @@
             },
             addHighLight() {
                 this.dialogVisible_HighLight = false
-                //把新增的内容重复的去掉
                 const arr = JSON.stringify(this.addHighlightJsonArray_new)
                 //发送后台处理
                 addHighLightAnnotation(this.annotation.annotationId, arr).then(res => {

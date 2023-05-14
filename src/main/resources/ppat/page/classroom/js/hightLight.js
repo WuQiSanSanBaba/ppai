@@ -1,3 +1,11 @@
+/**
+ * 根据核心概念和一般概念分析富文本编辑器的内容
+ * @param text
+ * @param editor
+ * @param classroomPart
+ * @param subject
+ * @returns {Promise<{geneJsonArray: string, coreJsonArray: string, html, content}|string>}
+ */
 async function analizyQuestion(text, editor, classroomPart, subject) {
     if (!classroomPart) {
         //获取主题
@@ -96,12 +104,12 @@ function checkConcepts(text, subject, editor) {
     if (coreJsonArray.length > 0) {
         coreJsonArray = JSON.stringify(coreJsonArray)
     } else {
-        coreJsonArray = ''
+        coreJsonArray = JSON.stringify([])
     }
     if (geneJsonArray.length > 0) {
         geneJsonArray = JSON.stringify(geneJsonArray)
     } else {
-        geneJsonArray = ''
+        geneJsonArray = JSON.stringify([])
     }
 
     return {content, html, coreJsonArray, geneJsonArray}
@@ -114,9 +122,10 @@ var dealHightLight = {
     hadAddJsonArray: [],
     hadAnnotationArray: [],
     excute(question, element) {
-        dealHightLight.hadHighArray = []
+        dealHightLight.hadCoreJsonArray = []
+        dealHightLight.hadGeneJsonArray = []
         dealHightLight.hadUnderlineArray = []
-        dealHightLight.hadAddHighlightArray = []
+        dealHightLight.hadAddJsonArray = []
         dealHightLight.hadAnnotationArray = []
         this.preElement(question.coreJsonArray, 'core', element)
         this.preElement(question.geneJsonArray, 'gene', element)
@@ -145,16 +154,16 @@ var dealHightLight = {
     traverse(node, keyword, type) {
         $(node).find("*").each(function () {
             // 判断当前节点是否包含关键词
-            if ($(this).text().indexOf(keyword) >= 0 || $(this).text().indexOf(keyword.word)) {
+            if ($(this).text().indexOf(keyword) >= 0 || $(this).text().indexOf(keyword.word)>-1) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
                 if (type === 'underline' && dealHightLight.hadUnderlineArray.indexOf(keyword) < 0) {
                     dealHightLight.hadUnderlineArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span title='双击进入注释详情' ondblclick='addAnnotationJS(" + keyword + ")' class='underline'>" + keyword + "</span>"));
-                } else if (type === 'core' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
-                    dealHightLight.hadHighArray.push(keyword);
+                } else if (type === 'core' && dealHightLight.hadCoreJsonArray.indexOf(keyword) < 0) {
+                    dealHightLight.hadCoreJsonArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='core'>" + keyword + "</span>"));
-                }else if (type === 'gene' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
-                    dealHightLight.hadHighArray.push(keyword);
+                }else if (type === 'gene' && dealHightLight.hadGeneJsonArray.indexOf(keyword) < 0) {
+                    dealHightLight.hadGeneJsonArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='gene'>" + keyword + "</span>"));
                 }
             }
@@ -164,7 +173,7 @@ var dealHightLight = {
         const word = keyword.word;
         $(node).find("*").each(function () {
             // 判断当前节点是否包含关键词
-            if ($(this).text().indexOf(word) >= 0 || $(this).text().indexOf(word)) {
+            if ($(this).text().indexOf(word) >= 0 || dealHightLight.hadAddJsonArray.indexOf(word)<0) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
                 if (flag === 'core') {
                     $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='core'>" + word + "</span>"));
@@ -172,18 +181,17 @@ var dealHightLight = {
                 } else {
                     $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='gene'>" + word + "</span>"));
                 }
-                dealHightLight.hadAddHighlightArray.push(word);
-
+                dealHightLight.hadAddJsonArray.push(word);
             }
         });
     }, traverseAnnotation(node, keyword, type) {
-        const annotationGroupId = keyword.annotationGroupId;
+        const annotationId = keyword.annotationId;
         const annotationWord = keyword.annotationWord;
         $(node).find("*").each(function () {
             // 判断当前节点是否包含关键词
-            if ($(this).text().indexOf(annotationWord) >= 0 || $(this).text().indexOf(annotationWord)) {
+            if ($(this).text().indexOf(annotationWord) >= 0 || dealHightLight.hadAnnotationArray.indexOf(word)<0) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
-                $(this).html($(this).html().replace(new RegExp(annotationWord, "i"), "<span title='双击进入注释详情' ondblclick='toAnnotation(" + annotationGroupId + ")' class='annotation'>" + annotationWord + "</span>"));
+                $(this).html($(this).html().replace(new RegExp(annotationWord, "i"), "<span title='双击进入注释详情' ondblclick='toAnnotation(" + annotationId + ")' class='annotation'>" + annotationWord + "</span>"));
                 dealHightLight.hadAnnotationArray.push(annotationWord);
             }
         });

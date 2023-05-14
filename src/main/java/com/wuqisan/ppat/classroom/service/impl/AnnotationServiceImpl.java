@@ -140,11 +140,19 @@ public class AnnotationServiceImpl implements AnnotationService {
 
     /**
      * @param list
+     * @param annotationId
      */
     @Override
-    public void updateAnnotionBatchListById(List<AnnotationBatch> list) {
+    public void updateAnnotionBatchListById(List<AnnotationBatch> list, Long annotationId) {
         for (AnnotationBatch annotationBatch : list) {
-            annotationMapper.updateAnnotionBatchListById(annotationBatch);
+            //如果没有id证明是插入
+            if (annotationBatch.getAnnotationBatchId() == null) {
+                annotationBatch.setAnnotationBatchId(CommonUtils.generateKey15());
+                annotationBatch.setAnnotationId(annotationId);
+                annotationMapper.addAnnotationBatch(annotationBatch);
+            } else {
+                annotationMapper.updateAnnotionBatchListById(annotationBatch);
+            }
         }
     }
 
@@ -164,5 +172,42 @@ public class AnnotationServiceImpl implements AnnotationService {
     public void updateAnnotationByAnnotionId(Annotation annotation) {
         annotationMapper.updateAnnotationByAnnotionId(annotation);
 
+    }
+
+    /**
+     * @param annotationBatchId
+     */
+    @Override
+    public void deleteAnnotationBatchByAnnotationBatchId(Long annotationBatchId) {
+        annotationMapper.deleteAnnotationBatchByAnnotationBatchId(annotationBatchId);
+    }
+
+    /**
+     * @param annotationBatchId
+     * @return
+     */
+    @Override
+    public AnnotationBatch getAnnotationBatchByAnnotationBatchId(Long annotationBatchId) {
+       return annotationMapper.getAnnotationBatchByAnnotationBatchId(annotationBatchId);
+    }
+
+    /**
+     * @param annotation
+     * @param content
+     * @return
+     */
+    @Override
+    public HighlightAnnotation deleteAnnnotationJsonArray(Annotation annotation, String content) {
+        JSONArray core = JSON.parseArray(annotation.getCoreJsonArray());
+        JSONArray gene = JSON.parseArray(annotation.getGeneJsonArray());
+        JSONArray underline = JSON.parseArray(annotation.getUnderlineJsonArray());
+        JSONArray add = JSON.parseArray(annotation.getAddJsonArray());
+        HighlightAnnotation highlightAnnotation=new HighlightAnnotation();
+        highlightAnnotation.setCoreJsonArray(core);
+        highlightAnnotation.setGeneJsonArray(gene);
+        highlightAnnotation.setUnderlineJsonArray(underline);
+        highlightAnnotation.setAddJsonArray(add);
+        highlightAnnotation= publicService.dealAfterDelete(highlightAnnotation,content);
+        return highlightAnnotation;
     }
 }

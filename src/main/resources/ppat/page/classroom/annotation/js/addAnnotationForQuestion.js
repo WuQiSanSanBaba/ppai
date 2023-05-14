@@ -1,5 +1,6 @@
-async function saveannotationsEditor() {
+async function saveannotations() {
     let classroomPart
+    let subject
     //获取主题
     await loadClassroom().then(result => {
         classroomPart = result.data.classroomPart
@@ -9,6 +10,9 @@ async function saveannotationsEditor() {
             type: 'danger' // 定义颜色主题
         }).show();
     }
+    await getSubjectById(classroomPart.subjectId).then(res => {
+        subject = res.data
+    })
     $('#myModal').modal('hide')
     if (editorContainerArray == null || editorContainerArray.length === 0) {
         new $.zui.Messager('提示消息：你还没有注释请先注释', {
@@ -20,22 +24,19 @@ async function saveannotationsEditor() {
     let annotation = {
         questionId: questionId,
         questionTitle: questionTitle,
-        annotationId: annotationId,
         annotationWord: annotationWord,
         partId: classroomPart.partId,
         groupId: classroomPart.groupId,
-        userId: classroomPart.userId,
-        userName: classroomPart.userName,
         subjectId: classroomPart.subjectId,
         subjectName: classroomPart.subjectName,
         classroomId: classroomPart.classroomId,
         annotationType: 'question',
     }
     const annotationBatchList = []
-    let jsonArray = []
+    let coreJsonArray = []
+    let geneJsonArray = []
     for (let item of editorContainerArray) {
         const text = item.editor.getText();
-        const checkBox$ = $('[name="' + item.categorize + '"][type="checkbox"]')
         let annotationBatch = {
             questionId: questionId,
             annotationWord: annotationWord,
@@ -43,35 +44,37 @@ async function saveannotationsEditor() {
             content: text,
             html: item.editor.getHtml(),
             categorize: item.categorize,
-            annotationBatchId: checkBox$.prop('annotationBatchId'),
         }
-        await analizyQuestion(text, item.editor).then(res => {
-            if (res.flag1 === 1) {
-                jsonArray.push(...JSON.parse(res.jsonArray1))
+        await analizyQuestion(text, item.editor, classroomPart, subject).then(res => {
+            if (res.coreJsonArray) {
+                coreJsonArray.push(...JSON.parse(res.coreJsonArray))
+            }
+            if (res.geneJsonArray) {
+                geneJsonArray.push(...JSON.parse(res.geneJsonArray))
             }
             annotationBatch.partId = res.partId
             annotationBatch.groupId = res.groupId
             annotationBatch.classroomId = res.classroomId
         });
-
         annotationBatchList.push(annotationBatch)
     }
-    if (jsonArray.length > 0) {
-        const newArray = jsonArray.filter((item, index) => {
-            return jsonArray.indexOf(item) === index
+    if (coreJsonArray.length > 0) {
+        const newArray = coreJsonArray.filter((item, index) => {
+            return coreJsonArray.indexOf(item) === index
         })
-        annotation.jsonArray1 = JSON.stringify(newArray)
-        annotation.flag1 = 1
-
-    } else {
-        annotation.flag1 = 0
+        annotation.coreJsonArray = JSON.stringify(newArray)
+    }
+    if (geneJsonArray.length > 0) {
+        const newArray = geneJsonArray.filter((item, index) => {
+            return geneJsonArray.indexOf(item) === index
+        })
+        annotation.geneJsonArray = JSON.stringify(newArray)
     }
     annotationDto.annotation = annotation
     annotationDto.annotationBatchList = annotationBatchList
     const data = JSON.stringify(annotationDto)
-
     $.ajax({
-        url: '/classroom/annotation/updateAnnotation',
+        url: '/classroom/annotation/addAnnotation',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
@@ -94,39 +97,5 @@ async function saveannotationsEditor() {
     });
 }
 
-function getAnnotationDtoByAnnotationId(annotationId) {
-    return $axios({
-        url: '/classroom/annotation/getAnnotationDtoByAnnotationId/' + annotationId,
-        method: 'get'
-    })
-}
 
-/**
- * 循环加载富文本编辑器
- * @param annotationList 根据questionId查询出来的 annotation数组
- * @param categorizes 新建课堂的分类
- */
-function loadEdit(annotation, categorizes) {
-    const annotationList = annotation.annotationBatchList;
-    //1.遍历注释分组
-    annotationList.map(item => {
-        //1.1如果注释分组存在分类列表里，证明已经存在
-        if (categorizes.indexOf(item.categorize) > -1) {
-            //1.2获取对应展示和隐藏分类的多选框
-            const checkBox$ = $('[name="' + item.categorize + '"][type="checkbox"]')
-            //1.3多选框为选择
-            //1.4触发点击事件创建富文本编辑器
-            checkBox$.click();
-            checkBox$.prop('annotationBatchId', item.annotationBatchId)
 
-        }
-        editorContainerArray.map(res => {
-            if (res.categorize === item.categorize) {
-                editor = res.editor
-                //1.5获取editor对象并赋值
-                editor.setHtml(item.html);
-            }
-
-        })
-    })
-}

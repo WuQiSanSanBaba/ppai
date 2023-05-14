@@ -1,13 +1,13 @@
-function loadTitle($questionTitle,$annotationWord) {
+function loadTitle($questionTitle, $annotationWord) {
     //获取参数 采用urlCoder 编码 防止乱码
     const urlParams = new URLSearchParams(window.location.search); // 获取URL的查询参数部分
-    questionId =urlParams.get('questionId'); // 获取param1的值
+    questionId = urlParams.get('questionId'); // 获取param1的值
     annotationWord = decodeURI(urlParams.get('annotationWord')); // 获取param2的值
-    questionTitle =decodeURI( urlParams.get('questionTitle')); // 获取param2的值
-    annotationId =decodeURI( urlParams.get('annotationId')); // 获取param2的值
+    questionTitle = decodeURI(urlParams.get('questionTitle')); // 获取param2的值
+    annotationId = decodeURI(urlParams.get('annotationId')); // 获取param2的值
     $questionTitle.text(questionTitle);
     $annotationWord.text(annotationWord);
-    console.log(questionId, annotationWord,questionTitle); // 输出value1 value2
+    console.log(questionId, annotationWord, questionTitle); // 输出value1 value2
 }
 
 
@@ -37,7 +37,6 @@ function loadPage(checkBox$, editorContainers$) {
         checkBox$.append(checkbox).append(label);
         // 为多选框添加点击事件
         checkbox.on('click', function () {
-            let checkboxInfo={}
             //创建富文本编辑器
             if ($(this).prop('checked') === true && $('#editor_container' + i).length === 0) {
                 //创建富文本编辑器容器
@@ -70,19 +69,51 @@ function loadPage(checkBox$, editorContainers$) {
                     'id': 'editorContainer' + i,
                     'editor': editor,
                     'annotationTitle': categorizes[i] + questionTitle,
-                    'categorize':categorizes[i]
+                    'categorize': categorizes[i]
                 }
                 editorContainerArray.push(editorContainer);
             } else if ($(this).prop('checked') === false && $('#editor_container' + i).length > 0) {
-                editorContainerArray = editorContainerArray.filter(function (e) {
-                    return e.id !== 'editorContainer' + i;
+                $("<div>确定要删该条注释吗？</div>").dialog({
+                    resizable: false,
+                    modal: true,
+                    title: "确认删除",
+                    buttons: {
+                        "删除": function () {
+                            const checkBox$=  $('[name="' + categorizes[i] + '"][type="checkbox"]')
+                            const annotationBatchId= checkBox$.prop('annotationBatchId');
+                            if (annotationBatchId){
+                                deleteAnnotationBatchByAnnotationBatchId(annotationBatchId).then(res=>{
+                                    if (res.code===1){
+                                        new $.zui.Messager(res.data, {
+                                            type: 'success' // 定义颜色主题
+                                        }).show();
+                                    }
+                                })
+                            }
+                            editorContainerArray = editorContainerArray.filter(function (e) {
+                                return e.id !== 'editorContainer' + i;
+                            })
+                            $('#editor—wrapper' + i).remove();
+                            $(this).dialog("close");
+                        },
+                        "取消": function () {
+                            $(this).dialog("close");
+                        }
+                    }
                 })
-                $('#editor—wrapper' + i).remove();
+
             }
         });
 
     }
     return categorizes;
+}
+
+function deleteAnnotationBatchByAnnotationBatchId(annotationBatchId){
+    return $axios({
+        'url': `/classroom/annotation/deleteAnnotationBatchByAnnotationBatchId/${annotationBatchId}`,
+        'method': 'get'
+    })
 }
 
 

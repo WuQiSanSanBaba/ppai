@@ -1,5 +1,6 @@
 package com.wuqisan.ppat.classroom.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
@@ -41,7 +42,7 @@ public class AnnotationController extends BaseController {
         AnnotationDto annotationDto = new AnnotationDto();
         annotationDto.setAnnotation(annotation);
         annotationDto.setPageInfo(anntations);
-        List<ClassroomPart> groupMembersList = classroomPartService.getGroupMembersByGroupIds(anntations.getList().get(0).getGroupId());
+        List<ClassroomPart> groupMembersList = classroomPartService.getGroupMembersByGroupIds(annotation.getGroupId());
 
         return R.success(annotationDto).add("groupMembersList", groupMembersList);
     }
@@ -56,9 +57,8 @@ public class AnnotationController extends BaseController {
         annotation.setCoreJsonArray(highlightAnnotation.getCoreJsonArray().toJSONString());
         annotation.setGeneJsonArray(highlightAnnotation.getGeneJsonArray().toJSONString());
         annotation.setUnderlineJsonArray(highlightAnnotation.getUnderlineJsonArray().toJSONString());
-        //只要新增的高亮和下划线才更新
         annotationService.updateAnnotationByAnnotionId(annotation);
-        annotationService.updateAnnotionBatchListById(annotationBatcheList);
+        annotationService.updateAnnotionBatchListById(annotationBatcheList,annotation.getAnnotationId());
         return R.success("修改成功");
     }
 
@@ -96,37 +96,17 @@ public class AnnotationController extends BaseController {
         annotationDto.setAnnotationBatchList(list);
         return R.success(annotationDto);
     }
-    /*@RequestMapping("addHighLightAnnotation")
-    @ApiOperation("新增高亮显示")
-    public R<Question> addHighLightAnnotation(@RequestBody Map<String, Object> body) {
-        Long annotationId = Long.parseLong((String) body.get("annotationId"));
-        Annotation annotation = annotationService.getAnnotationByAnnotationId(annotationId);
-        String newArrayString = (String) body.get("newArrayString");
-        JSONArray addHighLightJsonArray = publicService.doAddHighlight(newArrayString, questionByQuestionId.getGroupId(), questionByQuestionId.getSubjectId());
-        //处理新增概念
-        JSONArray concept = new JSONArray();
-        for (int i = 0; i < addHighLightJsonArray.size(); i++) {
-            JSONObject jsonObject = addHighLightJsonArray.getJSONObject(i);
-            if (StringUtils.equals(jsonObject.getString("flag"), "addHighlight")) {
-                concept.add(jsonObject.getString("word"));
-            }
-        }
-        Subject subjectById = subjectService.getSubjectById(questionByQuestionId.getSubjectId());
-        JSONArray oldConcept = JSON.parseArray(subjectById.getGeneralConceptJsonArray());
-        oldConcept.addAll(concept);
-        subjectById.setGeneralConceptJsonArray(oldConcept.toJSONString());
-        subjectService.updateSubject(subjectById);
-        //更新question
-        Question question = new Question();
-        question.setQuestionId(questionId);
-        question.setQuestionId(question.getQuestionId());
-        question.setAddHighlightFlag(1);
-        //把旧的高亮和新的合一起
-        if (questionByQuestionId.getAddHighlightFlag()!=null&&questionByQuestionId.getAddHighlightFlag()==1){
-            addHighLightJsonArray.addAll(JSON.parseArray(questionByQuestionId.getAddHighlightJsonArray()));
-        }
-        question.setAddHighlightJsonArray(addHighLightJsonArray.toJSONString());
-        questionService.updateQuestionByQuestionId(question);
-        return R.success(question);
-    }*/
+    @GetMapping("deleteAnnotationBatchByAnnotationBatchId/{annotationBatchId}")
+    @ApiOperation("删除注释")
+    public R<String> deleteAnnotationBatchByAnnotationBatchId(@PathVariable Long annotationBatchId) {
+        AnnotationBatch annotationBatch= annotationService.getAnnotationBatchByAnnotationBatchId(annotationBatchId);
+        Annotation annotation = annotationService.getAnnotationByAnnotationId(annotationBatch.getAnnotationId());
+        HighlightAnnotation highlightAnnotation= annotationService.deleteAnnnotationJsonArray(annotation,annotationBatch.getContent());
+        annotation.setCoreJsonArray(highlightAnnotation.getCoreJsonArray().toJSONString());
+        annotation.setGeneJsonArray(highlightAnnotation.getGeneJsonArray().toJSONString());
+        annotation.setUnderlineJsonArray(highlightAnnotation.getUnderlineJsonArray().toJSONString());
+        annotation.setAddJsonArray(highlightAnnotation.getAddJsonArray().toJSONString());
+        annotationService.deleteAnnotationBatchByAnnotationBatchId(annotationBatchId);
+        return R.success("删除成功");
+    }
 }

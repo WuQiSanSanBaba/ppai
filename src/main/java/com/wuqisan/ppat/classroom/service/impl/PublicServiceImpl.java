@@ -44,7 +44,7 @@ public class PublicServiceImpl implements PublicService {
             coreJsonArray = JSON.parseArray(coreJsonArrayString);
         }
         JSONArray geneJsonArray = new JSONArray();
-        if (StringUtils.isNotBlank(coreJsonArrayString)) {
+        if (StringUtils.isNotBlank(geneJsonArrayString)) {
             geneJsonArray = JSON.parseArray(geneJsonArrayString);
         }
         JSONArray underlineJsonArray = new JSONArray();
@@ -63,9 +63,9 @@ public class PublicServiceImpl implements PublicService {
                 if (highlightAll.contains(keyword)) {
                     if (annotationArray.contains(keyword)) {
                         underlineJsonArray.add(keyword);
+                    } else {
+                        coreJsonArray.remove(keyword);
                     }
-                } else {
-                    coreJsonArray.remove(keyword);
                 }
             }
             for (int i = 0; i < geneJsonArray.size(); i++) {
@@ -73,9 +73,9 @@ public class PublicServiceImpl implements PublicService {
                 if (highlightAll.contains(keyword)) {
                     if (annotationArray.contains(keyword)) {
                         underlineJsonArray.add(keyword);
+                    } else {
+                        geneJsonArray.remove(keyword);
                     }
-                } else {
-                    geneJsonArray.remove(keyword);
                 }
             }
         }
@@ -116,6 +116,35 @@ public class PublicServiceImpl implements PublicService {
         }
 
         return result;
+    }
+
+    /**
+     * @param highlightAnnotation
+     * @param content
+     * @return
+     */
+    @Override
+    public HighlightAnnotation dealAfterDelete(HighlightAnnotation highlightAnnotation, String content) {
+        JSONArray coreJsonArray = highlightAnnotation.getCoreJsonArray();
+        coreJsonArray.removeIf(item -> content.contains(item.toString()));
+        highlightAnnotation.setCoreJsonArray(coreJsonArray);
+
+        JSONArray geneJsonArray = highlightAnnotation.getGeneJsonArray();
+        geneJsonArray.removeIf(item -> content.contains(item.toString()));
+        highlightAnnotation.setGeneJsonArray(geneJsonArray);
+
+        JSONArray underlineJsonArray = highlightAnnotation.getUnderlineJsonArray();
+        underlineJsonArray.removeIf(item -> content.contains(item.toString()));
+        highlightAnnotation.setUnderlineJsonArray(underlineJsonArray);
+
+        JSONArray addJsonArray = highlightAnnotation.getAddJsonArray();
+        addJsonArray.removeIf(item -> {
+            JSONObject add = (JSONObject) item;
+            String word = add.getString("word");
+            return content.contains(word);
+        });
+        highlightAnnotation.setAddJsonArray(addJsonArray);
+        return highlightAnnotation;
     }
 
 

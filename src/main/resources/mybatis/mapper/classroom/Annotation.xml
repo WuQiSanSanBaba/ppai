@@ -27,6 +27,12 @@
                 #{addJsonArray}, #{annotationJsonArray})
 
     </insert>
+    <insert id="addAnnotationBatch">
+        INSERT INTO annotation_batch(annotation_id, annotation_batch_id, annotation_word, annotation_title, content,
+                                     html, categorize, part_id, group_id, classroom_id, create_time, update_time,
+                                     create_user, update_user, question_id)
+        VALUES (#{annotationId}, #{annotationBatchId}, #{annotationWord}, #{annotationTitle}, #{content}, #{html}, #{categorize}, #{partId}, #{groupId}, #{classroomId}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser}, #{questionId})
+    </insert>
 
     <update id="updateAnnotionBatchListById">
         update annotation_batch
@@ -52,31 +58,31 @@
         where annotation_batch_id = #{annotationBatchId}
     </update>
     <update id="updateAnnotationByAnnotionId">
-        update annotation
+        UPDATE annotation
         <set>
-            <if test="highlightFlag != null">
-                highlight_flag = #{highlightFlag},
-            </if>
-            <if test="highlightJsonArray !=null">
-                highlight_json_array=#{highlightJsonArray},
-            </if>
-            <if test="underlineFlag != null">
-                underline_flag = #{underlineFlag},
-            </if>
-            <if test="underlineJsonArray !=null">
-                underline_json_array=#{underlineJsonArray},
-            </if>
-            <if test="updateTime !=null">
-                update_time=#{updateTime},
-            </if>
-            <if test="updateUser !=null">
-                update_user=#{updateUser},
-            </if>
-
+            <if test="partId != null">part_id = #{partId},</if>
+            <if test="questionTitle != null">question_title = #{questionTitle},</if>
+            <if test="groupId != null">group_id = #{groupId},</if>
+            <if test="classroomId != null">classroom_id = #{classroomId},</if>
+            <if test="subjectId != null">subject_id = #{subjectId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="annotationType != null">annotation_type = #{annotationType},</if>
+            <if test="annotationWord != null">annotation_word = #{annotationWord},</if>
+            <if test="coreJsonArray != null">core_json_array = #{coreJsonArray},</if>
+            <if test="geneJsonArray != null">gene_json_array = #{geneJsonArray},</if>
+            <if test="underlineJsonArray != null">underline_json_array = #{underlineJsonArray},</if>
+            <if test="addJsonArray != null">add_json_array = #{addJsonArray},</if>
+            <if test="annotationJsonArray != null">annotation_json_array = #{annotationJsonArray},</if>
         </set>
         where
             annotation_id=#{annotationId}
     </update>
+    <delete id="deleteAnnotationBatchByAnnotationBatchId">
+        delete from annotation_batch where annotation_batch_id=#{annotationBatchId}
+    </delete>
     <select id="getAnnotationByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.AnnotationBatch">
         SELECT annotation_id,
                part_id,
@@ -162,5 +168,25 @@
         FROM annotation
         where group_id = #{groupId}
           and subject_id = #{subjectId}
+    </select>
+    <select id="getAnnotationBatchByAnnotationBatchId"
+            resultType="com.wuqisan.ppat.classroom.bean.AnnotationBatch">
+        SELECT annotation_id,
+               annotation_batch_id,
+               annotation_word,
+               annotation_title,
+               content,
+               html,
+               categorize,
+               part_id,
+               group_id,
+               classroom_id,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+               question_id
+        FROM annotation_batch
+        WHERE annotation_batch_id=#{annotationBatchId}
     </select>
 </mapper>

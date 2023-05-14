@@ -4,6 +4,7 @@ package com.wuqisan.ppat.classroom.service;
 import com.github.pagehelper.PageInfo;
 import com.wuqisan.ppat.classroom.bean.Annotation;
 import com.wuqisan.ppat.classroom.bean.AnnotationBatch;
+import com.wuqisan.ppat.classroom.bean.HighlightAnnotation;
 import com.wuqisan.ppat.classroom.bean.Question;
 
 import java.util.List;
@@ -21,9 +22,14 @@ public interface AnnotationService {
 
   Long updateQuestionAnnotation(String annotationList, Question questionByQuestionId);
 
-  void updateAnnotionBatchListById(List<AnnotationBatch> annotationBatch);
+  void updateAnnotionBatchListById(List<AnnotationBatch> annotationBatch, Long annotationId);
 
   void addAddAnnotation(Annotation annotation);
 
   void updateAnnotationByAnnotionId(Annotation annotation);
+
+    void deleteAnnotationBatchByAnnotationBatchId(Long annotationBatchId);
+
+  AnnotationBatch getAnnotationBatchByAnnotationBatchId(Long annotationBatchId);
+  HighlightAnnotation deleteAnnnotationJsonArray(Annotation annotation, String content);
 }
