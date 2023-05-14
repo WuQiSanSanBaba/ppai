@@ -27,14 +27,12 @@ public class EchartsController {
         Long partId = BaseContext.getUser().getClassroomPart().getPartId();
         //因为questionId唯一，不可能重复的
         //根据组员编号查询问题
-        Question question = new Question();
-        question.setPartId(partId);
-        question = questionService.getQuestionByPartId(partId);
+        Question question = questionService.getQuestionByPartId(partId);
         if (question == null) {
             return R.error("你还没有新建问题");
         }
         //处理生成echarts数据
-        Echarts e = echartsService.gneneEcharts(partId);
+        Echarts e = echartsService.gneneEcharts(question);
         return R.success(e);
     }
 }

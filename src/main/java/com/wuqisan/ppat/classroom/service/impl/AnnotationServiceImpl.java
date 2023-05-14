@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.wuqisan.ppat.classroom.bean.Annotation;
 import com.wuqisan.ppat.classroom.bean.AnnotationBatch;
+import com.wuqisan.ppat.classroom.bean.HighlightAnnotation;
 import com.wuqisan.ppat.classroom.bean.Question;
 import com.wuqisan.ppat.classroom.mapper.AnnotationMapper;
 import com.wuqisan.ppat.classroom.service.AnnotationService;
@@ -54,20 +55,13 @@ public class AnnotationServiceImpl implements AnnotationService {
      * @return
      */
     @Override
-    public Annotation doHighlightAnnotation(Annotation annotation, Question question,Long groupId,Long subjectId) {
-        if (annotation.getFlag1() == 1) {
-            JSONObject jsonObject = publicService.dealConcepts(annotation.getJsonArray1(), "annotation", groupId, subjectId);
-            if (jsonObject.getInteger("highlightFlag") == 1) {
-                JSONArray highlight = jsonObject.getJSONArray("highLightJsonArray");
-                annotation.setHighlightFlag(1);
-                annotation.setHighlightJsonArray(highlight.toJSONString());
-            }
-            if (jsonObject.getInteger("underlineFlag") == 1) {
-                JSONArray underline = jsonObject.getJSONArray("underlineJsonArray");
-                annotation.setUnderlineFlag(1);
-                annotation.setUnderlineJsonArray(underline.toJSONString());
-            }
-        }
+    public Annotation doHighlightAnnotation(Annotation annotation) {
+
+        HighlightAnnotation highlightAnnotation = publicService.dealConcepts(annotation.getCoreJsonArray(), annotation.getGeneJsonArray(),
+                "annotation", annotation.getGroupId(), annotation.getSubjectId());
+        annotation.setCoreJsonArray(highlightAnnotation.getCoreJsonArray().toJSONString());
+        annotation.setGeneJsonArray(highlightAnnotation.getGeneJsonArray().toJSONString());
+        annotation.setUnderlineJsonArray(highlightAnnotation.getUnderlineJsonArray().toJSONString());
         return annotation;
     }
 
@@ -118,12 +112,9 @@ public class AnnotationServiceImpl implements AnnotationService {
         //1.1创建用于更新的questionbean
         Question question = new Question();
         question.setQuestionId(questionByQuestionId.getQuestionId());
-        question.setAnnotationFlag(1);
         JSONArray annotations = new JSONArray();
         //1.2先判断这个问题有没有注释 如果有先把旧的拿出来
-        if (questionByQuestionId.getAnnotationFlag() != null && questionByQuestionId.getAnnotationFlag() == 1) {
-            annotations = JSON.parseArray(questionByQuestionId.getAnnotationJsonArray());
-        }
+        annotations = JSON.parseArray(questionByQuestionId.getAnnotationJsonArray());
         boolean isExists = false;
         for (int i = 0; i < annotations.size(); i++) {
             JSONObject jsonObject = annotations.getJSONObject(i);

@@ -5,5 +5,5 @@ import com.wuqisan.ppat.classroom.bean.Question;
 
 public interface EchartsService {
 
-    Echarts gneneEcharts(Long partId);
+    Echarts gneneEcharts(Question question);
 }

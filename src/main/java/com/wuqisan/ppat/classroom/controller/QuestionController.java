@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wuqisan.ppat.base.bean.R;
 import com.wuqisan.ppat.base.context.BaseContext;
 import com.wuqisan.ppat.classroom.bean.ClassroomPart;
+import com.wuqisan.ppat.classroom.bean.HighlightAnnotation;
 import com.wuqisan.ppat.classroom.bean.Question;
 import com.wuqisan.ppat.classroom.bean.Subject;
 import com.wuqisan.ppat.classroom.service.ClassroomPartService;
@@ -42,21 +43,13 @@ public class QuestionController {
     @ApiOperation("新增问题")
     public R<Question> addQuestion(@RequestBody Question question) {
         //处理新增的符合概念的关键词
-        if (question.getFlag1() != null && question.getFlag1() == 1) {
-            Long groupId = BaseContext.getUser().getClassroomPart().getGroupId();
-            Long subjectId = BaseContext.getUser().getClassroomPart().getSubjectId();
-            JSONObject jsonObject = publicService.dealConcepts(question.getJsonArray1(), "annotation", groupId, subjectId);
-            if (jsonObject.getInteger("highlightFlag") == 1) {
-                JSONArray highlight = jsonObject.getJSONArray("highLightJsonArray");
-                question.setHighlightFlag(1);
-                question.setHighlightJsonArray(highlight.toJSONString());
-            }
-            if (jsonObject.getInteger("underlineFlag") == 1) {
-                JSONArray underline = jsonObject.getJSONArray("underlineJsonArray");
-                question.setUnderlineFlag(1);
-                question.setUnderlineJsonArray(underline.toJSONString());
-            }
-        }
+        HighlightAnnotation highlightAnnotation = publicService.dealConcepts(question.getCoreJsonArray(), question.getGeneJsonArray(), "question", question.getGroupId(), question.getSubjectId());
+        question.setCoreJsonArray(highlightAnnotation.getCoreJsonArray().toJSONString());
+        question.setGeneJsonArray(highlightAnnotation.getGeneJsonArray().toJSONString());
+        question.setUnderlineJsonArray(highlightAnnotation.getUnderlineJsonArray().toJSONString());
+        //初始化 []
+        question.setAnnotationJsonArray(new JSONArray().toJSONString());
+        question.setAddJsonArray(new JSONArray().toJSONString());
         //生成id
         question.setQuestionId(CommonUtils.generateKey15());
         questionService.addQuestion(question);
@@ -72,21 +65,12 @@ public class QuestionController {
     @RequestMapping("updateQuestion")
     @ApiOperation("更新问题")
     public R<Question> updateQuestion(@RequestBody Question question) {
-        Question currentQuestion= questionService.getQuestionByQuestionId(question.getQuestionId());
+        Question currentQuestion = questionService.getQuestionByQuestionId(question.getQuestionId());
         //处理新增的符合概念的关键词
-        if (question.getFlag1() != null && question.getFlag1() == 1) {
-            JSONObject jsonObject = publicService.dealConcepts(question.getJsonArray1(), "question", currentQuestion.getGroupId(), question.getSubjectId());
-            if (jsonObject.getInteger("highlightFlag") == 1) {
-                JSONArray highLightJsonArray = jsonObject.getJSONArray("highLightJsonArray");
-                question.setHighlightFlag(1);
-                question.setHighlightJsonArray(highLightJsonArray.toJSONString());
-            }
-            if (jsonObject.getInteger("underlineFlag") == 1) {
-                JSONArray underlineJsonArray = jsonObject.getJSONArray("underlineJsonArray");
-                question.setUnderlineFlag(1);
-                question.setUnderlineJsonArray(underlineJsonArray.toJSONString());
-            }
-        }
+        HighlightAnnotation highlightAnnotation = publicService.dealConcepts(question.getCoreJsonArray(), question.getGeneJsonArray(), "question", question.getGroupId(), question.getSubjectId());
+        question.setCoreJsonArray(highlightAnnotation.getCoreJsonArray().toJSONString());
+        question.setGeneJsonArray(highlightAnnotation.getGeneJsonArray().toJSONString());
+        question.setUnderlineJsonArray(highlightAnnotation.getUnderlineJsonArray().toJSONString());
         questionService.updateQuestionByQuestionId(question);
         return R.success(question);
     }
@@ -134,7 +118,7 @@ public class QuestionController {
         JSONArray concept = new JSONArray();
         for (int i = 0; i < addHighLightJsonArray.size(); i++) {
             JSONObject jsonObject = addHighLightJsonArray.getJSONObject(i);
-            if (StringUtils.equals(jsonObject.getString("flag"), "addHighlight")) {
+            if (StringUtils.equals(jsonObject.getString("flag"), "gene")) {
                 concept.add(jsonObject.getString("word"));
             }
         }
@@ -147,12 +131,11 @@ public class QuestionController {
         Question question = new Question();
         question.setQuestionId(questionId);
         question.setQuestionId(question.getQuestionId());
-        question.setAddHighlightFlag(1);
         //把旧的高亮和新的合一起
-        if (questionByQuestionId.getAddHighlightFlag()!=null&&questionByQuestionId.getAddHighlightFlag()==1){
-            addHighLightJsonArray.addAll(JSON.parseArray(questionByQuestionId.getAddHighlightJsonArray()));
+        if (StringUtils.isNotBlank(questionByQuestionId.getAddJsonArray())) {
+            addHighLightJsonArray.addAll(JSON.parseArray(questionByQuestionId.getAddJsonArray()));
         }
-        question.setAddHighlightJsonArray(addHighLightJsonArray.toJSONString());
+        question.setAddJsonArray(addHighLightJsonArray.toJSONString());
         questionService.updateQuestionByQuestionId(question);
         return R.success(question);
     }

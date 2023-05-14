@@ -24,11 +24,8 @@ async function analizyQuestion(text, editor, classroomPart, subject) {
     let result = checkConcepts(text, subject, editor)
     result.partId = classroomPart.partId
     result.subjectId = classroomPart.subjectId
-    result.subjectName = classroomPart.subjectName
     result.groupId = classroomPart.groupId
     result.classroomId = classroomPart.classroomId
-    result.userId = classroomPart.userId
-    result.userName = classroomPart.userName
     return result;
     //保存
 }
@@ -78,16 +75,17 @@ function checkConcepts(text, subject, editor) {
     const coreList = JSON.parse(subject.coreConceptJsonArray)
     const generalList = JSON.parse(subject.generalConceptJsonArray)
     /*获取核心概念高亮*/
-    let jsonArray1 = [];
+    let coreJsonArray = [];
+    let geneJsonArray = [];
     coreList.map(item => {
         if (text.indexOf(item) > -1) {
-            jsonArray1.push(item);
+            coreJsonArray.push(item);
         }
     })
     /*获取一般概念高亮*/
     generalList.map(item => {
         if (text.indexOf(item) > -1) {
-            jsonArray1.push(item);
+            geneJsonArray.push(item);
         }
     })
     //概念比较处理
@@ -95,53 +93,51 @@ function checkConcepts(text, subject, editor) {
     const content = editor.getText();
     let flag1 = 0;
 
-    if (jsonArray1.length > 0) {
-        flag1 = 1;
-        jsonArray1 = JSON.stringify(jsonArray1)
+    if (coreJsonArray.length > 0) {
+        coreJsonArray = JSON.stringify(coreJsonArray)
     } else {
-        jsonArray1 = ''
+        coreJsonArray = ''
+    }
+    if (geneJsonArray.length > 0) {
+        geneJsonArray = JSON.stringify(geneJsonArray)
+    } else {
+        geneJsonArray = ''
     }
 
-    return {content, html, flag1, jsonArray1}
+    return {content, html, coreJsonArray, geneJsonArray}
 }
 
 var dealHightLight = {
-    hadHighArray: [],
+    hadCoreJsonArray: [],
+    hadGeneJsonArray: [],
     hadUnderlineArray: [],
-    hadAddHighlightArray: [],
+    hadAddJsonArray: [],
     hadAnnotationArray: [],
     excute(question, element) {
         dealHightLight.hadHighArray = []
         dealHightLight.hadUnderlineArray = []
         dealHightLight.hadAddHighlightArray = []
         dealHightLight.hadAnnotationArray = []
-        if (question.highlightFlag === 1) {
-            this.preElement(question.highlightJsonArray, 'highlight', element)
-        }
-        if (question.addHighlightFlag === 1) {
-            this.preElement(question.addHighlightJsonArray, 'addHighlight', element)
-        }
-        if (question.underlineFlag === 1) {
-            this.preElement(question.underlineJsonArray, 'underline', element)
-        }
-        if (question.annotationFlag === 1) {
-            this.preElement(question.annotationJsonArray, 'annotation', element)
-        }
+        this.preElement(question.coreJsonArray, 'core', element)
+        this.preElement(question.geneJsonArray, 'gene', element)
+        this.preElement(question.underlineJsonArray, 'underline', element)
+        this.preElement(question.annotationJsonArry, 'annotation', element)
+        this.preElement(question.addJsonArray, 'add', element)
     },
     preElement(jsonArray, type, element) {
+        if (!jsonArray){
+            return
+        }
         let array = JSON.parse(jsonArray);
-        //去重
-        array = array.filter((obj, index, self) =>
-            index === self.findIndex(other => JSON.stringify(obj) === JSON.stringify(other)) // 去除重复对象
-        );
-        for (let string of array) {
-            if (type === 'addHighlight') {
-                this.traverseAddHighlight(element, string, type)
-            } else if (type === 'annotation') {
-                this.traverseAnnotation(element, string, type)
-
-            } else {
-                this.traverse(element, string, type)
+        if (array.length > 0) {
+            for (let string of array) {
+                if (type === 'add') {
+                    this.traverseAdd(element, string, type)
+                } else if (type === 'annotation') {
+                    this.traverseAnnotation(element, string, type)
+                } else {
+                    this.traverse(element, string, type)
+                }
             }
         }
     },
@@ -154,24 +150,27 @@ var dealHightLight = {
                 if (type === 'underline' && dealHightLight.hadUnderlineArray.indexOf(keyword) < 0) {
                     dealHightLight.hadUnderlineArray.push(keyword);
                     $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span title='双击进入注释详情' ondblclick='addAnnotationJS(" + keyword + ")' class='underline'>" + keyword + "</span>"));
-                } else if (type === 'highlight' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
+                } else if (type === 'core' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
                     dealHightLight.hadHighArray.push(keyword);
-                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='highlight'>" + keyword + "</span>"));
+                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='core'>" + keyword + "</span>"));
+                }else if (type === 'gene' && dealHightLight.hadHighArray.indexOf(keyword) < 0) {
+                    dealHightLight.hadHighArray.push(keyword);
+                    $(this).html($(this).html().replace(new RegExp(keyword, "i"), "<span class='gene'>" + keyword + "</span>"));
                 }
             }
         });
-    }, traverseAddHighlight(node, keyword, type) {
+    }, traverseAdd(node, keyword, type) {
         const flag = keyword.flag;
         const word = keyword.word;
         $(node).find("*").each(function () {
             // 判断当前节点是否包含关键词
             if ($(this).text().indexOf(word) >= 0 || $(this).text().indexOf(word)) {
                 // 如果包含，则将关键词用<span>标签包裹起来，并添加样式
-                if (flag === 'addHighlight') {
-                    $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='addHighlight'>" + word + "</span>"));
+                if (flag === 'core') {
+                    $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='core'>" + word + "</span>"));
 
                 } else {
-                    $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='highlight'>" + word + "</span>"));
+                    $(this).html($(this).html().replace(new RegExp(word, "i"), "<span class='gene'>" + word + "</span>"));
                 }
                 dealHightLight.hadAddHighlightArray.push(word);
 

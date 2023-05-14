@@ -88,11 +88,11 @@
                 <div style="margin: 25px;font-size: 18px">
                     <div class="keywords-title">已有的高亮显示:</div>
                     <div>
-                        <div style="font-size:20px;" v-if="hightLigtWord.length===0">
+                        <div style="font-size:20px;" v-if="annotation.addHighlightFlag!==0">
                             你还未新增高亮词
                         </div>
                         <div v-else style="    color: #67c23a;background: #f0f9eb;border-color: #c2e7b0;"
-                             v-for="(item, index) in hightLigtWord"
+                             v-for="(item, index) in addHighlightJsonArray"
                              :key="index"
                              class="keywords-span">{{ item }}<i @click="deleteKeyWord(index)"
                                                                 class="el-icon-delete-solid"></i></div>
@@ -156,36 +156,34 @@
                 dialogVisible_Annotation: false,
                 input_: '',
                 addHighlightJsonArray_new: [],
-                annotation:undefined
+                annotation: {}
 
             }
         },
         computed: {
             hightLigtWord() {
-                const hightLigtWord = []
-                this.tableData.map(res => {
-                    if (res.highlightFlag !== null && res.highlightFlag === 1) {
-                        const highlightJsonArray = JSON.parse(res.highlightJsonArray)
-                        highlightJsonArray.map(res => {
-                            hightLigtWord.push(res)
-                        })
-                    }
-                    if (res.addHighlightFlag !== null && res.addHighlightFlag === 1) {
-                        const addHighlightJsoArray = JSON.parse(res.addHighlightJsonArray)
-                        addHighlightJsoArray.map(res => {
-                            hightLigtWord.push(res)
-                        })
-                    }
-
-                })
-                return hightLigtWord;
+                let arr = []
+                if (this.annotation.addHighlightFlag && this.annotation.addHighlightFlag === 1) {
+                    const addHightlightArray = JSON.parse(this.annotation.addHighlightJsonArray)
+                    addHightlightArray.map(res => {
+                        arr.push(res.word)
+                    })
+                }
+                if (this.annotation.highlightFlag && this.annotation.highlightFlag === 1) {
+                    arr = arr.concat(JSON.parse(this.annotation.highlightJsonArray))
+                }
+                return arr
+                return arr;
             },
             content() {
-                let content=''
+                let content = ''
                 this.tableData.map(res => {
-                  content=content+res.content
+                    content = content + res.content
                 })
                 return content
+            }, addHighlightJsonArray() {
+                if (this.annotation.addHighlightFlag)
+                    return JSON.parse(this.question.addHighlightJsonArray)
             }
         },
         created() {
@@ -208,7 +206,7 @@
                     if (this.hightLigtWord) {
                         for (let i = 0; i < this.hightLigtWord.length; i++) {
                             if (this.hightLigtWord[i].indexOf(this.input_) > -1) {
-                                this.$message.error(hightLigtWord[i] + "已经高亮显示，请重试")
+                                this.$message.error(this.hightLigtWord[i] + "已经高亮显示，请重试")
                                 return
                             }
                         }
@@ -258,14 +256,14 @@
                             this.groupers.push(member.userName)
                         })
                         loadAnnotationContainer(this.tableData)
-                        dealHightLight.excute(this.annotation,$('.richText'))
+                        dealHightLight.excute(this.annotation, $('.richText'))
                     }
                 })
             }, editorAnnotaton() {
                 window.parent.menuHandle({
                     menuId: 'updateAnnotation',
                     name: '修改注释',
-                    url: '/ppat/page/classroom/annotation/editorAnnotation.html?annotationId=' + this.annotationId +
+                    url: '/ppat/page/classroom/annotation/editAnnotationForQuestion.html?annotationId=' + this.annotationId +
                         '&questionId=' + this.questionId +
                         '&annotationWord=' + encodeURI(this.annotationWord) +
                         '&questionTitle=' + encodeURI(this.questionTitle)
@@ -277,10 +275,24 @@
                     name: '问题详情',
                     url: '/ppat/page/classroom/question/question.html?questionId=' + this.questionId
                 }, true);
-            },addAnnotationPage(){
+            }, addAnnotationPage() {
 
-            },addHighLight(){
-
+            },
+            addHighLight() {
+                this.dialogVisible_HighLight = false
+                //把新增的内容重复的去掉
+                const arr = JSON.stringify(this.addHighlightJsonArray_new)
+                //发送后台处理
+                addHighLightAnnotation(this.annotation.annotationId, arr).then(res => {
+                    if (res.code === 1) {
+                        this.$message.success("添加成功")
+                        this.question.addHighlightFlag = res.data.addHighlightFlag
+                        this.question.addHighlightJsonArray = res.data.addHighlightJsonArray
+                        let _content = $('#question-content');
+                        dealHightLight.excute(res.data, _content.get(0));
+                        this.addHighlightJsonArray_new = []
+                    }
+                });
             }
         }
     })

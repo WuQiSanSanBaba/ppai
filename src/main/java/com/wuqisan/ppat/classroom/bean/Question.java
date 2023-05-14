@@ -11,16 +11,12 @@ public class Question extends BaseBean {
     private String title;
     private String content;
     private String html;
-    private String highlightJsonArray;
-    private Integer highlightFlag;
-    private Integer addHighlightFlag;
-    private String addHighlightJsonArray;
+    private String coreJsonArray;
+    private String geneJsonArray;
+    private String addJsonArray;
     private String underlineJsonArray;
-    private Integer underlineFlag;
     private String annotationJsonArray;
-    private Integer annotationFlag;
     private Long subjectId;
-    private String subjectName;
     private Long partId;
     private Long groupId;
 

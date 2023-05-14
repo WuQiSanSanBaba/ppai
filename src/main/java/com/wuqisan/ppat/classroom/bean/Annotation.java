@@ -15,14 +15,11 @@ public class Annotation extends BaseBean {
     private Long groupId;
     private Long classroomId;
     private Long subjectId;
-    private String subjectName;
-    private Integer highlightFlag;
-    private Integer underlineFlag;
-    private String highlightJsonArray;
-    private String underlineJsonArray;
     private String annotationType;
+    private String coreJsonArray;
+    private String geneJsonArray;
+    private String addJsonArray;
+    private String underlineJsonArray;
     private String annotationJsonArray;
-    private Integer annotationFlag;
-    private Integer addHighlightFlag;
-    private String addHighlightJsonArray;
+
 }

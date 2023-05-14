@@ -26,3 +26,11 @@ function loadAnnotationContainer (data){
         wrapper.append(richTextDiv)
     })
 }
+
+function addHighLightAnnotation(annotationId, newArrayString) {
+    return $axios({
+        url: '/classroom/annotation/addHighlightAnnotation',
+        method: 'post',
+        data: {annotationId: annotationId, newArrayString: newArrayString}
+    });
+}

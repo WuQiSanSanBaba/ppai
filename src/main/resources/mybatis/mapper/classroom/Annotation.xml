@@ -17,27 +17,37 @@
     </insert>
     <insert id="addAddAnnotation">
 
-        INSERT INTO annotation (annotation_id, part_id, question_title, question_id, group_id, classroom_id, subject_id,
-                                subject_name, update_time, update_user, highlight_flag, underline_flag,
-                                highlight_json_array, underline_json_array, create_user, create_time, annotation_type,
-                                annotation_json_array, annotation_flag, add_highlight_flag, add_highlight_json_array,
-                                annotation_word)
-        VALUES (#{annotationId}, #{partId}, #{questionTitle}, #{questionId}, #{groupId}, #{classroomId}, #{subjectId},
-                #{subjectName}, #{updateTime}, #{updateUser}, #{highlightFlag}, #{underlineFlag}, #{highlightJsonArray},
-                #{underlineJsonArray}, #{createUser}, #{createTime}, #{annotationType}, #{annotationJsonArray},
-                #{annotationFlag}, #{addHighlightFlag}, #{addHighlightJsonArray}, #{annotationWord})
+        INSERT INTO annotation
+        (annotation_id, part_id, question_title, question_id, group_id, classroom_id, subject_id,
+         update_time, update_user, create_user, create_time, annotation_type, annotation_word,
+         core_json_array, gene_json_array, underline_json_array, add_json_array, annotation_json_array)
+        VALUES (#{annotationId}, #{partId}, #{questionTitle}, #{questionId}, #{groupId}, #{classroomId},
+                #{subjectId}, #{updateTime}, #{updateUser}, #{createUser}, #{createTime}, #{annotationType},
+                #{annotationWord}, #{coreJsonArray}, #{geneJsonArray}, #{underlineJsonArray},
+                #{addJsonArray}, #{annotationJsonArray})
 
     </insert>
 
     <update id="updateAnnotionBatchListById">
         update annotation_batch
         <set>
-            <if test="content != null">
-                content = #{content},
-            </if>
-            <if test="html !=null">
-                html=#{html},
-            </if>
+            <if test="partId != null">part_id=#{partId},</if>
+            <if test="questionTitle != null">question_title=#{questionTitle},</if>
+            <if test="questionId != null">question_id=#{questionId},</if>
+            <if test="groupId != null">group_id=#{groupId},</if>
+            <if test="classroomId != null">classroom_id=#{classroomId},</if>
+            <if test="subjectId != null">subject_id=#{subjectId},</if>
+            <if test="updateTime != null">update_time=#{updateTime},</if>
+            <if test="updateUser != null">update_user=#{updateUser},</if>
+            <if test="createUser != null">create_user=#{createUser},</if>
+            <if test="createTime != null">create_time=#{createTime},</if>
+            <if test="annotationType != null">annotation_type=#{annotationType},</if>
+            <if test="annotationWord != null">annotation_word=#{annotationWord},</if>
+            <if test="coreJsonArray != null">core_json_array=#{coreJsonArray},</if>
+            <if test="geneJsonArray != null">gene_json_array=#{geneJsonArray},</if>
+            <if test="underlineJsonArray != null">underline_json_array=#{underlineJsonArray},</if>
+            <if test="addJsonArray != null">add_json_array=#{addJsonArray},</if>
+            <if test="annotationJsonArray != null">annotation_json_array=#{annotationJsonArray},</if>
         </set>
         where annotation_batch_id = #{annotationBatchId}
     </update>
@@ -75,21 +85,17 @@
                group_id,
                classroom_id,
                subject_id,
-               subject_name,
                update_time,
                update_user,
-               highlight_flag,
-               underline_flag,
-               highlight_json_array,
-               underline_json_array,
                create_user,
                create_time,
                annotation_type,
-               annotation_json_array,
-               annotation_flag,
-               add_highlight_flag,
-               add_highlight_json_array,
-               annotation_word
+               annotation_word,
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
         FROM annotation
         where question_id = #{questionId}
     </select>
@@ -120,21 +126,17 @@
                group_id,
                classroom_id,
                subject_id,
-               subject_name,
                update_time,
                update_user,
-               highlight_flag,
-               underline_flag,
-               highlight_json_array,
-               underline_json_array,
                create_user,
                create_time,
                annotation_type,
                annotation_word,
-               annotation_json_array,
-               annotation_flag,
-               add_highlight_flag,
-               add_highlight_json_array
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
         FROM annotation
         where annotation_id = #{annotationId}
     </select>
@@ -146,21 +148,17 @@
                group_id,
                classroom_id,
                subject_id,
-               subject_name,
                update_time,
                update_user,
-               highlight_flag,
-               underline_flag,
-               highlight_json_array,
-               underline_json_array,
                create_user,
                create_time,
                annotation_type,
-               annotation_json_array,
-               annotation_flag,
-               add_highlight_flag,
-               add_highlight_json_array,
-               annotation_word
+               annotation_word,
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
         FROM annotation
         where group_id = #{groupId}
           and subject_id = #{subjectId}

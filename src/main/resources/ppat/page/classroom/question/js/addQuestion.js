@@ -99,8 +99,8 @@ function addQuestion(params) {
     return axios.post('/classroom/question/addQuestion', {
         title: params.title,
         content: params.content,
-        flag1: params.flag1,
-        jsonArray1: params.jsonArray1,
+        geneJsonArray: params.geneJsonArray,
+        coreJsonArray: params.coreJsonArray,
         html: params.html,
         groupId: params.groupId,
         subjectId: params.subjectId,
@@ -113,13 +113,9 @@ function updateQuestion(params) {
     return axios.post('/classroom/question/updateQuestion', {
         content: params.content,
         html: params.html,
-        flag1: params.flag1,
-        jsonArray1: params.jsonArray1,
+        geneJsonArray: params.geneJsonArray,
+        coreJsonArray: params.coreJsonArray,
         questionId: params.questionId,
-        highlightFlag: params.highlightFlag,
-        highlightJsonArray: params.highlightJsonArray,
-        underlineFlag: params.underlineFlag,
-        underlineJsonArray: params.underlineJsonArray,
     })
 }
 

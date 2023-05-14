@@ -37,13 +37,17 @@ public class PublicServiceImpl implements PublicService {
      *
      */
     @Override
-    public JSONObject dealConcepts(String jsonArray, String type, Long groupId, Long subjectId) {
+    public HighlightAnnotation dealConcepts(String coreJsonArrayString, String geneJsonArrayString, String type, Long groupId, Long subjectId) {
         Long userId = BaseContext.getUser().getUserId();
-        JSONArray conceptArray = JSON.parseArray(jsonArray);
-        JSONArray underlineArr = new JSONArray();
-        JSONArray highLightArr = new JSONArray();
-        int underlineFlag = 0;
-        int highlightFlag = 0;
+        JSONArray coreJsonArray = new JSONArray();
+        if (StringUtils.isNotBlank(coreJsonArrayString)) {
+            coreJsonArray = JSON.parseArray(coreJsonArrayString);
+        }
+        JSONArray geneJsonArray = new JSONArray();
+        if (StringUtils.isNotBlank(coreJsonArrayString)) {
+            geneJsonArray = JSON.parseArray(geneJsonArrayString);
+        }
+        JSONArray underlineJsonArray = new JSONArray();
         List<HighlightAnnotation> highlightUnderList;
         //存量问题列表
         List<Question> highLightQuestion = questionService.getHighLightByGroupIdAndSubjectId(groupId, subjectId);
@@ -53,33 +57,33 @@ public class PublicServiceImpl implements PublicService {
         JSONArray highlightAll = this.getHighlightArray(highlightUnderList);
         //获取所有被注释的词
         JSONArray annotationArray = this.getAnnotationArray(highlightUnderList);
-        //1.为零直接把概念显示为高亮
-        if (highlightAll.isEmpty()) {
-            highLightArr.addAll(conceptArray);
-        } else {
-            for (int i = 0; i < conceptArray.size(); i++) {
-                String keyword = conceptArray.getString(i);
+        if (!highlightAll.isEmpty()) {
+            for (int i = 0; i < coreJsonArray.size(); i++) {
+                String keyword = coreJsonArray.getString(i);
                 if (highlightAll.contains(keyword)) {
                     if (annotationArray.contains(keyword)) {
-                        underlineArr.add(keyword);
+                        underlineJsonArray.add(keyword);
                     }
                 } else {
-                    highLightArr.add(keyword);
+                    coreJsonArray.remove(keyword);
+                }
+            }
+            for (int i = 0; i < geneJsonArray.size(); i++) {
+                String keyword = geneJsonArray.getString(i);
+                if (highlightAll.contains(keyword)) {
+                    if (annotationArray.contains(keyword)) {
+                        underlineJsonArray.add(keyword);
+                    }
+                } else {
+                    geneJsonArray.remove(keyword);
                 }
             }
         }
-        if (!underlineArr.isEmpty()) {
-            underlineFlag = 1;
-        }
-        if (!highLightArr.isEmpty()) {
-            highlightFlag = 1;
-        }
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("highlightFlag", highlightFlag);
-        jsonObject.put("underlineFlag", underlineFlag);
-        jsonObject.put("highLightJsonArray", highLightArr);
-        jsonObject.put("underlineJsonArray", underlineArr);
-        return jsonObject;
+        HighlightAnnotation highlightAnnotation = new HighlightAnnotation();
+        highlightAnnotation.setCoreJsonArray(coreJsonArray);
+        highlightAnnotation.setGeneJsonArray(geneJsonArray);
+        highlightAnnotation.setUnderlineJsonArray(underlineJsonArray);
+        return highlightAnnotation;
     }
 
     /**
@@ -103,10 +107,10 @@ public class PublicServiceImpl implements PublicService {
             String add = newArray.getString(i);
             if (allHighlight.contains(add)) {
                 addJson.put("word", add);
-                addJson.put("flag", "highlight");
+                addJson.put("flag", "core");
             } else {
                 addJson.put("word", add);
-                addJson.put("flag", "addHighlight");
+                addJson.put("flag", "gene");
             }
             result.add(addJson);
         }
@@ -119,13 +123,15 @@ public class PublicServiceImpl implements PublicService {
         JSONArray jsonArray = new JSONArray();
         for (Question question : highLightQuestionList) {
             //高亮
-            if (question.getHighlightFlag() != null && question.getHighlightFlag() == 1) {
-                jsonArray.addAll(JSON.parseArray(question.getHighlightJsonArray()));
+            jsonArray.addAll(JSON.parseArray(question.getCoreJsonArray()));
+            jsonArray.addAll(JSON.parseArray(question.getGeneJsonArray()));
+            JSONArray add = JSON.parseArray(question.getAddJsonArray());
+            JSONArray addWord = new JSONArray();
+            for (int i = 0; i < add.size(); i++) {
+                String word = add.getJSONObject(i).getString("word");
+                addWord.add(word);
             }
-            //新增高亮
-            if (question.getAddHighlightFlag() != null && question.getAddHighlightFlag() == 1) {
-                jsonArray.addAll(JSON.parseArray(question.getAddHighlightJsonArray()));
-            }
+            jsonArray.addAll(addWord);
         }
         String coreConceptJsonArray = subjectById.getCoreConceptJsonArray();
         String generalConceptJsonArray = subjectById.getGeneralConceptJsonArray();
@@ -137,10 +143,7 @@ public class PublicServiceImpl implements PublicService {
     private JSONArray getAnnotationArray(List<HighlightAnnotation> highlightUnderList) {
         JSONArray jsonArray = new JSONArray();
         for (HighlightAnnotation highlightAnnotation : highlightUnderList) {
-            if (highlightAnnotation.getAnnotationFlag() == 1) {
-                JSONArray jsonArray1 = JSON.parseArray(highlightAnnotation.getAnnotationJsonArray());
-                jsonArray.addAll(jsonArray1);
-            }
+            jsonArray.addAll(highlightAnnotation.getAnnotationJsonArray());
         }
         return jsonArray;
     }
@@ -154,14 +157,9 @@ public class PublicServiceImpl implements PublicService {
     private JSONArray getHighlightArray(List<HighlightAnnotation> highlightUnderList) {
         JSONArray jsonArray = new JSONArray();
         for (HighlightAnnotation highlightAnnotation : highlightUnderList) {
-            if (highlightAnnotation.getHighlightFlag() == 1) {
-                JSONArray jsonArray1 = JSON.parseArray(highlightAnnotation.getHighlightJsonArray());
-                jsonArray.addAll(jsonArray1);
-            }
-            if (highlightAnnotation.getAddHighlightFlag() == 1) {
-                JSONArray jsonArray1 = JSON.parseArray(highlightAnnotation.getAddHighlightJsonArray());
-                jsonArray.addAll(jsonArray1);
-            }
+            jsonArray.addAll(highlightAnnotation.getCoreJsonArray());
+            jsonArray.addAll(highlightAnnotation.getGeneJsonArray());
+            jsonArray.addAll(highlightAnnotation.getAddJsonArray());
         }
         return jsonArray;
     }
@@ -175,26 +173,20 @@ public class PublicServiceImpl implements PublicService {
             }
             //高亮
             HighlightAnnotation highlightAnnotation = new HighlightAnnotation();
-            if (question.getHighlightFlag() != null && question.getHighlightFlag() == 1) {
-                highlightAnnotation.setHighlightFlag(1);
-                highlightAnnotation.setHighlightJsonArray(question.getHighlightJsonArray());
-            } else {
-                highlightAnnotation.setHighlightFlag(0);
+            JSONArray core = JSON.parseArray(question.getCoreJsonArray());
+            JSONArray gege = JSON.parseArray(question.getGeneJsonArray());
+            JSONArray anno = JSON.parseArray(question.getAnnotationJsonArray());
+            JSONArray addWord = new JSONArray();
+            JSONArray add = JSON.parseArray(question.getAddJsonArray());
+            for (int i = 0; i < add.size(); i++) {
+                String word = add.getJSONObject(i).getString("word");
+                addWord.add(word);
             }
-            //注释
-            if (question.getAnnotationFlag() != null && question.getAnnotationFlag() == 1) {
-                highlightAnnotation.setAnnotationFlag(1);
-                highlightAnnotation.setAnnotationJsonArray(question.getAnnotationJsonArray());
-            } else {
-                highlightAnnotation.setAnnotationFlag(0);
-            }
-            //新增高亮
-            if (question.getAddHighlightFlag() != null && question.getAddHighlightFlag() == 1) {
-                highlightAnnotation.setAddHighlightFlag(1);
-                highlightAnnotation.setAddHighlightJsonArray(question.getAddHighlightJsonArray());
-            } else {
-                highlightAnnotation.setAddHighlightFlag(0);
-            }
+
+            highlightAnnotation.setCoreJsonArray(core);
+            highlightAnnotation.setGeneJsonArray(gege);
+            highlightAnnotation.setAnnotationJsonArray(anno);
+            highlightAnnotation.setAddJsonArray(addWord);
             list.add(highlightAnnotation);
         }
         for (Annotation annotation : highLightAnnotationBatches) {
@@ -204,26 +196,15 @@ public class PublicServiceImpl implements PublicService {
             }
             //高亮
             HighlightAnnotation highlightAnnotation = new HighlightAnnotation();
-            if (annotation.getHighlightFlag() != null && annotation.getHighlightFlag() == 1) {
-                highlightAnnotation.setHighlightFlag(1);
-                highlightAnnotation.setHighlightJsonArray(annotation.getHighlightJsonArray());
-            } else {
-                highlightAnnotation.setHighlightFlag(0);
-            }
-            //注释
-            if (annotation.getAnnotationFlag() != null && annotation.getAnnotationFlag() == 1) {
-                highlightAnnotation.setAnnotationFlag(1);
-                highlightAnnotation.setAnnotationJsonArray(annotation.getAnnotationJsonArray());
-            } else {
-                highlightAnnotation.setAnnotationFlag(0);
-            }
-            //新增高亮
-            if (annotation.getAddHighlightFlag() != null && annotation.getAddHighlightFlag() == 1) {
-                highlightAnnotation.setAddHighlightFlag(1);
-                highlightAnnotation.setAddHighlightJsonArray(annotation.getAddHighlightJsonArray());
-            } else {
-                highlightAnnotation.setAddHighlightFlag(0);
-            }
+            JSONArray core = JSON.parseArray(annotation.getCoreJsonArray());
+            JSONArray gege = JSON.parseArray(annotation.getGeneJsonArray());
+            JSONArray anno = JSON.parseArray(annotation.getAnnotationJsonArray());
+            JSONArray add = JSON.parseArray(annotation.getAddJsonArray());
+            highlightAnnotation.setCoreJsonArray(core);
+            highlightAnnotation.setGeneJsonArray(gege);
+            highlightAnnotation.setAnnotationJsonArray(anno);
+            highlightAnnotation.setAddJsonArray(add);
+            list.add(highlightAnnotation);
             list.add(highlightAnnotation);
         }
         return list;

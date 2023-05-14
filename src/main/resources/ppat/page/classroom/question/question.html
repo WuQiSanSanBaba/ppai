@@ -75,11 +75,11 @@
                 <div style="margin: 25px;font-size: 18px">
                     <div class="keywords-title">已有的高亮显示:</div>
                     <div>
-                        <div style="font-size:20px;" v-if="question.addHighlightFlag!==1">
+                        <div style="font-size:20px;" v-if="!question.addJsonArray">
                             你还未新增高亮词
                         </div>
                         <div v-else style="    color: #67c23a;background: #f0f9eb;border-color: #c2e7b0;"
-                             v-for="(item, index) in addHighlightJsonArray"
+                             v-for="(item, index) in addJsonArray"
                              :key="index"
                              class="keywords-span">{{ item.word }}<i @click="deleteKeyWord(index)"
                                                                      class="el-icon-delete-solid"></i></div>
@@ -153,20 +153,25 @@
         computed: {
             allHighLight() {
                 let arr = []
-                if (this.question.addHighlightFlag && this.question.addHighlightFlag === 1) {
-                    const addHightlightArray = JSON.parse(this.question.addHighlightJsonArray)
-                    addHightlightArray.map(res => {
+                if (this.question.addJsonArray) {
+                    const addJsonArray = JSON.parse(this.question.addJsonArray)
+                    addJsonArray.map(res => {
                         arr.push(res.word)
                     })
                 }
-                if (this.question.highlightFlag && this.question.highlightFlag === 1) {
-                    arr = arr.concat(JSON.parse(this.question.highlightJsonArray))
+                if (this.question.coreJsonArray) {
+                    arr = arr.concat(JSON.parse(this.question.coreJsonArray))
+                }
+                if (this.question.geneJsonArray) {
+                    arr = arr.concat(JSON.parse(this.question.geneJsonArray))
                 }
                 return arr
             },
-            addHighlightJsonArray() {
-                if (this.question.addHighlightFlag)
-                    return JSON.parse(this.question.addHighlightJsonArray)
+            addJsonArray() {
+                if (this.question.addJsonArray) {
+                    return JSON.parse(this.question.addJsonArray)
+                }
+                return []
             }
         },
         created() {
@@ -236,11 +241,20 @@
                         this.$message.error(this.input_ + "没有出现在正文中")
                         return;
                     }
-                    if (this.question.highlightJsonArray) {
-                        const highlightJsonArray = JSON.parse(this.question.highlightJsonArray)
-                        for (let i = 0; i < highlightJsonArray.length; i++) {
-                            if (highlightJsonArray[i].indexOf(this.input_) > -1) {
-                                this.$message.error(highlightJsonArray[i] + "已经高亮显示，请重试")
+                    if (this.question.coreJsonArray) {
+                        const coreJsonArray = JSON.parse(this.question.coreJsonArray)
+                        for (let i = 0; i < coreJsonArray.length; i++) {
+                            if (coreJsonArray[i].indexOf(this.input_) > -1) {
+                                this.$message.error(coreJsonArray[i] + "已经高亮显示，请重试")
+                                return
+                            }
+                        }
+                    }
+                    if (this.question.geneJsonArray) {
+                        const geneJsonArray = JSON.parse(this.question.geneJsonArray)
+                        for (let i = 0; i < geneJsonArray.length; i++) {
+                            if (geneJsonArray[i].indexOf(this.input_) > -1) {
+                                this.$message.error(geneJsonArray[i] + "已经高亮显示，请重试")
                                 return
                             }
                         }
@@ -254,10 +268,10 @@
                         }
                     }
                     //把已经高亮的去掉_蓝色
-                    if (this.question.addHighlightJsonArray) {
-                        const addHighlightJsonArray = JSON.parse(this.question.addHighlightJsonArray)
-                        for (let i = 0; i < addHighlightJsonArray.length; i++) {
-                            if (addHighlightJsonArray[i].word.indexOf(this.input_) > -1) {
+                    if (this.question.addJsonArray) {
+                        const addJsonArray = JSON.parse(this.question.addJsonArray)
+                        for (let i = 0; i < addJsonArray.length; i++) {
+                            if (addJsonArray[i].word.indexOf(this.input_) > -1) {
                                 this.$message.error(this.input_ + "已经高亮显示，请重试")
                                 return
                             }
@@ -276,8 +290,7 @@
                 addHighLight_(this.question.questionId, arr).then(res => {
                     if (res.code === 1) {
                         this.$message.success("添加成功")
-                        this.question.addHighlightFlag = res.data.addHighlightFlag
-                        this.question.addHighlightJsonArray = res.data.addHighlightJsonArray
+                        this.question.addJsonArray = res.data.addJsonArray
                         let _content = $('#question-content');
                         dealHightLight.excute(res.data, _content.get(0));
                         this.addHighlightJsonArray_new = []
@@ -308,7 +321,7 @@
                      'questionId='+ this.question.questionId+"&"+
                      'annotationWord='+encodeURI(item)+"&"+
                      'questionTitle='+encodeURI(this.question.title)*/
-                const href = '/ppat/page/classroom/annotation/addAnnotation.html?' +
+                const href = '/ppat/page/classroom/annotation/addAnnotationForQuestion.html?' +
                     'questionId=' + this.question.questionId + "&" +
                     'annotationWord=' + encodeURI(item) + "&" +
                     'questionTitle=' + encodeURI(this.question.title)
@@ -322,7 +335,7 @@
         window.parent.menuHandle({
             menuId: 'annotationBatch',
             name: '注释详情',
-            url: '/ppat/page/classroom/annotation/annotation.html?' +
+            url: '/ppat/page/classroom/annotation/annotationForQuestion.html?' +
                 'annotationGroupId=' + annotationGroupId
 
         }, true);

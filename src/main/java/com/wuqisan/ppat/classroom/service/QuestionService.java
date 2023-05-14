@@ -24,15 +24,5 @@ public interface QuestionService {
      * @param question
      */
     void updateQuestionByQuestionId(Question question);
-
-    /**
-     * 处理新增高亮
-     *
-     * @param questionId
-     * @param newArray
-     * @return
-     */
-    Question doAddHighlight(Long questionId, JSONArray newArray);
-
     Question getQuestionByPartId(Long partId);
 }

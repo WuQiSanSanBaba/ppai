@@ -33,7 +33,8 @@ async function saveannotations() {
         annotationType : 'question',
     }
     const annotationBatchList = []
-    let jsonArray=[]
+    let coreJsonArray=[]
+    let geneJsonArray=[]
     for (let item of editorContainerArray) {
         const text = item.editor.getText();
         let annotationBatch = {
@@ -46,7 +47,8 @@ async function saveannotations() {
         }
         await analizyQuestion(text, item.editor,classroomPart,subject).then(res => {
             if (res.flag1===1){
-                jsonArray.push(...JSON.parse(res.jsonArray1))
+                coreJsonArray.push(...JSON.parse(res.coreJsonArray))
+                geneJsonArray.push(...JSON.parse(res.geneJsonArray))
             }
             annotationBatch.partId = res.partId
             annotationBatch.groupId = res.groupId
@@ -54,15 +56,17 @@ async function saveannotations() {
         });
         annotationBatchList.push(annotationBatch)
     }
-    if (jsonArray.length>0){
-        const newArray=  jsonArray.filter((item,index)=>{
-            return jsonArray.indexOf(item)===index
+    if (coreJsonArray.length>0){
+        const newArray=  coreJsonArray.filter((item,index)=>{
+            return coreJsonArray.indexOf(item)===index
         })
-        annotation.jsonArray1=JSON.stringify(newArray)
-        annotation.flag1=1
-
-    }else {
-        annotation.flag1=0
+        annotation.geneJsonArray=JSON.stringify(newArray)
+    }
+    if (geneJsonArray.length>0){
+        const newArray=  geneJsonArray.filter((item,index)=>{
+            return geneJsonArray.indexOf(item)===index
+        })
+        annotation.geneJsonArray=JSON.stringify(newArray)
     }
     annotationDto.annotation=annotation
     annotationDto.annotationBatchList=annotationBatchList

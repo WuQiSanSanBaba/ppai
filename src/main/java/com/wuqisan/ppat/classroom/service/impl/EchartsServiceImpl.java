@@ -34,20 +34,15 @@ public class EchartsServiceImpl implements EchartsService {
      * @return
      */
     @Override
-    public Echarts gneneEcharts(Long partId) {
+    public Echarts gneneEcharts(Question  question) {
         Echarts echarts = new Echarts();
-        Question question = questionService.getQuestionByPartId(partId);
-        List<AnnotationBatch> annotationBatch = annotationService.getAnnotationListByQuestionId(question.getQuestionId());
-        QuestionAnnotationDto questionAnnotationDto = new QuestionAnnotationDto();
-        questionAnnotationDto.setQuestion(question);
-        questionAnnotationDto.setAnnotationBatches(annotationBatch);
         //节点列表
         List<NodeEcharts> list = new ArrayList<>();
         List<LinkEcharts> linkEchartsList=new ArrayList<>();
         //生成根节点
         NodeEcharts nodeEcharts = this.geneRootNode(question);
         list.add(nodeEcharts);
-        if (question.getAnnotationFlag() != null && question.getAnnotationFlag() == 1) {
+        if (!JSON.parseArray(question.getAnnotationJsonArray()).isEmpty()) {
             //生成儿子节点
             List<NodeEcharts> childList = this.geneChildNode(question);
             linkEchartsList = this.buildConnections(nodeEcharts, childList);

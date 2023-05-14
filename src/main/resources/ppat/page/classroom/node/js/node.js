@@ -84,7 +84,7 @@ function generateChart(data, this_) {
             window.parent.menuHandle({
                 menuId: 'annotation',
                 name: '注释详情',
-                url: '/ppat/page/classroom/annotation/annotation.html?' +
+                url: '/ppat/page/classroom/annotation/annotationForQuestion.html?' +
                     'annotationId=' + annotationId
 
             }, false);

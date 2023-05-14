@@ -12,7 +12,7 @@ public interface AnnotationService {
   Annotation getAnnotationByAnnotationId(Long annotationId);
   void addAnnotationBatchList(List<AnnotationBatch> list, Long annotionGroupId);
 
-  Annotation doHighlightAnnotation(Annotation list, Question question,Long groupId,Long subjectId);
+  Annotation doHighlightAnnotation(Annotation list);
   PageInfo<AnnotationBatch> getAnnotationBatchListByAnnotationIdPage(Long annotationId);
   List<AnnotationBatch> getAnnotationListByAnnotationBatchByAnnotationId(Long annotationId);
   List<AnnotationBatch> getAnnotationListByQuestionId(Long annotationId);

@@ -8,25 +8,47 @@
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Annotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/HighlightAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/HighlightAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/bean/Question.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/EchartsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/EchartsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/dto/AnnotationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/dto/AnnotationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/mapper/AnnotationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/mapper/AnnotationMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/AnnotationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/AnnotationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/EchartsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/EchartsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/PublicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/PublicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/QuestionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/AnnotationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/EchartsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/EchartsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/Annotation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/Annotation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/addAnnotationAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/addAnnotationForAnnotation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/annotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/annotation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/editorAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/editorAnnotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/addAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/addAnnotationForQuestion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/annotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/annotationForQuestion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/editorAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/editAnnotationForQuestion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/addAnnotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/addAnnotation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/annotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/annotation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/annotationCommon.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/annotationCommon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/editorAnnotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/editorAnnotation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/editorAnnotation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/annotation/js/editAnnotation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/css/highlight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/css/highlight.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/js/hightLight.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/js/hightLight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/subject/selectSubject.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/subject/selectSubject.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/styles/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/styles/page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/js/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/node/js/node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/js/addQuestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ppat/page/classroom/question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/bean/Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/bean/Question.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/EchartsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/EchartsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/QuestionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/controller/QuestionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/PublicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/PublicService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/QuestionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/QuestionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/EchartsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/EchartsServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/PublicServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wuqisan/ppat/classroom/service/impl/QuestionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/question.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapper/classroom/question.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/node/js/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/node/js/node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/js/addQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/js/addQuestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/question/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/page/classroom/subject/selectSubject.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/page/classroom/subject/selectSubject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ppat/styles/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ppat/styles/page.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +300,8 @@
       <workItem from="1683850463144" duration="42540000" />
       <workItem from="1683949717406" duration="17944000" />
       <workItem from="1683982774947" duration="8898000" />
-      <workItem from="1684004219742" duration="4068000" />
+      <workItem from="1684004219742" duration="13848000" />
+      <workItem from="1684045357921" duration="2004000" />
     </task>
     <task id="LOCAL-00001" summary="tijiaobei">
       <created>1663427583805</created>
@@ -371,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683989389185</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="简简单单提交一下而已">
+      <created>1684010542103</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1684010542103</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,13 +425,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/AnnotationController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wuqisan/ppat/classroom/controller/QuestionController.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="23" />
+          <line>69</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

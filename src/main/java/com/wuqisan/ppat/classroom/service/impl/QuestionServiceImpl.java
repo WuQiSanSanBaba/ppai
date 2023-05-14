@@ -58,66 +58,6 @@ public class QuestionServiceImpl implements QuestionService {
         questionMapper.updateQuestionByQuestionId(question);
     }
 
-    /**
-     * 处理新增高亮
-     *
-     * @param questionId
-     * @param newArray
-     * @return
-     */
-    @Override
-    public Question doAddHighlight(Long questionId, JSONArray newArray) {
-        //1、首先根据问题ID把全部信息查出来
-        Question question = this.getQuestionByQuestionId(questionId);
-        //2.获取已经高亮的JSON数组
-        JSONArray highlightArray;
-        if (question != null && question.getHighlightFlag() != null && question.getHighlightFlag() == 1) {
-            highlightArray = JSON.parseArray(question.getHighlightJsonArray());
-        } else {
-            highlightArray = new JSONArray();
-        }
-        //2.1新建一个这次新增高亮的数组
-        JSONArray highlightArrayThisNew=new JSONArray();
-        //2.2查询存量——黄色高亮
-        Long groupId = BaseContext.getUser().getClassroomPart().getGroupId();
-        //2.3把同组的问题信息查出来
-        List<Question> questionList = questionMapper.getHighlightListByGroupIdAndSubjectId(groupId, question.getSubjectId());
-        //2.4如果存量问题里的高亮词已经包含这次新增高亮就作为高亮显示而不是新增高亮显示
-        for (Object newItem : newArray) {
-            for (Question question_ : questionList) {
-                if ("1".equals(question_.getHighlightJsonArray())) {
-                    String highLight = question_.getHighlightJsonArray();
-                    JSONArray highLightArray = JSON.parseArray(highLight);
-                    if (highLightArray.contains(newItem)) {
-                        //如果存量有了，使其高亮
-                        highlightArrayThisNew.add(newItem);
-                        //移除新增数组里的该元素
-                        newArray.remove(newItem);
-                    }
-                }
-            }
-        }
-        //2.5如果原高亮或新高亮有元素 将他们合并并转为JSON字符串
-        if (!highlightArray.isEmpty()||!highlightArrayThisNew.isEmpty()) {
-            highlightArray.addAll(highlightArrayThisNew);
-            question.setHighlightJsonArray(highlightArray.toJSONString());
-            question.setHighlightFlag(1);
-        } else {
-            question.setHighlightFlag(0);
-        }
-        //2.6如果新增高亮有，就设置新增高亮JSON数组字符串
-        if (!newArray.isEmpty()) {
-            //把已经存在的新增高亮拿出来
-            if (question.getAnnotationFlag()!=null && question.getAddHighlightFlag()==1){
-                newArray.addAll(JSON.parseArray(question.getAddHighlightJsonArray()));
-            }
-            question.setAddHighlightFlag(1);
-            question.setAddHighlightJsonArray(newArray.toJSONString());
-        } else {
-            question.setAddHighlightFlag(0);
-        }
-        return question;
-    }
 
     /**
      * @param partId

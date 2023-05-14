@@ -5,170 +5,96 @@
 <mapper namespace="com.wuqisan.ppat.classroom.mapper.QuestionMapper">
     <insert id="addQuestion">
         INSERT INTO question
-        (question_id,
-         title,
-         content,
-         html,
-         highlight_json_array,
-         highlight_flag,
-         underline_json_array,
-         underline_flag,
-         annotation_json_array,
-         annotation_flag,
-         subject_id,
-         subject_name,
-         update_user,
-         create_user,
-         create_time,
-         update_time,
-         part_id,
-         group_id)
-        VALUES (#{questionId},
-                #{title},
-                #{content},
-                #{html},
-                #{highlightJsonArray},
-                #{highlightFlag},
-                #{underlineJsonArray},
-                #{underlineFlag},
-                #{annotationJsonArray},
-                #{annotationFlag},
-                #{subjectId},
-                #{subjectName},
-                #{updateUser},
-                #{createUser},
-                #{createTime},
-                #{updateTime},
-                #{partId},
-                #{groupId})
+        (question_id, title, content, html, group_id, part_id,
+         subject_id, update_user, create_user, create_time,
+         update_time, core_json_array, gene_json_array, underline_json_array,
+         add_json_array, annotation_json_array)
+        VALUES (#{questionId}, #{title}, #{content}, #{html}, #{groupId}, #{partId},
+                #{subjectId}, #{updateUser}, #{createUser}, #{createTime},
+                #{updateTime}, #{coreJsonArray}, #{geneJsonArray}, #{underlineJsonArray},
+                #{addJsonArray}, #{annotationJsonArray})
     </insert>
     <update id="updateQuestionByQuestionId" >
-        update
-        question
+        UPDATE question
         <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="content != null">
-                content = #{content},
-            </if>
-            <if test="html != null">
-                html = #{html},
-            </if>
-            <if test="highlightFlag != null">
-                highlight_flag = #{highlightFlag},
-            </if>
-            <if test="highlightJsonArray != null">
-                highlight_json_array = #{highlightJsonArray},
-            </if>
-            <if test="addHighlightFlag != null">
-                add_highlight_flag = #{addHighlightFlag},
-            </if>
-            <if test="addHighlightJsonArray != null">
-                add_highlight_json_array = #{addHighlightJsonArray},
-            </if>
-            <if test="underlineJsonArray != null">
-                underline_json_array = #{underlineJsonArray},
-            </if>
-            <if test="underlineFlag != null">
-                underline_flag = #{underlineFlag},
-            </if>
-            <if test="annotationJsonArray != null">
-                annotation_json_array = #{annotationJsonArray},
-            </if>
-            <if test="annotationFlag != null">
-                annotation_flag = #{annotationFlag},
-            </if>
-            <if test="subjectId != null">
-                subject_id = #{subjectId},
-            </if>
-            <if test="updateUser != null">
-                update_user = #{updateUser},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-            <if test="partId != null">
-                part_id = #{partId}
-            </if>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="html != null">html = #{html},</if>
+            <if test="groupId != null">group_id = #{groupId},</if>
+            <if test="partId != null">part_id = #{partId},</if>
+            <if test="subjectId != null">subject_id = #{subjectId},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="coreJsonArray != null">core_json_array = #{coreJsonArray},</if>
+            <if test="geneJsonArray != null">gene_json_array = #{geneJsonArray},</if>
+            <if test="underlineJsonArray != null">underline_json_array = #{underlineJsonArray},</if>
+            <if test="addJsonArray != null">add_json_array = #{addJsonArray},</if>
+            <if test="annotationJsonArray != null">annotation_json_array = #{annotationJsonArray},</if>
         </set>
-        where
-        question_id = #{questionId}
+        WHERE question_id = #{questionId}
     </update>
     <select id="getQuestionByQuestionId" resultType="com.wuqisan.ppat.classroom.bean.Question">
-        select question_id,
+        SELECT question_id,
                title,
                content,
                html,
-               highlight_flag,
-               highlight_json_array,
-               add_highlight_flag,
-               add_highlight_json_array,
-               underline_flag,
-               underline_json_array,
-               annotation_json_array,
-               annotation_flag,
+               group_id,
+               part_id,
                subject_id,
                update_user,
                create_user,
                create_time,
                update_time,
-               part_id,
-               group_id
-        from question
-        where question_id = #{questionId}
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
+        FROM question
+        WHERE question_id = #{questionId}
     </select>
     <select id="getHighlightListByGroupIdAndSubjectId" resultType="com.wuqisan.ppat.classroom.bean.Question">
-        SELECT
-            t.question_id,
-            t.title,
-            t.content,
-            t.html,
-            t.highlight_json_array,
-            t.highlight_flag,
-            t.add_highlight_flag,
-            t.add_highlight_json_array,
-            t.underline_json_array,
-            t.underline_flag,
-            t.annotation_json_array,
-            t.annotation_flag,
-            t.subject_id,
-            t.update_user,
-            t.create_user,
-            t.create_time,
-            t.update_time,
-            t.part_id,
-            t.group_id
-        FROM
-            question t
-        where
-            group_id = #{groupId}
-            AND subject_id = #{subjectId}
+        SELECT question_id,
+               title,
+               content,
+               html,
+               group_id,
+               part_id,
+               subject_id,
+               update_user,
+               create_user,
+               create_time,
+               update_time,
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
+        FROM question
+        where group_id = #{groupId}
+          AND subject_id = #{subjectId}
     </select>
     <select id="getQuestionByPartId" resultType="com.wuqisan.ppat.classroom.bean.Question">
-        SELECT
-            t.question_id,
-            t.title,
-            t.content,
-            t.html,
-            t.add_highlight_flag,
-            t.add_highlight_json_array,
-            t.highlight_json_array,
-            t.highlight_flag,
-            t.underline_json_array,
-            t.underline_flag,
-            t.annotation_json_array,
-            t.annotation_flag,
-            t.subject_id,
-            t.update_user,
-            t.create_user,
-            t.create_time,
-            t.update_time,
-            t.part_id,
-            t.group_id
-        FROM
-            question t
-        where
+        SELECT question_id,
+               title,
+               content,
+               html,
+               group_id,
+               part_id,
+               subject_id,
+               update_user,
+               create_user,
+               create_time,
+               update_time,
+               core_json_array,
+               gene_json_array,
+               underline_json_array,
+               add_json_array,
+               annotation_json_array
+        FROM question
+        WHERE
             part_id = #{partId}
     </select>
 </mapper>

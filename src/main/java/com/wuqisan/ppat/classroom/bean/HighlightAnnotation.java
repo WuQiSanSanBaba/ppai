@@ -1,15 +1,13 @@
 package com.wuqisan.ppat.classroom.bean;
 
+import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
 
 @Data
 public class HighlightAnnotation {
-    private String highlightJsonArray;
-    private Integer highlightFlag;
-    private Integer addHighlightFlag;
-    private String addHighlightJsonArray;
-    private String underlineJsonArray;
-    private Integer underlineFlag;
-    private String annotationJsonArray;
-    private Integer annotationFlag;
+    private JSONArray coreJsonArray;
+    private JSONArray geneJsonArray;
+    private JSONArray addJsonArray;
+    private JSONArray underlineJsonArray;
+    private JSONArray annotationJsonArray;
 }
